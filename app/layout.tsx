@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-ggbatang antialiased`}>{children}</body>
+      <body className={`font-ggbatang antialiased bg-image`}>{children}</body>
     </html>
   );
 }
