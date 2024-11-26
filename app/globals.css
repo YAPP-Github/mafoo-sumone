@@ -2,13 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: "ggbatang", Helvetica, sans-serif;
+  background-image: url("/background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: "ggbatang";
+  src: url("./fonts/ggbatang_Bold_subset.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  unicode-range: U+AC00-D7AF;
 }
