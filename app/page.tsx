@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <main
       id="mainBg"
-      className="flex flex-col items-center h-full"
+      className="flex flex-col items-center h-full bg-gradient"
     >
       <header className="flex flex-col items-center gap-3 py-4">
         <HeartIcon width={28} />

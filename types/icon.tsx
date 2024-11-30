@@ -6,7 +6,7 @@ export interface IconProps {
 }
 
 export interface TouchableIcon extends IconProps {
-  onClick: () => void;
+  onClick?: () => void;
   role?: string;
   tabIndex?: number;
 }

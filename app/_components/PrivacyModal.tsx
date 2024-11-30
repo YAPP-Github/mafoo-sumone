@@ -5,11 +5,12 @@ const PrivacyModal = ({ onClose }: { onClose: () => void }) => {
     console.log("close");
     onClose();
   };
+
   return (
-    <div className="fixed bottom-0 w-full bg-image rounded-t-3xl">
+    <div className="fixed bottom-0 z-10 w-full bg-image rounded-t-3xl">
       <CloseIcon
         width={36}
-        className="absolute right-2.5 top-2.5 z-10"
+        className="absolute right-2.5 top-2.5 z-20"
         onClick={handleClose}
       />
       <div className="relative flex flex-col w-full h-full gap-4 p-6">
