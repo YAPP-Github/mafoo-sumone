@@ -10,7 +10,7 @@ const CoupleModal = ({ onClose }: { onClose: () => void }) => {
     navigation.push("/pickphoto");
   };
   return (
-    <span className="fixed z-10 -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 bg-image w-[345px] h-[300px] rounded-md">
+    <span className="fixed z-50 -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 bg-image w-[345px] h-[300px] rounded-md">
       <div className="flex flex-col justify-between w-full h-full px-6 pt-12 pb-8">
         <span className="flex flex-col items-center gap-7">
           <HeartIcon

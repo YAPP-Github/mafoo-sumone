@@ -7,7 +7,7 @@ const PrivacyModal = ({ onClose }: { onClose: () => void }) => {
   };
 
   return (
-    <div className="fixed bottom-0 z-10 w-full bg-image rounded-t-3xl">
+    <div className="fixed bottom-0 z-50 w-full bg-image rounded-t-3xl">
       <CloseIcon
         width={36}
         className="absolute right-2.5 top-2.5 z-20"
