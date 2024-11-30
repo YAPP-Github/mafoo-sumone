@@ -1,6 +1,26 @@
-import { IconProps } from "@/types/icon";
+import { TouchableIcon } from "@/types/icon";
 
-const Chevron = ({ width, height, fill }: IconProps) => {
+type Direction = "up" | "right" | "down" | "left";
+
+const Chevron = ({
+  width,
+  height,
+  fill,
+  direction,
+  onClick,
+  tabIndex,
+  role,
+  className,
+}: TouchableIcon & { direction?: Direction }) => {
+  const rotationMap: { [key in Direction]: string } = {
+    up: "rotate(90deg)",
+    right: "rotate(0deg)",
+    down: "rotate(270deg)",
+    left: "rotate(180deg)",
+  };
+
+  const rotation = rotationMap[direction || "right"];
+
   return (
     <svg
       width={width || "17"}
@@ -8,6 +28,11 @@ const Chevron = ({ width, height, fill }: IconProps) => {
       viewBox="0 0 17 17"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      style={{ transform: rotation }}
+      role={role || "button"}
+      tabIndex={tabIndex || 0}
+      onClick={onClick}
+      className={className}
     >
       <g id="Outline / Arrows / Alt Arrow Right">
         <path
