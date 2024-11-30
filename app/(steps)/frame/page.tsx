@@ -43,6 +43,7 @@ const FramePage = () => {
       });
 
       const dataUrl = canvas.toDataURL("image/jpeg");
+      console.log(dataUrl);
       setIsLoading(true);
 
       setTimeout(() => {
