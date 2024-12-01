@@ -6,9 +6,12 @@ import html2canvas from "html2canvas";
 import Header from "@/components/Header";
 import HeartIcon from "@/assets/HeartIcon";
 import { useRouter } from "next/navigation";
+import { useGetCanvasSize } from "@/utils/useScreenSize";
+import Image from "next/image";
 
 const FramePage = () => {
   const navigation = useRouter();
+  const canvasSize = useGetCanvasSize();
   const [frameType, setFrameType] = useState<number>(1);
   const [imageSrc, setImageSrc] = useState<string>("");
   const canvasRef = useRef<HTMLDivElement>(null);
@@ -24,10 +27,10 @@ const FramePage = () => {
   }, []);
 
   const handleSelectFrame = async () => {
-    if (!canvasRef.current) return;
+    if (!canvasRef.current || !canvasSize.width) return;
 
-    canvasRef.current.style.width = "353px";
-    canvasRef.current.style.height = "612px";
+    canvasRef.current.style.width = canvasSize.width + "px";
+    canvasRef.current.style.height = canvasSize.height + "px";
 
     try {
       const canvas = await html2canvas(canvasRef.current, {
@@ -46,15 +49,14 @@ const FramePage = () => {
       console.log(dataUrl);
       setIsLoading(true);
 
-      setTimeout(() => {
-        setIsLoading(false);
-        navigation.push("/result");
-      }, 5000);
-
       // const link = document.createElement("a");
       // link.href = dataUrl;
       // link.download = "canvas_frame.jpeg";
       // link.click();
+      setTimeout(() => {
+        setIsLoading(false);
+        navigation.push("/result");
+      }, 5000);
     } catch (error) {
       console.error("Failed to capture the frame:", error);
     }
@@ -73,46 +75,55 @@ const FramePage = () => {
           </div>
         }
       />
-      <div className="w-[353px] h-full flex flex-col gap-6 items-center justify-center">
+      <div className="flex flex-col items-center justify-center w-full h-full gap-6">
         {/* Canvas Component Wrapper */}
         <div
           ref={canvasRef}
-          style={{ width: "353px", height: "612px" }}
+          style={{ width: canvasSize.width, height: canvasSize.height }}
         >
           <Canvas
             frameType={frameType}
             bgImage={imageSrc}
+            canvasSize={canvasSize}
           />
         </div>
 
-        <div className="flex flex-row w-full gap-4 overflow-x-scroll">
-          {Array.from({ length: 5 }).map((_, index) => (
+        <div className="flex flex-col w-full gap-3 px-6">
+          <div className="flex flex-row justify-between w-full overflow-x-scroll">
+            {Array.from({ length: 5 }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setFrameType(index + 1)}
+                className={`w-14 h-14 rounded-full bg-white flex items-center justify-center relative`}
+              >
+                <Image
+                  src={`/_assets/canvas/selectBtn/${index + 1}.png`}
+                  alt="frameChip"
+                  fill
+                  sizes="14"
+                  className={`${
+                    index + 1 === frameType
+                      ? "border-2 border-white rounded-full"
+                      : "opacity-40"
+                  } object-contain w-full h-full`}
+                />
+              </button>
+            ))}
+          </div>
+          <div className="flex-row w-full gap-2">
             <button
-              key={index}
-              onClick={() => setFrameType(index + 1)}
-              className={`w-14 h-14 rounded-full bg-white flex items-center justify-center`}
+              onClick={handleSelectFrame}
+              className="w-full h-12 bg-pink text-sm tracking-[0.28px] leading-[150%] text-white"
             >
-              <img
-                src={`/_assets/canvas/selectBtn/${index + 1}.png`}
-                alt="frameChip"
-                className="w-14 h-14 object-contain"
-              />
+              이 프레임으로 만들게요
             </button>
-          ))}
-        </div>
-        <div className="flex-row w-full gap-2">
-          <button
-            onClick={handleSelectFrame}
-            className="w-full h-12 bg-pink text-sm tracking-[0.28px] leading-[150%] text-white"
-          >
-            이 프레임으로 만들게요
-          </button>
+          </div>
         </div>
       </div>
       {isLoading && (
         <div className="fixed w-[calc(100%-48px)] h-[500px] bg-image z-50 mx-6 flex flex-col">
           <div className="w-full h-full flex flex-col gap-2.5 pt-12 pb-14">
-            <div className="flex flex-col gap-7 items-center pb-12">
+            <div className="flex flex-col items-center pb-12 gap-7">
               <HeartIcon width={28} />
               <span className="text-center text-lg text-gray-800 tracking-[0.36px] leading-[160%]">
                 지금 만든 추억

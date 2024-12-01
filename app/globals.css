@@ -43,7 +43,7 @@ body {
 
 @font-face {
   font-family: "ggbatang";
-  src: url("./fonts/ggbatang_Bold.otf") format("opentype");
+  src: url("./fonts/ggbatang_Bold_subset.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
 }

@@ -13,7 +13,7 @@ const PickPhotoPage = () => {
           </div>
         }
       />
-      <div className="flex flex-col gap-4 p-6 pt-4">
+      <div className="flex flex-col p-6 pt-4 gap-4">
         <div className="text-xl tracking-[0.4px] leading-[160%]">
           2024년, {`상대방`}님의
           <br />

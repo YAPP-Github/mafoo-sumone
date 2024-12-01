@@ -7,7 +7,7 @@ const ResultPage = () => {
   return (
     <main
       id="mainBg"
-      className="flex flex-col w-full items-center h-full"
+      className="flex flex-col items-center w-full h-full"
     >
       <Header
         titleComponent={
