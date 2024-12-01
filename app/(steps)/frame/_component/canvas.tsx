@@ -58,8 +58,12 @@ const Canvas = ({
   bgImage: string;
   canvasSize: { width: number; height: number };
 }) => {
+  const { partner, days_in_love } = {
+    partner: "영지",
+    days_in_love: 361,
+  };
+
   const [characterState, setCharacterState] = useState(0);
-  const { date } = { date: 200 };
 
   const { frameSrc, character1, character2, mainColor, subColor } =
     CanvasPrepData[frameType - 1];
@@ -82,13 +86,13 @@ const Canvas = ({
       />
       {/* 상단 Title */}
       <div className="absolute top-0 flex flex-col items-center w-full h-full gap-4 pt-4">
-        <span className="flex flex-col gap-2.5 items-center z-30 pt-6 relative">
+        <span className="flex flex-col gap-2.5 items-center z-30 pt-8 relative">
           <span className="z-30 flex flex-row items-center gap-1">
             <span
               style={{ color: mainColor }}
-              className="text-sm font-bold shifted-text"
+              className="text-lg font-bold shifted-text"
             >
-              @수연님의{" "}
+              @{partner}님의{" "}
             </span>
             {/* <TitleSvg fillColor="#f7807a" /> */}
             <MafooLogo
@@ -106,8 +110,8 @@ const Canvas = ({
           <Image
             src={"/_assets/SumoneLogo.png"}
             alt="SumoneLogo"
-            width={115}
-            height={22}
+            width={140}
+            height={26}
           />
         </span>
 
@@ -136,6 +140,7 @@ const Canvas = ({
                 height: "auto",
                 maxWidth: "100%",
                 maxHeight: "100%",
+                borderRadius: "16px",
               }}
             />
           </div>
@@ -172,11 +177,11 @@ const Canvas = ({
           style={{
             left: xPadding,
           }}
-          className="absolute bottom-4 flex flex-row gap-1 z-30 bg-[rgba(255,255,255,0.7)] px-4 rounded-full py-2 items-center justify-center"
+          className="absolute bottom-6 flex flex-row gap-1 z-30 bg-[rgba(255,255,255,0.7)] px-4 rounded-full py-2 items-center justify-center"
         >
           <DayHeartIcon width={28} />
           <span className="text-lg tracking-[0.36px] leading-[140%] shifted-text">
-            {date} 일째
+            {days_in_love} 일째
           </span>
         </span>
       </div>

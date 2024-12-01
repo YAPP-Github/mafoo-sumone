@@ -1,12 +1,13 @@
 "use client";
 
 import AlbumIcon from "@/assets/AlbumIcon";
+import SumoneButton from "@/assets/SumoneButton";
+import { usePhotoStore } from "@/atom/photo";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 const PhotoSelector = () => {
   const router = useRouter();
-  const [images, setImages] = useState<File[]>([]);
+  const { photos, setPhotos } = usePhotoStore();
 
   const handleSelectPhotos = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -19,22 +20,11 @@ const PhotoSelector = () => {
     }
 
     console.log("선택된 파일:", selectedFiles, selectedFiles.length);
-    setImages(selectedFiles);
+    setPhotos(selectedFiles);
   };
 
   const handleFrameSelection = () => {
-    if (images[0]) {
-      const file = images[0];
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        // 파일 데이터를 세션 스토리지에 저장
-        sessionStorage.setItem("selectedImage", reader.result as string);
-        router.push("/frame");
-      };
-
-      reader.readAsDataURL(file); // 파일을 Base64 데이터로 변환
-    }
+    router.push("/frame");
   };
 
   return (
@@ -56,7 +46,7 @@ const PhotoSelector = () => {
             />
           </label>
         </span>
-        {images
+        {photos
           .filter((_, index) => index % 2 == 1)
           .map((image, index) => (
             // eslint-disable-next-line @next/next/no-img-element
@@ -70,7 +60,7 @@ const PhotoSelector = () => {
         <span className="w-full h-16 shrink-0" />
       </div>
       <div className="flex flex-col items-start w-1/2 gap-1">
-        {images
+        {photos
           .filter((_, index) => index % 2 == 0)
           .map((image, index) => (
             // eslint-disable-next-line @next/next/no-img-element
@@ -83,9 +73,15 @@ const PhotoSelector = () => {
           ))}
         <span className="w-full h-16 shrink-0" />
       </div>
-      {images.length < 1 ? (
-        <div className="fixed flex text-white w-[calc(100%-48px)] h-12 bottom-2 bg-gray-300 items-center justify-center tracking-[0.28px] leading-[150%] text-sm">
-          최소 1장의 사진을 골라주세요
+      {photos.length < 1 ? (
+        <div className="fixed flex w-[calc(100%-48px)] h-12 bottom-2">
+          <SumoneButton
+            width="100%"
+            height={48}
+            fill="#CBD0D6"
+            text="최소 1장의 사진을 골라주세요"
+            textClass="text-white text-sm tracking-[0.28px] leading-[150%]"
+          />
         </div>
       ) : (
         <div className="fixed bottom-0 pb-2 flex flex-col items-center w-[calc(100%-48px)]">
@@ -93,12 +89,14 @@ const PhotoSelector = () => {
             추억을 🎞영상으로 만들 수 있어요!
             <span className="absolute w-4 h-4 rotate-45 -translate-x-1/2 bg-white left-1/2 -bottom-2" />
           </div>
-          <div
+          <SumoneButton
+            width="100%"
+            height={48}
+            fill="#C5B698"
+            text="추억 영상 만들기"
+            textClass="text-white text-sm tracking-[0.28px] leading-[150%]"
             onClick={handleFrameSelection}
-            className="flex text-white w-full h-12 bg-brown items-center justify-center tracking-[0.28px] leading-[150%] text-sm"
-          >
-            추억 영상 만들기
-          </div>
+          />
         </div>
       )}
     </div>

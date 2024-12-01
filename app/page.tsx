@@ -7,13 +7,24 @@ import VideoArea from "./_components/VideoArea";
 import MainGarland from "@/assets/MainGarland.png";
 import MainTree from "@/assets/MainTree.png";
 
-export default function Home() {
+export default async function Home() {
+  const { userCount } = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/sumone/summary`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-cache",
+    }
+  ).then((res) => res.json());
+
   return (
     <main
       id="mainBg"
       className="flex flex-col items-center h-full bg-gradient"
     >
-      <header className="flex flex-col items-center w-full py-4 gap-2">
+      <header className="flex flex-col items-center w-full gap-2 py-4">
         {/* Top Orgament Part */}
         <span
           className="flex w-full h-8 bg-repeat-x"
@@ -52,7 +63,7 @@ export default function Home() {
           height={24}
         />
         <span className="text-gray-700 text-sm tracking-[0.24px] leading-[140%]">
-          벌써 {`1,565`} 커플이 올해 추억을 결산했어요!
+          벌써 {userCount} 커플이 올해 추억을 결산했어요!
         </span>
       </span>
       <MainPageUserInteraction />

@@ -1,11 +1,15 @@
 "use client";
 
 import Chevron from "@/assets/Chevron";
+import SumoneButton from "@/assets/SumoneButton";
+
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
 
 const MainPageUserInteraction = () => {
+  const navigation = useRouter();
   const [modalType, setModalType] = useState<"privacy" | "couple" | null>(null);
 
   const PrivacyModal = dynamic(() => import("./PrivacyModal"), {
@@ -41,9 +45,40 @@ const MainPageUserInteraction = () => {
     setModalType(null);
   };
 
-  const handleCreateRecap = () => {
-    // 커플 확인 API
-    setModalType("couple");
+  const handleAskShare = async () => {
+    //  결산 부탁하기
+  };
+
+  const checkCouple = async () => {
+    return true;
+  };
+
+  const handleCreateRecap = async () => {
+    const albumIdCookie = document.cookie.split(";").find((cookie) => {
+      return cookie.includes("albumId");
+    });
+    if (!albumIdCookie) {
+      // 커플 확인 API
+      if (!checkCouple()) {
+        setModalType("couple");
+      } else {
+        // 앨범 생성 API
+        const { albumId } = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/sumone/albums`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        ).then((res) => {
+          return res.json();
+        });
+        // put albumId in to cookie
+        document.cookie = `albumId=${albumId}`;
+      }
+    }
+    navigation.push("/pickphoto");
   };
 
   return (
@@ -55,7 +90,7 @@ const MainPageUserInteraction = () => {
         className="py-2.5 px-6 w-full flex justify-between mt-3 tracking-[0.24px] leading-[140%]"
       >
         <span className="text-sm">개인정보 수집 동의</span>
-        <span className="flex flex-row items-center text-xs text-gray-500 gap-1">
+        <span className="flex flex-row items-center gap-1 text-xs text-gray-500">
           자세히 보기
           <Chevron
             width={16}
@@ -63,16 +98,23 @@ const MainPageUserInteraction = () => {
           />
         </span>
       </span>
-      <span className="flex flex-row mb-2 gap-3">
-        <button className="w-[160px] h-[56px] text-white text-sm tracking-[0.24px] leading-[150%] bg-[#C5B698]">
-          결산 부탁하기
-        </button>
-        <button
-          onClick={() => handleCreateRecap()}
-          className="w-[160px] h-[56px] text-white text-sm tracking-[0.24px] leading-[150%] bg-[#FF9092]"
-        >
-          동의하고 바로 결산
-        </button>
+      <span className="flex flex-row gap-3 mb-2">
+        <SumoneButton
+          width={160}
+          height={56}
+          fill={"#C5B698"}
+          text="결산 부탁하기"
+          textClass="text-white text-sm tracking-[0.24px] leading-[150%]"
+          onClick={handleAskShare}
+        />
+        <SumoneButton
+          width={160}
+          height={56}
+          fill={"#FF9092"}
+          text="동의하고 바로 결산"
+          textClass="text-white text-sm tracking-[0.24px] leading-[150%]"
+          onClick={handleCreateRecap}
+        />
       </span>
 
       {modalType &&

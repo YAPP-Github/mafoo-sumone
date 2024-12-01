@@ -5,6 +5,7 @@ const CoupleModal = ({ onClose }: { onClose: () => void }) => {
   const navigation = useRouter();
   const handleRegisterCouple = () => {
     //TODO: 커플 등록하기 이벤트
+    //dependency: Sumone측 API 대기중
     onClose();
 
     navigation.push("/pickphoto");

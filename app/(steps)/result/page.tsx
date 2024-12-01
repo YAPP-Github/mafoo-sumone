@@ -3,7 +3,18 @@ import HeartIcon from "@/assets/HeartIcon";
 import DoubleHeartIcon from "@/assets/DoubleHeartIcon";
 import UserInteraction from "./_components/UserInteraction";
 
-const ResultPage = () => {
+const ResultPage = async () => {
+  const { userCount } = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/sumone/summary`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-cache",
+    }
+  ).then((res) => res.json());
+
   return (
     <main
       id="mainBg"
@@ -25,7 +36,7 @@ const ResultPage = () => {
           height={24}
         />
         <span className="text-gray-700 text-sm tracking-[0.24px] leading-[140%]">
-          벌써 {`1,565`} 커플이 서로를 자랑했어요
+          벌써 {userCount} 커플이 서로를 자랑했어요
         </span>
       </span>
       <UserInteraction />

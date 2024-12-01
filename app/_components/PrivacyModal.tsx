@@ -2,7 +2,6 @@ import CloseIcon from "@/assets/CloseIcon";
 
 const PrivacyModal = ({ onClose }: { onClose: () => void }) => {
   const handleClose = () => {
-    console.log("close");
     onClose();
   };
 
@@ -13,7 +12,7 @@ const PrivacyModal = ({ onClose }: { onClose: () => void }) => {
         className="absolute right-2.5 top-2.5 z-20"
         onClick={handleClose}
       />
-      <div className="relative flex flex-col w-full h-full p-6 gap-4">
+      <div className="relative flex flex-col w-full h-full gap-4 p-6">
         <span className="text-lg tracking-[0.36px] leading-[150%]">
           개인정보 수집 항목
         </span>
