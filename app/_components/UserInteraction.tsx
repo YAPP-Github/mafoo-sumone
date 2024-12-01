@@ -10,13 +10,13 @@ const MainPageUserInteraction = () => {
 
   const PrivacyModal = dynamic(() => import("./PrivacyModal"), {
     loading: () => (
-      <div className="fixed bottom-0 w-full bg-image h-[220] rounded-t-3xl z-10" />
+      <div className="fixed bottom-0 w-full bg-image h-[220] rounded-t-3xl z-50" />
     ),
   });
 
   const CoupleModal = dynamic(() => import("./CoupleModal"), {
     loading: () => (
-      <div className="fixed z-10 -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 bg-image w-[345px] h-[300px] rounded-md" />
+      <div className="fixed -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 bg-image w-[345px] h-[300px] rounded-md z-50" />
     ),
   });
 
@@ -52,10 +52,10 @@ const MainPageUserInteraction = () => {
         role="button"
         tabIndex={0}
         onClick={handleOpenPrivacyModal}
-        className="py-2.5 px-6 w-full flex justify-between mt-6 tracking-[0.24px] leading-[140%]"
+        className="py-2.5 px-6 w-full flex justify-between mt-3 tracking-[0.24px] leading-[140%]"
       >
         <span className="text-sm">개인정보 수집 동의</span>
-        <span className="flex flex-row items-center gap-1 text-xs text-gray-500">
+        <span className="flex flex-row items-center text-xs text-gray-500 gap-1">
           자세히 보기
           <Chevron
             width={16}
@@ -63,7 +63,7 @@ const MainPageUserInteraction = () => {
           />
         </span>
       </span>
-      <span className="flex flex-row gap-3 mb-2">
+      <span className="flex flex-row mb-2 gap-3">
         <button className="w-[160px] h-[56px] text-white text-sm tracking-[0.24px] leading-[150%] bg-[#C5B698]">
           결산 부탁하기
         </button>
