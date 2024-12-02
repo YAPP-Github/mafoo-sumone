@@ -6,6 +6,7 @@ import Image from "next/image";
 import VideoArea from "./_components/VideoArea";
 import MainGarland from "@/assets/MainGarland.png";
 import MainTree from "@/assets/MainTree.png";
+import Link from "next/link";
 
 export default async function Home() {
   const { userCount } = await fetch(
@@ -24,6 +25,13 @@ export default async function Home() {
       id="mainBg"
       className="flex flex-col items-center h-full bg-gradient"
     >
+      <Link
+        href="https://chisel-promise-9ff.notion.site/FAQ-f366f55df31b49ef96e7db35c73b8921?pvs=4"
+        className="fixed top-16 left-4 rounded-full bg-pink text-white w-10 h-10 flex items-center justify-center"
+      >
+        ?
+      </Link>
+
       <header className="flex flex-col items-center w-full gap-2 py-4">
         {/* Top Orgament Part */}
         <span
