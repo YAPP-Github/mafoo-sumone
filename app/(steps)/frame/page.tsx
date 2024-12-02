@@ -88,7 +88,7 @@ const FramePage = () => {
           {photos.length > 0 && (
             <Canvas
               frameType={frameType}
-              bgImage={URL.createObjectURL(photos[0])}
+              images={photos}
               canvasSize={canvasSize}
             />
           )}

@@ -70,6 +70,7 @@ const MainPageUserInteraction = () => {
             headers: {
               "Content-Type": "application/json",
             },
+            body: JSON.stringify({ userId: "test123" }),
           }
         ).then((res) => {
           return res.json();

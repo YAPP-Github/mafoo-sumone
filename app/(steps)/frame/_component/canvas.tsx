@@ -51,11 +51,11 @@ const CanvasPrepData = [
 
 const Canvas = ({
   frameType,
-  bgImage,
+  images,
   canvasSize,
 }: {
   frameType: number;
-  bgImage: string;
+  images: File[];
   canvasSize: { width: number; height: number };
 }) => {
   const { partner, days_in_love } = {
@@ -64,6 +64,7 @@ const Canvas = ({
   };
 
   const [characterState, setCharacterState] = useState(0);
+  const [imageIdx, setImageIdx] = useState(0);
 
   const { frameSrc, character1, character2, mainColor, subColor } =
     CanvasPrepData[frameType - 1];
@@ -71,6 +72,11 @@ const Canvas = ({
   const handleClickImage = () => {
     setCharacterState((prev) => 1 - prev);
   };
+
+  const handleClickBackground = () => {
+    setImageIdx((prev) => (prev + 1) % images.length);
+  };
+
   const xPadding = (canvasSize.height * 37) / 543;
   const topIndex = (canvasSize.height * 110) / 543;
 
@@ -83,6 +89,7 @@ const Canvas = ({
         alt="frame"
         fill
         className="absolute top-0 z-20 object-contain w-full h-full"
+        onClick={handleClickBackground}
       />
       {/* 상단 Title */}
       <div className="absolute top-0 flex flex-col items-center w-full h-full gap-4 pt-4">
@@ -101,21 +108,15 @@ const Canvas = ({
               subColor={subColor}
             />
           </span>
-          {/* <Image
-            src={SumoneLogo}
-            alt="SumoneLogo"
-            width={115}
-            height={22}
-          /> */}
           <Image
             src={"/_assets/SumoneLogo.png"}
             alt="SumoneLogo"
-            width={140}
-            height={26}
+            width={145}
+            height={27}
           />
         </span>
 
-        {bgImage && (
+        {images.length > 0 && (
           <div
             style={{
               backgroundColor: subColor,
@@ -131,7 +132,8 @@ const Canvas = ({
             className="z-10"
           >
             <Image
-              src={bgImage}
+              id="targetImage"
+              src={URL.createObjectURL(images[imageIdx])}
               alt="image"
               width={(canvasSize.height * 240) / 543}
               height={(canvasSize.height * 354) / 543}
