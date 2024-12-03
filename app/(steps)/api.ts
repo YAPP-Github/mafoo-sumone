@@ -7,6 +7,11 @@ export const getPresignedUrls = async (photos: File[]) => {
   if (!albumId) {
     return;
   }
+
+  const formatedFileNames = photos.map((photo) => {
+    return photo.name.split(".")[0] + ".jpeg";
+  });
+
   const { urls } = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/sumone/albums/${albumId}/presigned-urls`,
     {
@@ -15,7 +20,7 @@ export const getPresignedUrls = async (photos: File[]) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        fileNames: photos.map((photo) => photo.name),
+        fileNames: formatedFileNames,
       }),
     }
   )
