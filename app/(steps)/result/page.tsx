@@ -3,10 +3,10 @@ import HeartIcon from "@/assets/HeartIcon";
 import DoubleHeartIcon from "@/assets/DoubleHeartIcon";
 import UserInteraction from "./_components/UserInteraction";
 
-type SearchParams = { [key: string]: string };
+type SearchParams = Promise<{ [key: string]: string }>;
 
-const ResultPage = async ({ searchParams }: { searchParams: SearchParams }) => {
-  const { recapUrl } = searchParams;
+const ResultPage = async (props: { searchParams: SearchParams }) => {
+  const { recapUrl } = await props.searchParams;
 
   const { userCount } = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/sumone/summary`,
