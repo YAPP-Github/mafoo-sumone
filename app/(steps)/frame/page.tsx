@@ -33,21 +33,22 @@ const FramePage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleRecapFramedPhoto = async (dataUrls: string[]) => {
-    console.log("handleSendFramedPhoto", dataUrls);
-
     // presigned URLs 가져오기
+    console.time("리캡 이미지 presigned url 발급");
     const presignedResult = await getPresignedUrls(photos);
     if (!presignedResult) {
       console.error("Failed to get presigned URLs");
       navigation.push("/pickphoto");
       return;
     }
+    console.timeEnd("리캡 이미지 presigned url 발급");
 
     const [albumId, urls] = presignedResult;
     console.log("Presigned URLs: ", urls);
 
     // dataUrls (프레임된 이미지들) 업로드
     try {
+      console.time("이미지 PUT");
       const uploadPromises = dataUrls.map(async (dataUrl, index) => {
         const blob = await fetch(dataUrl).then((res) => res.blob());
         const file = new File([blob], `frame_${index + 1}.jpeg`, {
@@ -68,11 +69,13 @@ const FramePage = () => {
 
       await Promise.all(uploadPromises);
 
+      console.timeEnd("이미지 PUT");
       // presigned URL에서 query string 제거 후 새 URL 생성
       const newUrls = urls.map((url: string) => {
         return url.split("?")[0];
       });
 
+      console.time("리캡 생성 요청");
       // recap API 호출
       const { recapUrl } = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/sumone/albums/${albumId}/recap`,
@@ -93,6 +96,7 @@ const FramePage = () => {
         });
 
       console.log("recapUrl", recapUrl);
+      console.timeEnd("리캡 생성 요청");
 
       setIsLoading(false);
       navigation.push(`/result?recapUrl=${recapUrl}`);
