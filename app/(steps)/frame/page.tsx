@@ -10,6 +10,7 @@ import { useGetCanvasSize } from "@/utils/useScreenSize";
 import Image from "next/image";
 import { usePhotoStore } from "@/atom/photo";
 import SumoneButton from "@/assets/SumoneButton";
+import { getPresignedUrls } from "../api";
 
 const FramePage = () => {
   const { partner } = {
@@ -20,6 +21,7 @@ const FramePage = () => {
   const [frameType, setFrameType] = useState<number>(1);
   const { photos } = usePhotoStore();
   const canvasRef = useRef<HTMLDivElement>(null);
+  const [imageIdx, setImageIdx] = useState(0);
 
   useEffect(() => {
     console.log("photos", photos);
@@ -30,40 +32,121 @@ const FramePage = () => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const handleRecapFramedPhoto = async (dataUrls: string[]) => {
+    console.log("handleSendFramedPhoto", dataUrls);
+
+    // presigned URLs 가져오기
+    const presignedResult = await getPresignedUrls(photos);
+    if (!presignedResult) {
+      console.error("Failed to get presigned URLs");
+      navigation.push("/pickphoto");
+      return;
+    }
+
+    const [albumId, urls] = presignedResult;
+    console.log("Presigned URLs: ", urls);
+
+    // dataUrls (프레임된 이미지들) 업로드
+    try {
+      const uploadPromises = dataUrls.map(async (dataUrl, index) => {
+        const blob = await fetch(dataUrl).then((res) => res.blob());
+        const file = new File([blob], `frame_${index + 1}.jpeg`, {
+          type: "image/jpeg",
+        });
+        const presignedUrl = urls[index];
+
+        return fetch(presignedUrl, {
+          method: "PUT",
+          body: file,
+        }).then((res) => {
+          if (!res.ok) {
+            throw new Error(`Failed to upload frame ${index + 1}`);
+          }
+          return res;
+        });
+      });
+
+      await Promise.all(uploadPromises);
+
+      // presigned URL에서 query string 제거 후 새 URL 생성
+      const newUrls = urls.map((url: string) => {
+        return url.split("?")[0];
+      });
+
+      // recap API 호출
+      const { recapUrl } = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/sumone/albums/${albumId}/recap`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fileUrls: newUrls,
+          }),
+        }
+      )
+        .then((res) => res.json())
+        .catch((err) => {
+          console.error("Error calling recap API:", err);
+          throw err;
+        });
+
+      console.log("recapUrl", recapUrl);
+
+      setIsLoading(false);
+      navigation.push(`/result?recapUrl=${recapUrl}`);
+    } catch (err) {
+      console.error("Error during recap processing:", err);
+      setIsLoading(false);
+    }
+  };
+
   const handleSelectFrame = async () => {
     if (!canvasRef.current || !canvasSize.width) return;
 
+    // Set the canvas size based on the available width and height
     canvasRef.current.style.width = canvasSize.width + "px";
     canvasRef.current.style.height = canvasSize.height + "px";
 
-    try {
-      const canvas = await html2canvas(canvasRef.current, {
-        onclone: (el) => {
-          const elementsWithShiftedDownwardText =
-            el.querySelectorAll(".shifted-text");
-          elementsWithShiftedDownwardText.forEach((element) => {
-            const htmlElement = element as HTMLElement;
-            // adjust styles or do whatever you want here
-            htmlElement.style.transform = "translateY(-40%)";
-          });
-        },
-      });
+    setIsLoading(true); // Show loading indicator
+    const dataUrls: string[] = [];
 
-      const dataUrl = canvas.toDataURL("image/jpeg");
-      console.log(dataUrl);
-      setIsLoading(true);
+    // Iterate over all photos
+    for (let idx = 0; idx < photos.length; idx++) {
+      try {
+        // Wait for the canvas to be updated with the new image
+        const canvas = await html2canvas(canvasRef.current, {
+          onclone: (el) => {
+            const elementsWithShiftedDownwardText =
+              el.querySelectorAll(".shifted-text");
+            elementsWithShiftedDownwardText.forEach((element) => {
+              const htmlElement = element as HTMLElement;
+              // Adjust styles or do whatever you want here
+              htmlElement.style.transform = "translateY(-40%)";
+            });
+          },
+        });
 
-      // const link = document.createElement("a");
-      // link.href = dataUrl;
-      // link.download = "canvas_frame.jpeg";
-      // link.click();
-      setTimeout(() => {
-        setIsLoading(false);
-        navigation.push("/result");
-      }, 5000);
-    } catch (error) {
-      console.error("Failed to capture the frame:", error);
+        // Convert the canvas to a data URL (image)
+        const dataUrl = canvas.toDataURL("image/jpeg");
+        dataUrls.push(dataUrl);
+
+        // Create a temporary link to download the image
+        // const link = document.createElement("a");
+        // link.href = dataUrl;
+        // link.download = `canvas_frame_${idx + 1}.jpeg`;
+        // link.click();
+        setImageIdx((prev) => (prev + 1) % photos.length);
+        await new Promise((resolve) => setTimeout(resolve, 10));
+      } catch (error) {
+        console.error("Failed to capture the frame:", error);
+      }
     }
+
+    handleRecapFramedPhoto(dataUrls);
+
+    // Hide the loading indicator after all downloads
   };
 
   return (
@@ -90,6 +173,8 @@ const FramePage = () => {
               frameType={frameType}
               images={photos}
               canvasSize={canvasSize}
+              imageIdx={imageIdx}
+              setImageIdx={setImageIdx}
             />
           )}
         </div>

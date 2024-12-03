@@ -54,31 +54,27 @@ const MainPageUserInteraction = () => {
   };
 
   const handleCreateRecap = async () => {
-    const albumIdCookie = document.cookie.split(";").find((cookie) => {
-      return cookie.includes("albumId");
-    });
-    if (!albumIdCookie) {
-      // 커플 확인 API
-      if (!checkCouple()) {
-        setModalType("couple");
-      } else {
-        // 앨범 생성 API
-        const { albumId } = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/sumone/albums`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ userId: "test123" }),
-          }
-        ).then((res) => {
-          return res.json();
-        });
-        // put albumId in to cookie
-        document.cookie = `albumId=${albumId}`;
-      }
+    // 커플 확인 API
+    if (!checkCouple()) {
+      setModalType("couple");
+    } else {
+      // 앨범 생성 API
+      const { albumId } = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/sumone/albums`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId: "test123" }),
+        }
+      ).then((res) => {
+        return res.json();
+      });
+      // put albumId in to cookie
+      document.cookie = `albumId=${albumId}`;
     }
+
     navigation.push("/pickphoto");
   };
 

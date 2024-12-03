@@ -23,7 +23,7 @@ export default async function Home() {
   return (
     <main
       id="mainBg"
-      className="flex flex-col items-center h-full bg-gradient"
+      className="flex flex-col items-center w-full h-full bg-gradient"
     >
       <Link
         href="https://chisel-promise-9ff.notion.site/FAQ-f366f55df31b49ef96e7db35c73b8921?pvs=4"

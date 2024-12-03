@@ -3,7 +3,11 @@ import HeartIcon from "@/assets/HeartIcon";
 import DoubleHeartIcon from "@/assets/DoubleHeartIcon";
 import UserInteraction from "./_components/UserInteraction";
 
-const ResultPage = async () => {
+type SearchParams = { [key: string]: string };
+
+const ResultPage = async ({ searchParams }: { searchParams: SearchParams }) => {
+  const { recapUrl } = searchParams;
+
   const { userCount } = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/sumone/summary`,
     {
@@ -28,8 +32,18 @@ const ResultPage = async () => {
           </div>
         }
       />
-
-      <div className="flex-grow max-w-[276px] min-w-[100px] aspect-[276/476] bg-gray-700 rounded-lg mx-[60px] mb-7"></div>
+      <div className="h-[calc(100%-212px)] w-full flex">
+        <div className="flex w-full h-full items-center justify-center mx-6 mb-7">
+          <video
+            src={recapUrl}
+            autoPlay={true}
+            loop
+            muted
+            className="w-full h-auto rounded-lg"
+            style={{}}
+          />
+        </div>
+      </div>
       <span className="flex items-center gap-2">
         <DoubleHeartIcon
           width={24}

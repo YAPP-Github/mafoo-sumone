@@ -11,35 +11,45 @@ const VideoArea = () => {
   const windowSize = useGetScreenSize();
 
   return (
-    <div className="flex-grow h-[calc(100%-360px)] aspect-[276/476] bg-gray-700 rounded-lg mx-[60px] mb-7">
+    <div className="h-[calc(100%-360px)] w-full flex mb-7 relative">
+      <div className="flex w-full h-full items-center justify-center mx-6 mb-7">
+        <video
+          src="/_assets/main_video.mp4"
+          autoPlay={true}
+          loop
+          muted
+          className="flex w-full h-full rounded-lg"
+        />
+      </div>
       <Image
         src={MainStar1}
         height={28}
         alt="Main Star 1"
-        className={`relative`}
+        className="absolute object-contain"
         style={{
-          top: 14 + "px",
-          left: ((windowSize.height - 360) / 476) * 276 + 12 + "px",
+          top: 28 + "px",
+          left: ((windowSize.height - 360) / 476) * 276 + 24 + 30 + "px",
         }}
       />
       <Image
         src={MainStar2}
         height={28}
         alt="Main Star 2"
-        className={`relative`}
+        className="absolute object-contain"
         style={{
           top: (windowSize.height - 360) * 0.4 - 28 + "px",
-          left: -40 + "px",
+          // left: -40 + "px",
+          left: 12 + "px",
         }}
       />
       <Image
         src={MainStar3}
         height={17}
         alt="Main Star 3"
-        className={`relative`}
+        className="absolute object-contain"
         style={{
           top: (windowSize.height - 360) * 0.8 - 28 + "px",
-          left: ((windowSize.height - 360) / 476) * 276 + 20 + "px",
+          left: ((windowSize.height - 360) / 476) * 276 + 24 + 20 + "px",
         }}
       />
     </div>

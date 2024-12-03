@@ -3,7 +3,7 @@
 import DayHeartIcon from "@/assets/DayHeartIcon";
 import MafooLogo from "@/assets/MafooLogo";
 import Image from "next/image";
-import { useState } from "react";
+import { Dispatch, SetStateAction, memo, useState } from "react";
 // import TitleSvg from "@/app/assets/Logo";
 // import SpriteImg from "../_assets/canvas/sprite.png";
 
@@ -53,10 +53,14 @@ const Canvas = ({
   frameType,
   images,
   canvasSize,
+  imageIdx,
+  setImageIdx,
 }: {
   frameType: number;
   images: File[];
   canvasSize: { width: number; height: number };
+  imageIdx: number;
+  setImageIdx: Dispatch<SetStateAction<number>>;
 }) => {
   const { partner, days_in_love } = {
     partner: "영지",
@@ -64,7 +68,6 @@ const Canvas = ({
   };
 
   const [characterState, setCharacterState] = useState(0);
-  const [imageIdx, setImageIdx] = useState(0);
 
   const { frameSrc, character1, character2, mainColor, subColor } =
     CanvasPrepData[frameType - 1];
@@ -108,7 +111,8 @@ const Canvas = ({
               subColor={subColor}
             />
           </span>
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={"/_assets/SumoneLogo.png"}
             alt="SumoneLogo"
             width={145}
@@ -191,4 +195,4 @@ const Canvas = ({
   );
 };
 
-export default Canvas;
+export default memo(Canvas);
