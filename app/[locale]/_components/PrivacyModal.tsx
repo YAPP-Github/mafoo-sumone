@@ -19,7 +19,7 @@ const PrivacyModal = ({ onClose }: { onClose: () => void }) => {
         <span className="w-full border-b border-gray-200" />
         <div className="flex flex-col text-sm tracking-[0.28px] leading-[200%] text-gray-500">
           <span>수집·이용기관명 : 마푸</span>
-          <span>수집항목 : 성별, 이름, 이미지 파일</span>
+          <span>수집항목 : 이미지 파일</span>
           <span>수집·이용 목적 : 이벤트 콘텐츠 생성 및 저장</span>
           <span>보유 및 이용기간 : 1개월간 보관 후 폐기</span>
         </div>

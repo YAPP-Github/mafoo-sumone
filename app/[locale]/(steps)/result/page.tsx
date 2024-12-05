@@ -2,11 +2,10 @@ import Header from "@/components/Header";
 import HeartIcon from "@/assets/HeartIcon";
 import DoubleHeartIcon from "@/assets/DoubleHeartIcon";
 import UserInteraction from "./_components/UserInteraction";
+import { AsyncSearchParams } from "@/types/user";
 
-type SearchParams = Promise<{ [key: string]: string }>;
-
-const ResultPage = async (props: { searchParams: SearchParams }) => {
-  const { recapUrl } = await props.searchParams;
+const ResultPage = async (props: { searchParams: AsyncSearchParams }) => {
+  const { top, bottom, recapUrl } = await props.searchParams;
 
   const { userCount } = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/sumone/summary`,
@@ -23,6 +22,10 @@ const ResultPage = async (props: { searchParams: SearchParams }) => {
     <main
       id="mainBg"
       className="flex flex-col items-center w-full h-full"
+      style={{
+        paddingTop: top + "px",
+        paddingBottom: bottom + "px",
+      }}
     >
       <Header
         titleComponent={

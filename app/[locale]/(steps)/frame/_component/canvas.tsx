@@ -2,6 +2,7 @@
 
 import DayHeartIcon from "@/assets/DayHeartIcon";
 import MafooLogo from "@/assets/MafooLogo";
+import { ObjectedParams } from "@/types/user";
 import Image from "next/image";
 import { Dispatch, SetStateAction, memo, useState } from "react";
 // import TitleSvg from "@/app/assets/Logo";
@@ -55,18 +56,15 @@ const Canvas = ({
   canvasSize,
   imageIdx,
   setImageIdx,
+  userData,
 }: {
   frameType: number;
   images: File[];
   canvasSize: { width: number; height: number };
   imageIdx: number;
   setImageIdx: Dispatch<SetStateAction<number>>;
+  userData: ObjectedParams;
 }) => {
-  const { partner, days_in_love } = {
-    partner: "영지",
-    days_in_love: 361,
-  };
-
   const [characterState, setCharacterState] = useState(0);
 
   const { frameSrc, character1, character2, mainColor, subColor } =
@@ -102,7 +100,7 @@ const Canvas = ({
               style={{ color: mainColor }}
               className="text-lg font-bold shifted-text"
             >
-              @{partner}님의{" "}
+              @{userData.partnerNickName}님의{" "}
             </span>
             {/* <TitleSvg fillColor="#f7807a" /> */}
             <MafooLogo
@@ -187,7 +185,7 @@ const Canvas = ({
         >
           <DayHeartIcon width={28} />
           <span className="text-lg tracking-[0.36px] leading-[140%] shifted-text">
-            {days_in_love} 일째
+            {userData.dDay} 일째
           </span>
         </span>
       </div>

@@ -4,13 +4,21 @@ import PhotoSelector from "./_components/PhotoSelector";
 import { AsyncSearchParams } from "@/types/user";
 
 const PickPhotoPage = async (props: { searchParams: AsyncSearchParams }) => {
-  const { top, bottom, nickName, partnerNickName, dDay, isConnected } =
-    await props.searchParams;
-
-  console.log(top, bottom, nickName, partnerNickName, dDay, isConnected);
+  const {
+    top,
+    bottom,
+    nickName,
+    partnerNickName,
+    dDay,
+    isConnected,
+    coupleId,
+  } = await props.searchParams;
 
   return (
-    <main className="flex flex-col w-full h-full">
+    <main
+      style={{ paddingTop: top + "px", paddingBottom: bottom + "px" }}
+      className="flex flex-col w-full h-full"
+    >
       <Header
         titleComponent={
           <div className="flex flex-row gap-1 items-center  text-lg tracking-[0.36px] leading-[140%]">
@@ -30,7 +38,17 @@ const PickPhotoPage = async (props: { searchParams: AsyncSearchParams }) => {
         </div>
       </div>
       {/* Photo Selector */}
-      <PhotoSelector />
+      <PhotoSelector
+        userData={{
+          top,
+          bottom,
+          nickName,
+          partnerNickName,
+          dDay,
+          isConnected,
+          coupleId,
+        }}
+      />
     </main>
   );
 };

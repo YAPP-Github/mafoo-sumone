@@ -5,6 +5,7 @@ export interface ObjectedParams {
   partnerNickName: string;
   dDay: string;
   isConnected: string;
+  coupleId: string;
 }
 
 export type AsyncSearchParams = Promise<{ [key: string]: string }>;

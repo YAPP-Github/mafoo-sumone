@@ -75,7 +75,6 @@ const MainPageUserInteraction = ({
   };
 
   const handleCreateRecap = async () => {
-    console.log("handleCreateRecap");
     try {
       if (!checkCouple()) {
         setModalType("couple");
@@ -87,12 +86,19 @@ const MainPageUserInteraction = ({
             headers: {
               "Content-Type": "application/json",
             },
-            // TODO: Change userId to actual user ID
-            body: JSON.stringify({ userId: "test123" }),
+            body: JSON.stringify({ userId: userData.coupleId }),
           }
         );
 
         if (!response.ok) {
+          if (typeof window !== "undefined" && window.ReactNativeWebView) {
+            window.ReactNativeWebView.postMessage(
+              JSON.stringify({
+                type: "ERROR",
+                message: response,
+              })
+            );
+          }
           throw new Error("Failed to create album");
         }
 

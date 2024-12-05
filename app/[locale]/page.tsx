@@ -11,8 +11,15 @@ import InfoIcon from "@/assets/InfoIcon";
 import { AsyncSearchParams } from "@/types/user";
 
 export default async function Home(props: { searchParams: AsyncSearchParams }) {
-  const { top, bottom, nickName, partnerNickName, dDay, isConnected } =
-    await props.searchParams;
+  const {
+    top,
+    bottom,
+    nickName,
+    partnerNickName,
+    dDay,
+    isConnected,
+    coupleId,
+  } = await props.searchParams;
 
   const { userCount } = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/sumone/summary`,
@@ -92,6 +99,7 @@ export default async function Home(props: { searchParams: AsyncSearchParams }) {
           partnerNickName,
           dDay,
           isConnected,
+          coupleId,
         }}
       />
     </main>

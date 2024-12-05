@@ -9,7 +9,7 @@ export const getPresignedUrls = async (photos: File[]) => {
   }
 
   const formatedFileNames = photos.map((photo) => {
-    return photo.name.split(".")[0] + ".jpeg";
+    return photo.name.split(".")[0] + ".png";
   });
 
   const { urls } = await fetch(

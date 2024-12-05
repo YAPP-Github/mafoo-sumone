@@ -1,11 +1,10 @@
 "use client";
 
 import SumoneButton from "@/assets/SumoneButton";
+import { useSearchParams } from "next/navigation";
 
 const UserInteraction = () => {
-  const { partner } = {
-    partner: "영지",
-  };
+  const searchParams = useSearchParams();
   const handleAskEvent = () => {
     console.log("ask event");
   };
@@ -19,7 +18,7 @@ const UserInteraction = () => {
           width="100%"
           height={48}
           fill="#c5b698"
-          text={`${partner}에게도 부탁하기`}
+          text={`${searchParams.get("partnerNickName")}에게도 부탁하기`}
           textClass="text-white text-sm tracking-[0.24px] leading-[150%]"
           onClick={handleAskEvent}
         />

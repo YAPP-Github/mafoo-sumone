@@ -5,9 +5,12 @@ import SumoneButton from "@/assets/SumoneButton";
 import { usePhotoStore } from "@/atom/photo";
 import { useRouter } from "next/navigation";
 import { getPresignedUrls } from "../../api";
+import { ObjectedParams } from "@/types/user";
+import { useObjectToQueryString } from "@/utils/useQueryString";
 
-const PhotoSelector = () => {
-  const router = useRouter();
+const PhotoSelector = ({ userData }: { userData: ObjectedParams }) => {
+  const navigation = useRouter();
+  const OTQ = useObjectToQueryString();
   const { photos, setPhotos } = usePhotoStore();
 
   const handleSelectPhotos = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +33,7 @@ const PhotoSelector = () => {
       const presignedResult = await getPresignedUrls(photos);
       if (!presignedResult) {
         console.error("Failed to get presigned URLs");
-        router.push("/pickphoto");
+        navigation.refresh();
         return;
       }
 
@@ -97,7 +100,7 @@ const PhotoSelector = () => {
       const photoUrl = await handleSendOriginalPhoto();
       console.log("photoUrl", photoUrl);
 
-      router.push("/frame");
+      navigation.push(`frame?${OTQ(userData)}`);
     } catch (err) {
       console.error("Failed to upload photos or create album:", err);
     }

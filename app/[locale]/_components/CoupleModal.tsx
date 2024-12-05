@@ -2,9 +2,9 @@ import HeartIcon from "@/assets/HeartIcon";
 
 const CoupleModal = ({ onClose }: { onClose: () => void }) => {
   const handleRegisterCouple = () => {
-    //TODO: 커플 등록하기 이벤트
-    window?.ReactNativeWebView?.postMessage({ type: "NEED_CONNECT" });
-    //dependency: Sumone측 API 대기중
+    if (typeof window !== "undefined" && window.ReactNativeWebView) {
+      window?.ReactNativeWebView?.postMessage({ type: "NEED_CONNECT" });
+    }
     onClose();
   };
   return (

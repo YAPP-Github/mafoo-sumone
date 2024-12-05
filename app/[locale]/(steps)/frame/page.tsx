@@ -1,22 +1,30 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, use } from "react";
 import Canvas from "./_component/canvas";
 import html2canvas from "html2canvas";
 import Header from "@/components/Header";
 import HeartIcon from "@/assets/HeartIcon";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useGetCanvasSize } from "@/utils/useScreenSize";
 import Image from "next/image";
 import { usePhotoStore } from "@/atom/photo";
 import SumoneButton from "@/assets/SumoneButton";
 import { getPresignedUrls } from "../api";
+import { AsyncSearchParams } from "@/types/user";
 
-const FramePage = () => {
-  const { partner } = {
-    partner: "영지",
-  };
+const FramePage = (props: { searchParams: AsyncSearchParams }) => {
+  const {
+    top,
+    bottom,
+    nickName,
+    partnerNickName,
+    dDay,
+    isConnected,
+    coupleId,
+  } = use(props.searchParams);
   const navigation = useRouter();
+  const searchParams = useSearchParams();
   const canvasSize = useGetCanvasSize();
   const [frameType, setFrameType] = useState<number>(1);
   const { photos } = usePhotoStore();
@@ -24,9 +32,8 @@ const FramePage = () => {
   const [imageIdx, setImageIdx] = useState(0);
 
   useEffect(() => {
-    console.log("photos", photos);
     if (!photos.length) {
-      navigation.push("/pickphoto");
+      navigation.push(`pickphoto?${searchParams.toString()}`);
     }
   }, [photos, navigation]);
 
@@ -51,8 +58,8 @@ const FramePage = () => {
       console.time("이미지 PUT");
       const uploadPromises = dataUrls.map(async (dataUrl, index) => {
         const blob = await fetch(dataUrl).then((res) => res.blob());
-        const file = new File([blob], `frame_${index + 1}.jpeg`, {
-          type: "image/jpeg",
+        const file = new File([blob], `frame_${index + 1}.png`, {
+          type: "image/png",
         });
         const presignedUrl = urls[index];
 
@@ -99,7 +106,7 @@ const FramePage = () => {
       console.timeEnd("리캡 생성 요청");
 
       setIsLoading(false);
-      navigation.push(`/result?recapUrl=${recapUrl}`);
+      navigation.push(`result?recapUrl=${recapUrl}`);
     } catch (err) {
       console.error("Error during recap processing:", err);
       setIsLoading(false);
@@ -133,7 +140,7 @@ const FramePage = () => {
         });
 
         // Convert the canvas to a data URL (image)
-        const dataUrl = canvas.toDataURL("image/jpeg");
+        const dataUrl = canvas.toDataURL("image/png");
         dataUrls.push(dataUrl);
 
         // Create a temporary link to download the image
@@ -154,10 +161,14 @@ const FramePage = () => {
   };
 
   return (
-    <div
+    <main
       className={`${
         isLoading && "dark-overlay"
       } w-full h-full bg-black flex-col items-center flex justify-center`}
+      style={{
+        paddingTop: top + "px",
+        paddingBottom: bottom + "px",
+      }}
     >
       <Header
         titleComponent={
@@ -179,11 +190,20 @@ const FramePage = () => {
               canvasSize={canvasSize}
               imageIdx={imageIdx}
               setImageIdx={setImageIdx}
+              userData={{
+                top,
+                bottom,
+                nickName,
+                partnerNickName,
+                dDay,
+                isConnected,
+                coupleId,
+              }}
             />
           )}
         </div>
 
-        <div className="flex flex-col w-full gap-3 px-6">
+        <div className="flex flex-col w-full gap-5 px-6">
           <div className="flex flex-row justify-between w-full overflow-x-scroll">
             {Array.from({ length: 5 }).map((_, index) => (
               <button
@@ -228,7 +248,7 @@ const FramePage = () => {
                 마푸에서 한 달간 다시 볼 수 있어요
               </span>
               <span className="text-center text-sm text-gray-600 tracking-[0.28px] leading-[150%]">
-                {partner}님을 사랑하는 마음을
+                {partnerNickName}님을 사랑하는 마음을
                 <br />
                 가득 담아 만들고 있어요!
               </span>
@@ -238,7 +258,7 @@ const FramePage = () => {
           </div>
         </div>
       )}
-    </div>
+    </main>
   );
 };
 
