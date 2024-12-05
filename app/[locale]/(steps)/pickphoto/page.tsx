@@ -1,11 +1,11 @@
 import HeartIcon from "@/assets/HeartIcon";
 import Header from "@/components/Header";
 import PhotoSelector from "./_components/PhotoSelector";
-import { SearchParams } from "@/types/user";
+import { AsyncSearchParams } from "@/types/user";
 
-const PickPhotoPage = (props: { searchParams: SearchParams }) => {
+const PickPhotoPage = async (props: { searchParams: AsyncSearchParams }) => {
   const { top, bottom, nickName, partnerNickName, dDay, isConnected } =
-    props.searchParams;
+    await props.searchParams;
 
   console.log(top, bottom, nickName, partnerNickName, dDay, isConnected);
 
