@@ -45,7 +45,7 @@ const FramePage = (props: { searchParams: AsyncSearchParams }) => {
     const presignedResult = await getPresignedUrls(photos);
     if (!presignedResult) {
       console.error("Failed to get presigned URLs");
-      navigation.push("/pickphoto");
+      navigation.push(`/pickphoto?${searchParams.toString()}`);
       return;
     }
     console.timeEnd("리캡 이미지 presigned url 발급");
@@ -106,10 +106,13 @@ const FramePage = (props: { searchParams: AsyncSearchParams }) => {
       console.timeEnd("리캡 생성 요청");
 
       setIsLoading(false);
-      navigation.push(`result?recapUrl=${recapUrl}`);
+      navigation.push(`result?${searchParams.toString()}&recapUrl=${recapUrl}`);
     } catch (err) {
       console.error("Error during recap processing:", err);
       setIsLoading(false);
+      if (typeof window !== "undefined" && window.ReactNativeWebView) {
+        window.ReactNativeWebView.postMessage(JSON.stringify({ type: "exit" }));
+      }
     }
   };
 
@@ -212,7 +215,7 @@ const FramePage = (props: { searchParams: AsyncSearchParams }) => {
                 className={`w-14 h-14 rounded-full bg-white flex items-center justify-center relative`}
               >
                 <Image
-                  src={`/_assets/canvas/selectBtn/${index + 1}.jpeg`}
+                  src={`/_assets/canvas/selectBtn/${index + 1}.png`}
                   alt="frameChip"
                   fill
                   sizes="14"
