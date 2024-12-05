@@ -6,10 +6,42 @@ import { useSearchParams } from "next/navigation";
 const UserInteraction = () => {
   const searchParams = useSearchParams();
   const handleAskEvent = () => {
-    console.log("ask event");
+    console.log("ask event", {
+      type: "RESULT_ASK",
+      message: {
+        title: "[썸원-마푸] 2024 내 연인 결산",
+        file: searchParams.get("recapUrl"),
+      },
+    });
+    if (typeof window !== "undefined" && window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({
+          type: "RESULT_ASK",
+          message: {
+            title: "[썸원-마푸] 2024 내 연인 결산",
+            file: searchParams.get("recapUrl"),
+          },
+        })
+      );
+    }
   };
   const handleShareEvent = () => {
-    console.log("share event");
+    console.log("share event", {
+      type: "RESULT_SHARE",
+      message: {
+        file: "s3 url",
+      },
+    });
+    if (typeof window !== "undefined" && window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({
+          type: "RESULT_SHARE",
+          message: {
+            file: searchParams.get("recapUrl"),
+          },
+        })
+      );
+    }
   };
   return (
     <div className="flex items-center w-full my-3">
