@@ -58,8 +58,8 @@ const FramePage = (props: { searchParams: AsyncSearchParams }) => {
       console.time("이미지 PUT");
       const uploadPromises = dataUrls.map(async (dataUrl, index) => {
         const blob = await fetch(dataUrl).then((res) => res.blob());
-        const file = new File([blob], `frame_${index + 1}.png`, {
-          type: "image/png",
+        const file = new File([blob], `frame_${index + 1}.jpeg`, {
+          type: "image/jpeg",
         });
         const presignedUrl = urls[index];
 
@@ -140,7 +140,7 @@ const FramePage = (props: { searchParams: AsyncSearchParams }) => {
         });
 
         // Convert the canvas to a data URL (image)
-        const dataUrl = canvas.toDataURL("image/png");
+        const dataUrl = canvas.toDataURL("image/jpeg");
         dataUrls.push(dataUrl);
 
         // Create a temporary link to download the image
@@ -212,7 +212,7 @@ const FramePage = (props: { searchParams: AsyncSearchParams }) => {
                 className={`w-14 h-14 rounded-full bg-white flex items-center justify-center relative`}
               >
                 <Image
-                  src={`/_assets/canvas/selectBtn/${index + 1}.png`}
+                  src={`/_assets/canvas/selectBtn/${index + 1}.jpeg`}
                   alt="frameChip"
                   fill
                   sizes="14"
