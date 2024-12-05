@@ -15,7 +15,8 @@ const VideoArea = () => {
       <div className="flex w-full h-full items-center justify-center mx-6 mb-7">
         <video
           src="/_assets/main_video.mp4"
-          autoPlay={true}
+          autoPlay
+          playsInline
           loop
           muted
           className="flex w-full h-full rounded-lg"

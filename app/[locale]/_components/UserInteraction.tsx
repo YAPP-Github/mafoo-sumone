@@ -2,14 +2,22 @@
 
 import Chevron from "@/assets/Chevron";
 import SumoneButton from "@/assets/SumoneButton";
+import { ObjectedParams } from "@/types/user";
+import { useObjectToQueryString } from "@/utils/useQueryString";
 
 import dynamic from "next/dynamic";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
 
-const MainPageUserInteraction = () => {
+const MainPageUserInteraction = ({
+  userData,
+}: {
+  userData: ObjectedParams;
+}) => {
   const navigation = useRouter();
+  const pathName = usePathname();
+  const OTQ = useObjectToQueryString();
   const [modalType, setModalType] = useState<"privacy" | "couple" | null>(null);
 
   const PrivacyModal = dynamic(() => import("./PrivacyModal"), {
@@ -47,35 +55,60 @@ const MainPageUserInteraction = () => {
 
   const handleAskShare = async () => {
     //  결산 부탁하기
+    if (typeof window !== "undefined" && window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({
+          type: "MAIN_SHARE",
+          message: {
+            title: "[썸원-마푸] 2024 내 연인 결산",
+          },
+        })
+      );
+    }
   };
 
-  const checkCouple = async () => {
+  const checkCouple = () => {
+    if (!userData || userData.isConnected !== "true") {
+      return false;
+    }
     return true;
   };
 
   const handleCreateRecap = async () => {
-    // 커플 확인 API
-    if (!checkCouple()) {
-      setModalType("couple");
-    } else {
-      // 앨범 생성 API
-      const { albumId } = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/sumone/albums`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ userId: "test123" }),
-        }
-      ).then((res) => {
-        return res.json();
-      });
-      // put albumId in to cookie
-      document.cookie = `albumId=${albumId}`;
-    }
+    console.log("handleCreateRecap");
+    try {
+      if (!checkCouple()) {
+        setModalType("couple");
+      } else {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/sumone/albums`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            // TODO: Change userId to actual user ID
+            body: JSON.stringify({ userId: "test123" }),
+          }
+        );
 
-    navigation.push("/pickphoto");
+        if (!response.ok) {
+          throw new Error("Failed to create album");
+        }
+
+        const { albumId } = await response.json();
+
+        if (albumId) {
+          document.cookie = `albumId=${albumId}`;
+          navigation.push(`${pathName}/pickphoto?${OTQ(userData)}`);
+        } else {
+          throw new Error("Album ID not returned");
+        }
+      }
+    } catch (error) {
+      console.error("Error creating recap:", error);
+      // Handle the error appropriately (show a notification, etc.)
+    }
   };
 
   return (

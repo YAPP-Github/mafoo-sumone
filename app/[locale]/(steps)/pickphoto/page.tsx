@@ -1,14 +1,16 @@
 import HeartIcon from "@/assets/HeartIcon";
 import Header from "@/components/Header";
 import PhotoSelector from "./_components/PhotoSelector";
+import { SearchParams } from "@/types/user";
 
-const PickPhotoPage = () => {
-  const { partner } = {
-    partner: "영지",
-  };
+const PickPhotoPage = (props: { searchParams: SearchParams }) => {
+  const { top, bottom, nickName, partnerNickName, dDay, isConnected } =
+    props.searchParams;
+
+  console.log(top, bottom, nickName, partnerNickName, dDay, isConnected);
 
   return (
-    <div className="flex flex-col w-full h-full">
+    <main className="flex flex-col w-full h-full">
       <Header
         titleComponent={
           <div className="flex flex-row gap-1 items-center  text-lg tracking-[0.36px] leading-[140%]">
@@ -19,7 +21,7 @@ const PickPhotoPage = () => {
       />
       <div className="flex flex-col gap-4 p-6 pt-4">
         <div className="text-xl tracking-[0.4px] leading-[160%]">
-          2024년, {partner}님의
+          2024년, {partnerNickName}님의
           <br />
           사랑스러운 순간을 모아주세요
         </div>
@@ -29,7 +31,7 @@ const PickPhotoPage = () => {
       </div>
       {/* Photo Selector */}
       <PhotoSelector />
-    </div>
+    </main>
   );
 };
 

@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { use } from "react";
 
 export const metadata: Metadata = {
   title: "Mafoo-Sumone Recap",
   description: "",
-  icons: ["favicon.png"],
+  icons: ["/favicon.png"],
 };
 
 export const viewport: Viewport = {
@@ -15,14 +16,19 @@ export const viewport: Viewport = {
   maximumScale: 1,
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+type Params = Promise<{ slug: string }>;
+
+export default function RootLayout(props: {
   children: React.ReactNode;
-}>) {
+  params: Params;
+}) {
+  const params = use(props.params);
+  console.log(params);
   return (
     <html lang="ko">
-      <body className={`font-ggbatang antialiased bg-image`}>{children}</body>
+      <body className={`font-ggbatang antialiased bg-image`}>
+        {props.children}
+      </body>
       <GoogleAnalytics gaId="G-LYZW7D247W" />
     </html>
   );
