@@ -122,9 +122,9 @@ const Canvas = ({
           <div
             style={{
               backgroundColor: subColor,
-              top: topIndex,
+              top: topIndex - 2,
               width: (canvasSize.height * 240) / 543 + 2 + "px",
-              height: (canvasSize.height * 354) / 543 + 2 + "px",
+              height: (canvasSize.height * 354) / 543 + 4 + "px",
               position: "absolute",
               display: "flex",
               justifyContent: "center",
