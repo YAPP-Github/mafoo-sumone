@@ -29,7 +29,9 @@ export default function RootLayout(props: {
       <body className={`font-ggbatang antialiased bg-image`}>
         {props.children}
       </body>
-      <GoogleAnalytics gaId="G-LYZW7D247W" />
+      <GoogleAnalytics
+        gaId={`${process.env.NEXT_PUBLIC_GA || "G-LYZW7D247W"}`}
+      />
     </html>
   );
 }
