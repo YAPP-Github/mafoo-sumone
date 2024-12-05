@@ -1,14 +1,11 @@
 import HeartIcon from "@/assets/HeartIcon";
-import { useRouter } from "next/navigation";
 
 const CoupleModal = ({ onClose }: { onClose: () => void }) => {
-  const navigation = useRouter();
   const handleRegisterCouple = () => {
     //TODO: 커플 등록하기 이벤트
+    window?.ReactNativeWebView?.postMessage({ type: "NEED_CONNECT" });
     //dependency: Sumone측 API 대기중
     onClose();
-
-    navigation.push("/pickphoto");
   };
   return (
     <span className="fixed z-50 -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 bg-image w-[345px] h-[300px] rounded-md">

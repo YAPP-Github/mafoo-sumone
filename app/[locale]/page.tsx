@@ -7,8 +7,13 @@ import VideoArea from "./_components/VideoArea";
 import MainGarland from "@/assets/MainGarland.png";
 import MainTree from "@/assets/MainTree.png";
 import Link from "next/link";
+import InfoIcon from "@/assets/InfoIcon";
+import { AsyncSearchParams } from "@/types/user";
 
-export default async function Home() {
+export default async function Home(props: { searchParams: AsyncSearchParams }) {
+  const { top, bottom, nickName, partnerNickName, dDay, isConnected } =
+    await props.searchParams;
+
   const { userCount } = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/sumone/summary`,
     {
@@ -23,13 +28,18 @@ export default async function Home() {
   return (
     <main
       id="mainBg"
+      style={{ paddingTop: top + "px", paddingBottom: bottom + "px" }}
       className="flex flex-col items-center w-full h-full bg-gradient"
     >
+      {/* TODO: FAQ 문서 링크 변경 */}
       <Link
         href="https://chisel-promise-9ff.notion.site/FAQ-f366f55df31b49ef96e7db35c73b8921?pvs=4"
-        className="fixed top-16 left-4 rounded-full bg-pink text-white w-10 h-10 flex items-center justify-center"
+        className="fixed right-4 rounded-full bg-[rgba(255, 255, 255, 0.60)] backdrop-blur-xl w-11 h-11 flex items-center justify-center"
+        style={{
+          top: Number(24) + Number(top) + "px",
+        }}
       >
-        ?
+        <InfoIcon width={24} />
       </Link>
 
       <header className="flex flex-col items-center w-full gap-2 py-4">
@@ -74,7 +84,16 @@ export default async function Home() {
           벌써 {userCount} 커플이 올해 추억을 결산했어요!
         </span>
       </span>
-      <MainPageUserInteraction />
+      <MainPageUserInteraction
+        userData={{
+          top,
+          bottom,
+          nickName,
+          partnerNickName,
+          dDay,
+          isConnected,
+        }}
+      />
     </main>
   );
 }
