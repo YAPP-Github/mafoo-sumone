@@ -3,10 +3,13 @@ import HeartIcon from "@/assets/HeartIcon";
 const CoupleModal = ({ onClose }: { onClose: () => void }) => {
   const handleRegisterCouple = () => {
     if (typeof window !== "undefined" && window.ReactNativeWebView) {
-      window?.ReactNativeWebView?.postMessage({ type: "NEED_CONNECT" });
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ type: "NEED_CONNECT" })
+      );
     }
     onClose();
   };
+
   return (
     <span className="fixed z-50 -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 bg-image w-[345px] h-[300px] rounded-md">
       <div className="flex flex-col justify-between w-full h-full px-6 pt-12 pb-8">

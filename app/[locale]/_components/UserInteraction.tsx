@@ -53,7 +53,7 @@ const MainPageUserInteraction = ({
     setModalType(null);
   };
 
-  const handleAskShare = async () => {
+  const handleAskShare = () => {
     //  결산 부탁하기
     if (typeof window !== "undefined" && window.ReactNativeWebView) {
       window.ReactNativeWebView.postMessage(
