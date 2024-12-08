@@ -1,10 +1,5 @@
 "use client";
 
-import Image from "next/image";
-
-import MainStar1 from "@/assets/MainStar.png";
-import MainStar2 from "@/assets/MainStar2.png";
-import MainStar3 from "@/assets/MainStar3.png";
 import { useGetScreenSize } from "@/utils/useScreenSize";
 
 const VideoArea = () => {
@@ -22,34 +17,24 @@ const VideoArea = () => {
           className="flex w-full h-full rounded-lg"
         />
       </div>
-      <Image
-        src={MainStar1}
-        height={28}
-        alt="Main Star 1"
-        className="absolute object-contain"
+      <span
+        className="sprite star yellow absolute"
         style={{
           top: 28 + "px",
           left: ((windowSize.height - 360) / 476) * 276 + 24 + 30 + "px",
         }}
       />
-      <Image
-        src={MainStar2}
-        height={28}
-        alt="Main Star 2"
-        className="absolute object-contain"
+      <span
+        className="sprite star green absolute"
         style={{
           top: (windowSize.height - 360) * 0.4 - 28 + "px",
-          // left: -40 + "px",
           left: 12 + "px",
         }}
       />
-      <Image
-        src={MainStar3}
-        height={17}
-        alt="Main Star 3"
-        className="absolute object-contain"
+      <span
+        className="sprite red absolute"
         style={{
-          top: (windowSize.height - 360) * 0.8 - 28 + "px",
+          top: (windowSize.height - 360) * 0.6 - 28 + "px",
           left: ((windowSize.height - 360) / 476) * 276 + 24 + 20 + "px",
         }}
       />

@@ -1,14 +1,9 @@
 import DoubleHeartIcon from "@/assets/DoubleHeartIcon";
 import HeartIcon from "@/assets/HeartIcon";
 import MainPageUserInteraction from "./_components/UserInteraction";
-import MainYellowHeart from "@/assets/MainYellowHeart.png";
-import Image from "next/image";
 import VideoArea from "./_components/VideoArea";
-import MainGarland from "@/assets/MainGarland.png";
-import MainTree from "@/assets/MainTree.png";
-import Link from "next/link";
-import InfoIcon from "@/assets/InfoIcon";
 import { AsyncSearchParams } from "@/types/user";
+import "./mainpage.css";
 
 export default async function Home(props: { searchParams: AsyncSearchParams }) {
   const {
@@ -32,48 +27,39 @@ export default async function Home(props: { searchParams: AsyncSearchParams }) {
     }
   ).then((res) => res.json());
 
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/sumone/invite-code?userId=${coupleId}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  )
+    .then((res) => {
+      return res.json();
+    })
+    .catch(() => {
+      return { code: null };
+    });
+
   return (
     <main
       id="mainBg"
       style={{ paddingTop: top + "px", paddingBottom: bottom + "px" }}
       className="flex flex-col items-center w-full h-full bg-gradient"
     >
-      {/* TODO: FAQ 문서 링크 변경 */}
-      <Link
-        href="https://chisel-promise-9ff.notion.site/FAQ-f366f55df31b49ef96e7db35c73b8921?pvs=4"
-        className="fixed right-4 rounded-full bg-[rgba(255, 255, 255, 0.60)] backdrop-blur-xl w-11 h-11 flex items-center justify-center"
-        style={{
-          top: Number(24) + Number(top) + "px",
-        }}
-      >
-        <InfoIcon width={24} />
-      </Link>
-
       <header className="flex flex-col items-center w-full gap-2 py-4">
         {/* Top Orgament Part */}
-        <span
-          className="flex w-full h-8 bg-repeat-x"
-          style={{
-            backgroundImage: `url(${MainGarland.src})`,
-          }}
-        />
-        <Image
-          src={MainTree}
-          alt="Main Tree"
-          width={60}
-        />
+        <span className="sprite garland w-full flex" />
+        <span className="sprite tree" />
         <span className="flex flex-col items-center gap-1">
           <span className="flex flex-row items-center gap-2">
             <HeartIcon width={24} />
             <h1 className="text-xl tracking-[0.4px] leading-[160%]">
               2024년 내 연인 결산
             </h1>
-            <Image
-              src={MainYellowHeart}
-              alt="Main Yellow Heart"
-              width={24}
-              className="object-contain"
-            />
+            <span className="sprite yellowHeart" />
           </span>
 
           <h2 className="text-center text-base text-gray-800 tracking-[0.32px] leading-[160%]">
@@ -92,6 +78,7 @@ export default async function Home(props: { searchParams: AsyncSearchParams }) {
         </span>
       </span>
       <MainPageUserInteraction
+        code={data.code}
         userData={{
           top,
           bottom,

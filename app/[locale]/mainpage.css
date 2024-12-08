@@ -1,0 +1,41 @@
+.sprite {
+  background-image: url("../../assets/Mainpage.png");
+  background-repeat: no-repeat;
+}
+
+.tree {
+  width: 60px;
+  height: 60px;
+  background-position: -0px -0px;
+}
+
+.yellowHeart {
+  width: 24px;
+  height: 24px;
+  background-position: -70px 0px;
+}
+
+.star {
+  width: 22px;
+  height: 28px;
+}
+
+.yellow {
+  background-position: -104px 0px;
+}
+
+.green {
+  background-position: -136px 0px;
+}
+
+.red {
+  background-position: -168px 0px;
+  width: 14px;
+  height: 17px;
+}
+
+.garland {
+  height: 32px;
+  background-position: -0px -70px;
+  background-repeat: repeat-x;
+}

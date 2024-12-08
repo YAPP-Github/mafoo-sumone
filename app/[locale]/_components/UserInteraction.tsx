@@ -5,34 +5,32 @@ import SumoneButton from "@/assets/SumoneButton";
 import { ObjectedParams } from "@/types/user";
 import { useObjectToQueryString } from "@/utils/useQueryString";
 
-import dynamic from "next/dynamic";
+import CoupleModal from "./CoupleModal";
+import PrivacyModal from "./PrivacyModal";
 import { usePathname, useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
+import { sendGAEvent } from "@next/third-parties/google";
+import Link from "next/link";
+import InfoIcon from "@/assets/InfoIcon";
+import CopyIcon from "@/assets/CopyIcon";
 
 const MainPageUserInteraction = ({
+  code,
   userData,
 }: {
+  code?: string;
   userData: ObjectedParams;
 }) => {
   const navigation = useRouter();
   const pathName = usePathname();
   const OTQ = useObjectToQueryString();
-  const [modalType, setModalType] = useState<"privacy" | "couple" | null>(null);
-
-  const PrivacyModal = dynamic(() => import("./PrivacyModal"), {
-    loading: () => (
-      <div className="fixed bottom-0 w-full bg-image h-[220] rounded-t-3xl z-50" />
-    ),
-  });
-
-  const CoupleModal = dynamic(() => import("./CoupleModal"), {
-    loading: () => (
-      <div className="fixed -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 bg-image w-[345px] h-[300px] rounded-md z-50" />
-    ),
-  });
+  const [modalType, setModalType] = useState<
+    "privacy" | "couple" | "loading" | null
+  >(null);
 
   useEffect(() => {
+    console.log("modalType:", modalType);
     const mainElement = document.getElementById("mainBg");
 
     if (mainElement) {
@@ -44,6 +42,12 @@ const MainPageUserInteraction = ({
       }
     }
   }, [modalType]);
+
+  useEffect(() => {
+    sendGAEvent("event", "MainPageView", {
+      locale: pathName.split("/")[1],
+    });
+  });
 
   const handleOpenPrivacyModal = () => {
     setModalType("privacy");
@@ -79,6 +83,7 @@ const MainPageUserInteraction = ({
       if (!checkCouple()) {
         setModalType("couple");
       } else {
+        setModalType("loading");
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/sumone/albums`,
           {
@@ -152,8 +157,34 @@ const MainPageUserInteraction = ({
           onClick={handleCreateRecap}
         />
       </span>
+      <div
+        className="fixed px-6 w-full flex flex-row-reverse justify-between"
+        style={{
+          top: Number(32) + Number(userData.top) + "px",
+        }}
+      >
+        {/* TODO: FAQ 문서 링크 변경 */}
+        <Link
+          href="https://chisel-promise-9ff.notion.site/FAQ-f366f55df31b49ef96e7db35c73b8921?pvs=4"
+          className="rounded-full bg-[rgba(255, 255, 255, 0.60)] backdrop-blur-xl w-11 h-11 flex items-center justify-center"
+        >
+          <InfoIcon width={24} />
+        </Link>
+        {code && (
+          <span className="flex h-fit flex-row items-center gap-1 bg-pink rounded-lg px-2 py-1.5">
+            <span className="text-sm text-white tracking-[0.28px]">
+              가입코드
+            </span>
+            <CopyIcon
+              width={16}
+              height={16}
+            />
+          </span>
+        )}
+      </div>
 
       {modalType &&
+        modalType !== "loading" &&
         (modalType === "privacy" ? (
           <PrivacyModal onClose={handleCloseModal} />
         ) : (

@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { getPresignedUrls } from "../../api";
 import { ObjectedParams } from "@/types/user";
 import { useObjectToQueryString } from "@/utils/useQueryString";
+import Masonry from "react-responsive-masonry";
 
 const PhotoSelector = ({ userData }: { userData: ObjectedParams }) => {
   const navigation = useRouter();
@@ -107,9 +108,13 @@ const PhotoSelector = ({ userData }: { userData: ObjectedParams }) => {
   };
 
   return (
-    <div className="flex flex-1 flex-grow w-full gap-2 p-6 overflow-y-scroll bg-white border border-b-0 border-gray-200 rounded-t-3xl">
-      <div className="flex flex-col items-start w-1/2 gap-1">
-        <span className="h-fit">
+    <div className="flex flex-1 w-full gap-2 p-6 overflow-y-scroll bg-white border border-b-0 border-gray-200 rounded-t-3xl">
+      <Masonry
+        key={photos.length}
+        columnsCount={2}
+        gutter="4px"
+      >
+        <>
           <input
             type="file"
             id="addImage"
@@ -124,34 +129,21 @@ const PhotoSelector = ({ userData }: { userData: ObjectedParams }) => {
               className="flex-shrink aspect-square"
             />
           </label>
-        </span>
-        {photos
-          .filter((_, index) => index % 2 == 1)
-          .map((image, index) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              key={`left${index}`}
-              src={URL.createObjectURL(image)}
-              className="object-contain w-full aspect-[2/3] border border-gray-200 rounded-xl"
-              alt={"image" + index}
-            />
-          ))}
+        </>
+        {photos.map((image, index) => (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            key={`${index}`}
+            src={URL.createObjectURL(image)}
+            className="object-contain w-full h-fit border border-gray-200 rounded-xl"
+            alt={"image" + index + 5}
+          />
+        ))}
+      </Masonry>
+
+      {/* <div className="flex flex-col items-start w-1/2 gap-1">
         <span className="w-full h-16 shrink-0" />
-      </div>
-      <div className="flex flex-col items-start w-1/2 gap-1">
-        {photos
-          .filter((_, index) => index % 2 == 0)
-          .map((image, index) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              key={`right${index}`}
-              src={URL.createObjectURL(image)}
-              className="object-contain w-full aspect-[2/3] border border-gray-200 rounded-xl"
-              alt={"image" + index + 5}
-            />
-          ))}
-        <span className="w-full h-16 shrink-0" />
-      </div>
+      </div> */}
       {photos.length < 1 ? (
         <div className="fixed flex w-[calc(100%-48px)] h-12 bottom-2">
           <SumoneButton

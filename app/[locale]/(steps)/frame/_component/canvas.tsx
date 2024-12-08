@@ -4,7 +4,8 @@ import DayHeartIcon from "@/assets/DayHeartIcon";
 import MafooLogo from "@/assets/MafooLogo";
 import { ObjectedParams } from "@/types/user";
 import Image from "next/image";
-import { Dispatch, SetStateAction, memo, useState } from "react";
+import { Dispatch, SetStateAction, memo } from "react";
+import Character from "./Character";
 // import TitleSvg from "@/app/assets/Logo";
 // import SpriteImg from "../_assets/canvas/sprite.png";
 
@@ -14,32 +15,32 @@ const CanvasPrepData = [
     frameSrc: "/_assets/canvas/frame/1.png",
     character1: "/_assets/canvas/character/puppy1.png",
     character2: "/_assets/canvas/character/puppy2.png",
-    mainColor: "#F56965",
-    subColor: "#FFDCD2",
+    mainColor: "#F64435",
+    subColor: "#ffffff",
   },
   {
     id: 2,
     frameSrc: "/_assets/canvas/frame/2.png",
-    character1: "/_assets/canvas/character/panda1.png",
-    character2: "/_assets/canvas/character/panda2.png",
-    mainColor: "#65B5FF",
-    subColor: "#BBE8FF",
+    character1: "/_assets/canvas/character/penguin1.png",
+    character2: "/_assets/canvas/character/penguin2.png",
+    mainColor: "#5B7F38",
+    subColor: "#ffffff",
   },
   {
     id: 3,
     frameSrc: "/_assets/canvas/frame/3.png",
     character1: "/_assets/canvas/character/cat1.png",
     character2: "/_assets/canvas/character/cat2.png",
-    mainColor: "#B862EB",
-    subColor: "#EADAFF",
+    mainColor: "#F64435",
+    subColor: "#ffffff",
   },
   {
     id: 4,
     frameSrc: "/_assets/canvas/frame/4.png",
     character1: "/_assets/canvas/character/panda1.png",
     character2: "/_assets/canvas/character/panda2.png",
-    mainColor: "#C88F00",
-    subColor: "#F3D78B",
+    mainColor: "#5B7F38",
+    subColor: "#ffffff",
   },
   {
     id: 5,
@@ -65,14 +66,8 @@ const Canvas = ({
   setImageIdx: Dispatch<SetStateAction<number>>;
   userData: ObjectedParams;
 }) => {
-  const [characterState, setCharacterState] = useState(0);
-
   const { frameSrc, character1, character2, mainColor, subColor } =
     CanvasPrepData[frameType - 1];
-
-  const handleClickImage = () => {
-    setCharacterState((prev) => 1 - prev);
-  };
 
   const handleClickBackground = () => {
     setImageIdx((prev) => (prev + 1) % images.length);
@@ -89,7 +84,7 @@ const Canvas = ({
         src={frameSrc}
         alt="frame"
         fill
-        className="absolute top-0 z-20 object-contain w-full h-full"
+        className="absolute top-0 z-20 object-contain w-full h-full bg-blend-overlay"
         onClick={handleClickBackground}
       />
       {/* 상단 Title */}
@@ -97,7 +92,7 @@ const Canvas = ({
         <span className="flex flex-col gap-2.5 items-center z-30 pt-8 relative">
           <span className="z-30 flex flex-row items-center gap-1">
             <span
-              style={{ color: mainColor }}
+              style={{ color: frameType === 5 ? mainColor : "#ffffff" }}
               className="text-lg font-bold shifted-text"
             >
               @{userData.partnerNickName}님의{" "}
@@ -105,15 +100,14 @@ const Canvas = ({
             {/* <TitleSvg fillColor="#f7807a" /> */}
             <MafooLogo
               width={78}
-              fill={mainColor}
-              subColor={subColor}
+              fill={frameType === 5 ? mainColor : "#ffffff"}
             />
           </span>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={"/_assets/SumoneLogo.png"}
             alt="SumoneLogo"
-            width={145}
+            width={canvasSize.width / 4}
             height={27}
           />
         </span>
@@ -121,7 +115,7 @@ const Canvas = ({
         {images.length > 0 && (
           <div
             style={{
-              backgroundColor: subColor,
+              backgroundColor: frameType === 5 ? subColor : mainColor,
               top: topIndex - 2,
               width: (canvasSize.height * 240) / 543 + 2 + "px",
               height: (canvasSize.height * 354) / 543 + 4 + "px",
@@ -150,33 +144,11 @@ const Canvas = ({
           </div>
         )}
 
-        <span
-          style={{
-            width: (canvasSize.height * 144) / 543 + "px",
-            height: (canvasSize.height * 144) / 543 + "px",
-          }}
-          className="absolute bottom-0 right-0 z-30 grow-0"
-          onClick={handleClickImage}
-        >
-          <Image
-            src={characterState === 0 ? character1 : character2 || character1}
-            fill
-            className="w-full"
-            alt="character"
-            sizes={`${(canvasSize.height * 144) / 543}px`}
-          />
-          {character2 && (
-            <span
-              className="relative z-30 flex transform -translate-x-1/3 bottom-10 w-fit left-1/2"
-              data-html2canvas-ignore="true"
-            >
-              <div className="w-fit bg-white py-2.5 px-3 rounded-lg shadow-sm z-20 whitespace-pre text-xs tracking-[0.24px] leading-[150%]">
-                저 포즈도 바꿀 수 있어요!
-                <span className="absolute w-4 h-4 rotate-45 -translate-x-1/2 bg-white rounded-sm left-1/2 -bottom-2" />
-              </div>
-            </span>
-          )}
-        </span>
+        <Character
+          character1={character1}
+          character2={character2}
+          canvasSize={canvasSize}
+        />
         <span
           style={{
             left: xPadding,
