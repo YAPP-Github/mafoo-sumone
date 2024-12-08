@@ -7,11 +7,11 @@ import Header from "@/components/Header";
 import HeartIcon from "@/assets/HeartIcon";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useGetCanvasSize } from "@/utils/useScreenSize";
-import Image from "next/image";
 import { usePhotoStore } from "@/atom/photo";
 import SumoneButton from "@/assets/SumoneButton";
 import { getPresignedUrls } from "../api";
 import { AsyncSearchParams } from "@/types/user";
+import "./frame.css";
 
 const FramePage = (props: { searchParams: AsyncSearchParams }) => {
   const {
@@ -208,25 +208,23 @@ const FramePage = (props: { searchParams: AsyncSearchParams }) => {
 
         <div className="flex flex-col w-full gap-5 px-6">
           <div className="flex flex-row justify-between w-full overflow-x-scroll">
-            {Array.from({ length: 5 }).map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setFrameType(index + 1)}
-                className={`w-14 h-14 rounded-full bg-white flex items-center justify-center relative`}
-              >
-                <Image
-                  src={`/_assets/canvas/selectBtn/${index + 1}.png`}
-                  alt="frameChip"
-                  fill
-                  sizes="14"
-                  className={`${
-                    index + 1 === frameType
-                      ? "border-2 border-white rounded-full"
-                      : "opacity-40"
-                  } object-contain w-full h-full`}
-                />
-              </button>
-            ))}
+            {["puppy", "penguin", "cat", "panda", "egg"].map(
+              (character, index) => (
+                <button
+                  key={index}
+                  onClick={() => setFrameType(index + 1)}
+                  className={`w-14 h-14 rounded-full bg-white flex items-center justify-center relative`}
+                >
+                  <span
+                    className={`sprite chip chip_${character} ${
+                      index + 1 === frameType
+                        ? "border-2 border-white rounded-full"
+                        : "opacity-40"
+                    }`}
+                  />
+                </button>
+              )
+            )}
           </div>
           <div className="w-full flex">
             <SumoneButton

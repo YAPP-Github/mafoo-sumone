@@ -1,13 +1,12 @@
-import Image from "next/image";
 import { useState } from "react";
 
 const Character = ({
-  character1,
-  character2,
+  isAbleToChangeCharacter,
+  character,
   canvasSize,
 }: {
-  character1: string;
-  character2?: string;
+  isAbleToChangeCharacter?: boolean;
+  character: string;
   canvasSize: { width: number; height: number };
 }) => {
   const [characterState, setCharacterState] = useState<number>(0);
@@ -25,16 +24,16 @@ const Character = ({
       className="absolute bottom-0 right-0 z-30 grow-0"
       onClick={handleClickCharacter}
     >
-      <Image
-        src={characterState === 0 ? character1 : character2 || character1}
-        fill
-        className="w-full"
-        alt="character"
-        sizes={`${(canvasSize.height * 144) / 543}px`}
+      <span
+        className={`flex sprite character ${character}${characterState}`}
+        style={{
+          zoom: `${((canvasSize.height / 543) * 144) / 180}`,
+        }}
       />
-      {character2 && (
+      {isAbleToChangeCharacter && (
         <span
-          className="relative z-30 flex transform -translate-x-1/3 bottom-10 w-fit left-1/2"
+          style={{ bottom: (canvasSize.height * 144) / 543 + 40 + "px" }}
+          className="relative z-30 flex transform -translate-x-1/3 left-1/2 w-fit"
           data-html2canvas-ignore="true"
         >
           <div className="w-fit bg-white py-2.5 px-3 rounded-lg shadow-sm z-20 whitespace-pre text-xs tracking-[0.24px] leading-[150%]">

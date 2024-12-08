@@ -6,46 +6,34 @@ import { ObjectedParams } from "@/types/user";
 import Image from "next/image";
 import { Dispatch, SetStateAction, memo } from "react";
 import Character from "./Character";
+import SumoneLogo from "@/assets/SumoneLogo";
 // import TitleSvg from "@/app/assets/Logo";
 // import SpriteImg from "../_assets/canvas/sprite.png";
 
 const CanvasPrepData = [
   {
     id: 1,
-    frameSrc: "/_assets/canvas/frame/1.png",
-    character1: "/_assets/canvas/character/puppy1.png",
-    character2: "/_assets/canvas/character/puppy2.png",
+    character: "puppy",
     mainColor: "#F64435",
-    subColor: "#ffffff",
   },
   {
     id: 2,
-    frameSrc: "/_assets/canvas/frame/2.png",
-    character1: "/_assets/canvas/character/penguin1.png",
-    character2: "/_assets/canvas/character/penguin2.png",
+    character: "penguin",
     mainColor: "#5B7F38",
-    subColor: "#ffffff",
   },
   {
     id: 3,
-    frameSrc: "/_assets/canvas/frame/3.png",
-    character1: "/_assets/canvas/character/cat1.png",
-    character2: "/_assets/canvas/character/cat2.png",
+    character: "cat",
     mainColor: "#F64435",
-    subColor: "#ffffff",
   },
   {
     id: 4,
-    frameSrc: "/_assets/canvas/frame/4.png",
-    character1: "/_assets/canvas/character/panda1.png",
-    character2: "/_assets/canvas/character/panda2.png",
+    character: "panda",
     mainColor: "#5B7F38",
-    subColor: "#ffffff",
   },
   {
     id: 5,
-    frameSrc: "/_assets/canvas/frame/5.png",
-    character1: "/_assets/canvas/character/egg1.png",
+    character: "egg",
     mainColor: "#444E5C",
     subColor: "#FBF3EE",
   },
@@ -66,8 +54,7 @@ const Canvas = ({
   setImageIdx: Dispatch<SetStateAction<number>>;
   userData: ObjectedParams;
 }) => {
-  const { frameSrc, character1, character2, mainColor, subColor } =
-    CanvasPrepData[frameType - 1];
+  const { character, mainColor, subColor } = CanvasPrepData[frameType - 1];
 
   const handleClickBackground = () => {
     setImageIdx((prev) => (prev + 1) % images.length);
@@ -80,16 +67,28 @@ const Canvas = ({
     <div
       className={`w-full h-full rounded-2xl relative flex items-center flex-col p-4`}
     >
-      <Image
+      {/* <Image
         src={frameSrc}
         alt="frame"
         fill
         className="absolute top-0 z-20 object-contain w-full h-full bg-blend-overlay"
         onClick={handleClickBackground}
+      /> */}
+      <span
+        className={`absolute top-0 z-20 w-full h-full bg-blend-overlay sprite frame frame_${character}`}
+        style={{
+          zoom: canvasSize.height / 680,
+        }}
+        onClick={handleClickBackground}
       />
       {/* 상단 Title */}
       <div className="absolute top-0 flex flex-col items-center w-full h-full gap-4 pt-4">
-        <span className="flex flex-col gap-2.5 items-center z-30 pt-8 relative">
+        <span
+          className="flex flex-col gap-2.5 items-center z-30 relative"
+          style={{
+            marginTop: canvasSize.height * 0.025,
+          }}
+        >
           <span className="z-30 flex flex-row items-center gap-1">
             <span
               style={{ color: frameType === 5 ? mainColor : "#ffffff" }}
@@ -104,11 +103,10 @@ const Canvas = ({
             />
           </span>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={"/_assets/SumoneLogo.png"}
-            alt="SumoneLogo"
+          <SumoneLogo
             width={canvasSize.width / 4}
             height={27}
+            fill={frameType === 5 ? mainColor : "#ffffff"}
           />
         </span>
 
@@ -145,9 +143,9 @@ const Canvas = ({
         )}
 
         <Character
-          character1={character1}
-          character2={character2}
           canvasSize={canvasSize}
+          character={character}
+          isAbleToChangeCharacter={frameType !== 5}
         />
         <span
           style={{
