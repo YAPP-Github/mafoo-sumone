@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { use } from "react";
+import { GoogleAdSense } from "../GoogleAdsense";
 
 export const metadata: Metadata = {
   title: "Mafoo-Sumone Recap",
@@ -32,6 +33,7 @@ export default function RootLayout(props: {
       <GoogleAnalytics
         gaId={`${process.env.NEXT_PUBLIC_GA || "G-LYZW7D247W"}`}
       />
+      <GoogleAdSense />
     </html>
   );
 }
