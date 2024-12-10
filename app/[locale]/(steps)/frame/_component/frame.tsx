@@ -22,7 +22,7 @@ interface FrameProps {
 const Frame = ({ locale, userData, dict }: FrameProps) => {
   const navigation = useRouter();
   const searchParams = useSearchParams();
-  const canvasSize = useGetCanvasSize();
+  const canvasSize = useGetCanvasSize(userData.top, userData.bottom);
   const [frameType, setFrameType] = useState<number>(1);
   const { photos } = usePhotoStore();
   const canvasRef = useRef<HTMLDivElement>(null);
@@ -262,7 +262,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
                   className={`w-14 h-14 rounded-full bg-white flex items-center justify-center relative`}
                 >
                   <span
-                    className={`sprite chip chip_${character} ${
+                    className={`sprite_f chip chip_${character} ${
                       index + 1 === frameType
                         ? "border-2 border-white rounded-full"
                         : "opacity-40"

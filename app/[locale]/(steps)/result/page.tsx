@@ -78,6 +78,7 @@ const ResultPage = async (props: {
             src={recapUrl}
             autoPlay={true}
             loop
+            playsInline
             muted
             style={{
               objectFit: "contain",

@@ -28,7 +28,7 @@ const Character = ({
       onClick={handleClickCharacter}
     >
       <span
-        className={`flex sprite character ${character}${characterState}`}
+        className={`flex sprite_f character ${character}${characterState}`}
         style={{
           zoom: `${((canvasSize.height / 543) * 144) / 180}`,
         }}

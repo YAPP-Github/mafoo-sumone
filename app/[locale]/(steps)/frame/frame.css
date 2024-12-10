@@ -1,4 +1,4 @@
-.sprite {
+.sprite_f {
   background-image: url("../../../../assets/FramePage.png");
   background-repeat: no-repeat;
 }
@@ -40,7 +40,8 @@
   background-position: -1330px 0px;
 }
 
-.egg0 {
+.egg0,
+.egg1 {
   background-position: -1520px 0px;
 }
 

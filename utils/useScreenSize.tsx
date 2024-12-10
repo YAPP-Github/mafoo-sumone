@@ -27,13 +27,14 @@ export const useGetScreenSize = () => {
   return windowSize;
 };
 
-export const useGetCanvasSize = () => {
+export const useGetCanvasSize = (paddingTop: string, paddingBottom: string) => {
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
     // Check if we're on the client side
     if (typeof window !== "undefined") {
-      const height = window.innerHeight - 234;
+      const height =
+        window.innerHeight - (212 + Number(paddingTop) + Number(paddingBottom));
       setCanvasSize({
         width: (height / 543) * 314,
         height: height,
