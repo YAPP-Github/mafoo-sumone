@@ -1,4 +1,5 @@
 import CopyIcon from "@/assets/CopyIcon";
+import { useEffect, useState } from "react";
 
 const RegisterCode = ({
   tooltip,
@@ -7,6 +8,17 @@ const RegisterCode = ({
   tooltip: boolean;
   onClickHandler?: () => void;
 }) => {
+  const [showTooltip, setShowTooltip] = useState(true);
+
+  useEffect(() => {
+    const timeout1 = setTimeout(() => {
+      setShowTooltip(false);
+    }, 3000);
+    return () => {
+      clearTimeout(timeout1);
+    };
+  }, []);
+
   return (
     <span
       role="button"
@@ -30,7 +42,7 @@ const RegisterCode = ({
         height={16}
         fill={tooltip ? "#FF9092" : "#ffffff"}
       />
-      {tooltip && (
+      {tooltip && showTooltip && (
         <div className="absolute bg-white px-3 py-2.5 text-xs tracking-[0.24px] top-12 rounded-md whitespace-pre shadow-sm">
           <span className="absolute w-4 h-4 rotate-45 -translate-x-1/2 bg-white rounded-sm left-[20%] -top-2" />
           마푸에서 내 추억을 확인하고싶다면?
