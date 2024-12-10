@@ -159,7 +159,12 @@ const PhotoSelector = ({
         <span className="w-full h-16 shrink-0" />
       </div> */}
       {photos.length < 1 ? (
-        <div className="fixed flex w-[calc(100%-48px)] h-12 bottom-2">
+        <div
+          className="fixed flex w-[calc(100%-48px)] h-12"
+          style={{
+            bottom: 8 + Number(userData.bottom) + "px",
+          }}
+        >
           <SumoneButton
             width="100%"
             height={48}
@@ -170,7 +175,12 @@ const PhotoSelector = ({
           />
         </div>
       ) : (
-        <div className="fixed bottom-0 pb-2 flex flex-col items-center w-[calc(100%-48px)]">
+        <div
+          className="fixed bottom-0 flex flex-col items-center w-[calc(100%-48px)]"
+          style={{
+            bottom: 8 + Number(userData.bottom) + "px",
+          }}
+        >
           <div className="fixed bottom-20 w-fit bg-white py-2.5 px-3 rounded-lg shadow-md z-20">
             {/* 추억을 🎞영상으로 만들 수 있어요! */}
             {video_makeable}

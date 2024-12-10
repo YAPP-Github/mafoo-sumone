@@ -26,7 +26,7 @@ const PickPhotoPage = async (props: {
 
   return (
     <main
-      style={{ paddingTop: top + "px", paddingBottom: bottom + "px" }}
+      style={{ paddingTop: top + "px" }}
       className="flex flex-col w-full h-full"
     >
       <PickPhotoHeader
