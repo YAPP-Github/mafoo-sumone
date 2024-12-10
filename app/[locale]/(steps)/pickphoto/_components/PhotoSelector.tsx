@@ -8,6 +8,7 @@ import { getPresignedUrls } from "../../api";
 import { ObjectedParams } from "@/types/user";
 import { useObjectToQueryString } from "@/utils/useQueryString";
 import Masonry from "react-responsive-masonry";
+import Image from "next/image";
 
 const PhotoSelector = ({
   userData,
@@ -145,13 +146,19 @@ const PhotoSelector = ({
           </label>
         </>
         {photos.map((image, index) => (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <div
+            className="block overflow-auto"
             key={`${index}`}
-            src={URL.createObjectURL(image)}
-            className="object-contain w-full h-fit border border-gray-200 rounded-xl"
-            alt={"image" + index + 5}
-          />
+          >
+            <Image
+              src={URL.createObjectURL(image)}
+              width={100}
+              height={100}
+              layout="responsive"
+              className="object-contain border border-gray-200 rounded-xl"
+              alt={"image" + index + 5}
+            />
+          </div>
         ))}
       </Masonry>
 
