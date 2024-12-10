@@ -26,6 +26,7 @@ interface MPUIProps {
   agree_and_get_recap: string;
   personalDataCollection: Record<string, string>;
   coupleModal: Record<string, string>;
+  ShareText: string;
 }
 
 const MainPageUserInteraction = ({
@@ -38,6 +39,7 @@ const MainPageUserInteraction = ({
   agree_and_get_recap,
   personalDataCollection,
   coupleModal,
+  ShareText,
 }: MPUIProps) => {
   const navigation = useRouter();
   const pathName = usePathname();
@@ -96,7 +98,7 @@ const MainPageUserInteraction = ({
         JSON.stringify({
           type: "MAIN_SHARE",
           message: {
-            title: "[썸원-마푸] 2024 내 연인 결산",
+            title: ShareText,
           },
         })
       );

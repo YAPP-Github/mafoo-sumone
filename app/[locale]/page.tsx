@@ -111,6 +111,7 @@ export default async function Home(props: {
         agree_and_get_recap={dict.MainPage.agree_and_get_recap}
         personalDataCollection={dict.personalDataCollection}
         coupleModal={dict.coupleModal}
+        ShareText={dict.Share}
       />
     </main>
   );
