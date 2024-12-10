@@ -5,7 +5,7 @@ import { Locale } from "@/types/page";
 import { getDictionary } from "../../dictionaries";
 
 const PickPhotoPage = async (props: {
-  params: { locale: Locale };
+  params: Promise<{ locale: Locale }>;
   searchParams: AsyncSearchParams;
 }) => {
   const lang = await props.params;

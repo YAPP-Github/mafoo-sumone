@@ -5,7 +5,7 @@ import { getDictionary } from "../../dictionaries";
 import "./frame.css";
 
 const FramePage = async (props: {
-  params: { locale: Locale };
+  params: Promise<{ locale: Locale }>;
   searchParams: AsyncSearchParams;
 }) => {
   const lang = await props.params;

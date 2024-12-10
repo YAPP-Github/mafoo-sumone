@@ -8,7 +8,7 @@ import { getDictionary } from "./dictionaries";
 import { Locale } from "@/types/page";
 
 export default async function Home(props: {
-  params: { locale: Locale };
+  params: Promise<{ locale: Locale }>;
   searchParams: AsyncSearchParams;
 }) {
   const lang = await props.params;
