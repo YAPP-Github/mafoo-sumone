@@ -7,7 +7,7 @@ import { useObjectToQueryString } from "@/utils/useQueryString";
 
 import CoupleModal from "./CoupleModal";
 import PrivacyModal from "./PrivacyModal";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { useEffect, useState } from "react";
 import { sendGAEvent } from "@next/third-parties/google";
@@ -47,6 +47,9 @@ const MainPageUserInteraction = ({
   const [modalType, setModalType] = useState<
     "privacy" | "couple" | "loading" | null
   >(null);
+
+  const searchParams = useSearchParams();
+  console.log("sp", searchParams.toString());
 
   useEffect(() => {
     console.log("modalType:", modalType);
