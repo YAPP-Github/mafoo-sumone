@@ -3,7 +3,7 @@
 import AlbumIcon from "@/assets/AlbumIcon";
 import SumoneButton from "@/assets/SumoneButton";
 import { usePhotoStore } from "@/atom/photo";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { getPresignedUrls } from "../../api";
 import { ObjectedParams } from "@/types/user";
 import { useObjectToQueryString } from "@/utils/useQueryString";
@@ -23,6 +23,10 @@ const PhotoSelector = ({
   const navigation = useRouter();
   const OTQ = useObjectToQueryString();
   const { photos, setPhotos } = usePhotoStore();
+
+  const pathName = usePathname();
+  const searchParams = useSearchParams();
+  console.log(pathName, searchParams.toString());
 
   const handleSelectPhotos = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;

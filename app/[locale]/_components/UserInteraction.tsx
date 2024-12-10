@@ -49,7 +49,7 @@ const MainPageUserInteraction = ({
   >(null);
 
   const searchParams = useSearchParams();
-  console.log("sp", searchParams.toString());
+  console.log(pathName, searchParams.toString());
 
   useEffect(() => {
     console.log("modalType:", modalType);

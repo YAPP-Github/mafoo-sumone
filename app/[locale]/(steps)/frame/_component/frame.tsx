@@ -5,7 +5,7 @@ import Canvas from "./canvas";
 import html2canvas from "html2canvas";
 import Header from "@/components/Header";
 import HeartIcon from "@/assets/HeartIcon";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useGetCanvasSize } from "@/utils/useScreenSize";
 import { usePhotoStore } from "@/atom/photo";
 import SumoneButton from "@/assets/SumoneButton";
@@ -27,6 +27,9 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
   const { photos } = usePhotoStore();
   const canvasRef = useRef<HTMLDivElement>(null);
   const [imageIdx, setImageIdx] = useState(0);
+
+  const pathName = usePathname();
+  console.log(pathName, searchParams.toString());
 
   useEffect(() => {
     if (!photos.length) {

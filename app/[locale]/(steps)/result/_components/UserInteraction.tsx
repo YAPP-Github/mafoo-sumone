@@ -1,11 +1,16 @@
 "use client";
 
 import SumoneButton from "@/assets/SumoneButton";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const UserInteraction = ({ dict }: { dict: Record<string, any> }) => {
   const searchParams = useSearchParams();
+
+  const pathName = usePathname();
+
+  console.log(pathName, searchParams.toString());
+
   const handleAskEvent = () => {
     console.log("ask event", {
       type: "RESULT_ASK",
