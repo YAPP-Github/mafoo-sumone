@@ -47,3 +47,24 @@ body {
   font-weight: 700;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "contra";
+  src: url("./fonts/CONTRA.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "jf-openhuninn";
+  src: url("./fonts/jf-openhuninn-2.0.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Mamelon";
+  src: url("./fonts/Mamelon-5-Hi-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}

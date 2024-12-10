@@ -9,6 +9,9 @@ export default {
   theme: {
     fontFamily: {
       ggbatang: ["ggbatang", "sans-serif"],
+      contra: ["contra", "sans-serif"],
+      jf: ["jf-openhuninn", "sans-serif"],
+      mamelon: ["Mamelon", "sans-serif"],
     },
     colors: {
       pink: "#FF9092",

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { use } from "react";
+import { Locale } from "@/types/page";
 
 export const metadata: Metadata = {
   title: "Mafoo-Sumone Recap",
@@ -33,9 +34,19 @@ export default function RootLayout(props: {
   params: Params;
 }) {
   const params = use(props.params);
+  const fonts = {
+    ko: "font-ggbatang",
+    en: "font-contra",
+    ja: "font-jf",
+    tw: "font-mamelon",
+    es: "font-contra",
+  };
+  console.log(params.locale);
   return (
     <html lang={params.locale}>
-      <body className={`font-ggbatang antialiased bg-image`}>
+      <body
+        className={`${fonts[params.locale as Locale]} antialiased bg-image`}
+      >
         {props.children}
       </body>
       <GoogleAnalytics
