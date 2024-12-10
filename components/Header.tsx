@@ -5,9 +5,10 @@ import { useRouter } from "next/navigation";
 
 interface HeaderProps {
   titleComponent: React.ReactElement;
+  onClickPrev?: () => void;
 }
 
-const Header = ({ titleComponent }: HeaderProps) => {
+const Header = ({ titleComponent, onClickPrev }: HeaderProps) => {
   const router = useRouter();
   const handleClickPrev = () => {
     router.back();
@@ -18,7 +19,7 @@ const Header = ({ titleComponent }: HeaderProps) => {
       <Chevron
         width={24}
         direction="left"
-        onClick={handleClickPrev}
+        onClick={onClickPrev ?? handleClickPrev}
         className="absolute left-4"
       />
       {titleComponent}

@@ -1,9 +1,19 @@
-import HeartIcon from "@/assets/HeartIcon";
-import Header from "@/components/Header";
 import PhotoSelector from "./_components/PhotoSelector";
 import { AsyncSearchParams } from "@/types/user";
+import PickPhotoHeader from "./_components/CustomHeader";
+import { Locale } from "@/types/page";
+import { getDictionary } from "../../dictionaries";
 
-const PickPhotoPage = async (props: { searchParams: AsyncSearchParams }) => {
+const PickPhotoPage = async (props: {
+  params: { locale: Locale };
+  searchParams: AsyncSearchParams;
+}) => {
+  const lang = await props.params;
+  const dict = await getDictionary(lang.locale);
+
+  if (!dict) {
+    return null;
+  }
   const {
     top,
     bottom,
@@ -19,22 +29,27 @@ const PickPhotoPage = async (props: { searchParams: AsyncSearchParams }) => {
       style={{ paddingTop: top + "px", paddingBottom: bottom + "px" }}
       className="flex flex-col w-full h-full"
     >
-      <Header
-        titleComponent={
-          <div className="flex flex-row gap-1 items-center  text-lg tracking-[0.36px] leading-[140%]">
-            <HeartIcon width={28} />
-            연말결산 이벤트
-          </div>
-        }
+      <PickPhotoHeader
+        searchParams={{
+          top,
+          bottom,
+          nickName,
+          partnerNickName,
+          dDay,
+          isConnected,
+          coupleId,
+        }}
+        text={dict.PickPhoto.year_end_event}
       />
       <div className="flex flex-col gap-4 p-6 pt-4">
-        <div className="text-xl tracking-[0.4px] leading-[160%]">
-          2024년, {partnerNickName}님의
-          <br />
-          사랑스러운 순간을 모아주세요
+        <div className="text-xl tracking-[0.4px] leading-[160%] whitespace-pre">
+          {/* 2024년, {partnerNickName}님의 */}
+          {dict.PickPhoto.gather_lovely_moments.before} {partnerNickName}
+          {dict.PickPhoto.gather_lovely_moments.after}
         </div>
         <div className="text-lg tracking-[0.32px] leading-[140%] text-gray-600">
-          최대 10장을 선택할 수 있어요
+          {/* 최대 10장을 선택할 수 있어요 */}
+          {dict.PickPhoto.select_up_to_10_photos}
         </div>
       </div>
       {/* Photo Selector */}
@@ -48,6 +63,9 @@ const PickPhotoPage = async (props: { searchParams: AsyncSearchParams }) => {
           isConnected,
           coupleId,
         }}
+        select_at_least_one_photo={dict.PickPhoto.select_at_least_one_photo}
+        video_makeable={dict.PickPhoto.video_makeable}
+        make_video={dict.PickPhoto.make_video}
       />
     </main>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import DayHeartIcon from "@/assets/DayHeartIcon";
@@ -13,26 +14,31 @@ import SumoneLogo from "@/assets/SumoneLogo";
 const CanvasPrepData = [
   {
     id: 1,
+    frameSrc: "/_assets/frame/puppy.png",
     character: "puppy",
     mainColor: "#F64435",
   },
   {
     id: 2,
+    frameSrc: "/_assets/frame/penguin.png",
     character: "penguin",
     mainColor: "#5B7F38",
   },
   {
     id: 3,
+    frameSrc: "/_assets/frame/cat.png",
     character: "cat",
     mainColor: "#F64435",
   },
   {
     id: 4,
+    frameSrc: "/_assets/frame/panda.png",
     character: "panda",
     mainColor: "#5B7F38",
   },
   {
     id: 5,
+    frameSrc: "/_assets/frame/egg.png",
     character: "egg",
     mainColor: "#444E5C",
     subColor: "#FBF3EE",
@@ -46,6 +52,7 @@ const Canvas = ({
   imageIdx,
   setImageIdx,
   userData,
+  dict,
 }: {
   frameType: number;
   images: File[];
@@ -53,8 +60,10 @@ const Canvas = ({
   imageIdx: number;
   setImageIdx: Dispatch<SetStateAction<number>>;
   userData: ObjectedParams;
+  dict: Record<string, any>;
 }) => {
-  const { character, mainColor, subColor } = CanvasPrepData[frameType - 1];
+  const { frameSrc, character, mainColor, subColor } =
+    CanvasPrepData[frameType - 1];
 
   const handleClickBackground = () => {
     setImageIdx((prev) => (prev + 1) % images.length);
@@ -67,18 +76,11 @@ const Canvas = ({
     <div
       className={`w-full h-full rounded-2xl relative flex items-center flex-col p-4`}
     >
-      {/* <Image
+      <Image
         src={frameSrc}
         alt="frame"
         fill
         className="absolute top-0 z-20 object-contain w-full h-full bg-blend-overlay"
-        onClick={handleClickBackground}
-      /> */}
-      <span
-        className={`absolute top-0 z-20 w-full h-full bg-blend-overlay sprite frame frame_${character}`}
-        style={{
-          zoom: canvasSize.height / 680,
-        }}
         onClick={handleClickBackground}
       />
       {/* 상단 Title */}
@@ -94,7 +96,9 @@ const Canvas = ({
               style={{ color: frameType === 5 ? mainColor : "#ffffff" }}
               className="text-lg font-bold shifted-text"
             >
-              @{userData.partnerNickName}님의{" "}
+              {/* @{userData.partnerNickName}{님의}{" "} */}
+              {dict.to_name.before}@{userData.partnerNickName}
+              {dict.to_name.after}
             </span>
             {/* <TitleSvg fillColor="#f7807a" /> */}
             <MafooLogo
@@ -114,9 +118,9 @@ const Canvas = ({
           <div
             style={{
               backgroundColor: frameType === 5 ? subColor : mainColor,
-              top: topIndex - 2,
+              top: topIndex - 10,
               width: (canvasSize.height * 240) / 543 + 2 + "px",
-              height: (canvasSize.height * 354) / 543 + 4 + "px",
+              height: (canvasSize.height * 354) / 543 + 20 + "px",
               position: "absolute",
               display: "flex",
               justifyContent: "center",
@@ -146,6 +150,7 @@ const Canvas = ({
           canvasSize={canvasSize}
           character={character}
           isAbleToChangeCharacter={frameType !== 5}
+          dict={dict}
         />
         <span
           style={{
@@ -155,7 +160,8 @@ const Canvas = ({
         >
           <DayHeartIcon width={28} />
           <span className="text-lg tracking-[0.36px] leading-[140%] shifted-text">
-            {userData.dDay} 일째
+            {/* {userData.dDay} 일째 */}
+            {dict.days.before} {userData.dDay} {dict.days.after}
           </span>
         </span>
       </div>

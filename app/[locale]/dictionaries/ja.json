@@ -1,0 +1,67 @@
+{
+  "MainPage": {
+    "title": "一年を一目に\n2024恋人決算",
+    "description": "",
+    "couples_count": {
+      "before": "既に",
+      "after": "{{1,565}}組がリキャップを作成！"
+    },
+    "personal_data_agreement": "個人情報取扱に同意",
+    "view_details": "詳細はこちら",
+    "ask_for_mine": "私もお願いする",
+    "agree_and_get_recap": "同意して今すぐ決算"
+  },
+  "personalDataCollection": {
+    "title": "個人情報収集項目",
+    "institution": "収集・利用機関名 : MAFOO",
+    "collectedItems": "収集項目 : 画像",
+    "purpose": "目的 : イベントコンテンツ生成・保存",
+    "retention": "保管期間 : 1ヶ月後破棄"
+  },
+  "coupleModal": {
+    "not_a_couple_yet": "まだサムワンのカプルではありません",
+    "register_and_get_recap": "",
+    "register_as_couple": "カプルアカウントを登録する"
+  },
+  "PickPhoto": {
+    "year_end_event": "年末イベント",
+    "gather_lovely_moments": {
+      "before": "2024年、",
+      "after": "様の\n愛しい瞬間を集めてみましょう！"
+    },
+    "select_up_to_10_photos": "最大10枚を選べます",
+    "select_at_least_one_photo": "最低1枚の写真を選んでください",
+    "video_makeable": "思い出を🎞動画にできます！",
+    "make_video": "動画作成"
+  },
+  "Frame": {
+    "select_frame": "フレーム選択",
+    "change_pose": "押してみてください",
+    "make_with_this_frame": "このフレームで作ります",
+    "to_name": {
+      "before": "",
+      "after": "さんの"
+    },
+    "days": {
+      "before": "",
+      "after": "日目"
+    },
+    "full_of_love": {
+      "before": "",
+      "after": "さんへの愛をたっぷり込めて作っています！"
+    }
+  },
+  "Result": {
+    "our_year_recap": "私たちの1年決算",
+    "couples_showing_off": {
+      "before": "すでに ",
+      "after": " 組が自慢しました"
+    },
+    "ask_for_partner": {
+      "before": "",
+      "after": "にもお願いする"
+    },
+    "show_off_on_sns": "私たちの1年をSNSで自慢しよう",
+    "recap_complete": "動画完成！"
+  }
+}

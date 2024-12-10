@@ -1,0 +1,68 @@
+{
+  "MainPage": {
+    "title": "Un año en una página:\nresumen de mi pare en 2024",
+    "description": "",
+    "couples_count": {
+      "before": "Ya ",
+      "after": " parejas han creado su recap"
+    },
+    "personal_data_agreement": "Consentimiento para recopilar datos personales",
+    "view_details": "Ver detalles",
+    "ask_for_mine": "Enviar solicitud",
+    "agree_and_get_recap": "Aceptar y crear el resumen ahora"
+  },
+  "personalDataCollection": {
+    "title": "Consentimiento para la recopilación de datos personales",
+    "institution": "Nombre de la institución de recopilación y uso. : MAFOO",
+    "collectedItems": "Información personal recopilada : archivo de imagen",
+    "purpose": "Finalidad de recopilación y uso : Crear y guardar contenido del evento",
+    "retention": "Período de conservación y uso : Conservar durante 1 mes y luego desechar"
+  },
+  "coupleModal": {
+    "not_a_couple_yet": "Aún no eres una pareja en SumOne.",
+    "register_and_get_recap": "Conéctate y crea tu pareja.",
+    "register_as_couple": "Registra tu relación y vuelve."
+  },
+  "PickPhoto": {
+    "year_end_event": "Evento de balance de fin de año",
+    "gather_lovely_moments": {
+      "before": "¿Vamos a recopilar los momentos\nencantadores de ",
+      "after": " en 2024?"
+    },
+    "select_up_to_10_photos": "Selecciona hasta 10 fotos",
+    "select_at_least_one_photo": "Por favor, selecciona una foto.",
+    "video_makeable": "Puedes convertir tus recuerdos en un recap.",
+    "make_video": "Crear recapitulación"
+  },
+  "Frame": {
+    "select_frame": "Elige un marco",
+    "change_pose": "Por favor, pulsa aquí",
+    "make_with_this_frame": "Seleccionar",
+    "to_name": {
+      "before": "de",
+      "after": ""
+    },
+    "days": {
+      "before": "día",
+      "after": ""
+    },
+    "full_of_love": {
+      "before": "¡Estamos creando esto con todo el amor para",
+      "after": "!"
+    }
+  },
+  "Result": {
+    "our_year_recap": "Nuestros momentos del año",
+
+    "couples_showing_off": {
+      "before": "Ya ",
+      "after": " parejas se han dado a conocer."
+    },
+    "ask_for_partner": {
+      "before": "Solicitar a ",
+      "after": ""
+    },
+    "show_off_on_sns": " Compartir en redes",
+    "recap_complete": "¡Recap completado!"
+  }
+}

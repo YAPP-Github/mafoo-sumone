@@ -13,18 +13,37 @@ import { useEffect, useState } from "react";
 import { sendGAEvent } from "@next/third-parties/google";
 import Link from "next/link";
 import InfoIcon from "@/assets/InfoIcon";
-import CopyIcon from "@/assets/CopyIcon";
+import CheckCircleIcon from "@/assets/CheckCircleIcon";
+import RegisterCode from "@/components/RegisterCode";
+import CloseTransparentIcon from "@/assets/CloseTrasparentIcon";
+
+interface MPUIProps {
+  code?: string;
+  locale: string;
+  userData: ObjectedParams;
+  personal_data_agreement: string;
+  view_details: string;
+  ask_for_mine: string;
+  agree_and_get_recap: string;
+  personalDataCollection: Record<string, string>;
+  coupleModal: Record<string, string>;
+}
 
 const MainPageUserInteraction = ({
   code,
+  locale,
   userData,
-}: {
-  code?: string;
-  userData: ObjectedParams;
-}) => {
+  personal_data_agreement,
+  view_details,
+  ask_for_mine,
+  agree_and_get_recap,
+  personalDataCollection,
+  coupleModal,
+}: MPUIProps) => {
   const navigation = useRouter();
   const pathName = usePathname();
   const OTQ = useObjectToQueryString();
+  const [showClipboardModal, setShowClipboardModal] = useState<boolean>(false);
   const [modalType, setModalType] = useState<
     "privacy" | "couple" | "loading" | null
   >(null);
@@ -57,6 +76,17 @@ const MainPageUserInteraction = ({
     setModalType(null);
   };
 
+  const handleCopyToClipboard = (code: string) => {
+    if (typeof window !== "undefined") {
+      navigator.clipboard.writeText(code);
+      setShowClipboardModal(true);
+
+      setTimeout(() => {
+        setShowClipboardModal(false);
+      }, 2500);
+    }
+  };
+
   const handleAskShare = () => {
     //  결산 부탁하기
     if (typeof window !== "undefined" && window.ReactNativeWebView) {
@@ -68,6 +98,12 @@ const MainPageUserInteraction = ({
           },
         })
       );
+    }
+  };
+
+  const handleClose = () => {
+    if (typeof window !== "undefined" && window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(JSON.stringify({ type: "CLOSE" }));
     }
   };
 
@@ -130,9 +166,13 @@ const MainPageUserInteraction = ({
         onClick={handleOpenPrivacyModal}
         className="py-2.5 px-6 w-full flex justify-between mt-3 tracking-[0.24px] leading-[140%]"
       >
-        <span className="text-sm">개인정보 수집 동의</span>
+        <span className="text-sm">
+          {/* 개인정보 수집 동의 */}
+          {personal_data_agreement}
+        </span>
         <span className="flex flex-row items-center gap-1 text-xs text-gray-500">
-          자세히 보기
+          {/* 자세히 보기 */}
+          {view_details}
           <Chevron
             width={16}
             height={16}
@@ -144,7 +184,8 @@ const MainPageUserInteraction = ({
           width={160}
           height={56}
           fill={"#C5B698"}
-          text="결산 부탁하기"
+          // text="결산 부탁하기"
+          text={ask_for_mine}
           textClass="text-white text-sm tracking-[0.24px] leading-[150%]"
           onClick={handleAskShare}
         />
@@ -152,13 +193,14 @@ const MainPageUserInteraction = ({
           width={160}
           height={56}
           fill={"#FF9092"}
-          text="동의하고 바로 결산"
+          // text="동의하고 바로 결산"
+          text={agree_and_get_recap}
           textClass="text-white text-sm tracking-[0.24px] leading-[150%]"
           onClick={handleCreateRecap}
         />
       </span>
       <div
-        className="fixed px-6 w-full flex flex-row-reverse justify-between"
+        className="fixed px-6 w-full flex flex-row-reverse justify-between items-center"
         style={{
           top: Number(32) + Number(userData.top) + "px",
         }}
@@ -170,25 +212,47 @@ const MainPageUserInteraction = ({
         >
           <InfoIcon width={24} />
         </Link>
-        {code && (
-          <span className="flex h-fit flex-row items-center gap-1 bg-pink rounded-lg px-2 py-1.5">
-            <span className="text-sm text-white tracking-[0.28px]">
-              가입코드
-            </span>
-            <CopyIcon
-              width={16}
-              height={16}
-            />
-          </span>
+        {locale === "ko" && code && (
+          <RegisterCode
+            tooltip
+            onClickHandler={() => handleCopyToClipboard(code)}
+          />
         )}
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={handleClose}
+          className="w-11 h-11 rounded-full bg-[rgba(255, 255, 255, 0.60)] flex items-center justify-center backdrop-blur-xl"
+        >
+          <CloseTransparentIcon width={28} />
+        </div>
       </div>
+      {showClipboardModal && (
+        <div className="fixed w-full h-full flex items-center justify-center">
+          <div className="bg-white rounded-full shadow-lg px-4 py-3 text-center flex flex-row gap-1">
+            <CheckCircleIcon
+              width={24}
+              height={24}
+            />
+            <span className="text-base text-gray-700 tracking-[0.32px] leading-[150%]">
+              마푸 회원가입 시 붙여 넣어주세요!
+            </span>
+          </div>
+        </div>
+      )}
 
       {modalType &&
         modalType !== "loading" &&
         (modalType === "privacy" ? (
-          <PrivacyModal onClose={handleCloseModal} />
+          <PrivacyModal
+            onClose={handleCloseModal}
+            personalDataCollection={personalDataCollection}
+          />
         ) : (
-          <CoupleModal onClose={handleCloseModal} />
+          <CoupleModal
+            onClose={handleCloseModal}
+            coupleModal={coupleModal}
+          />
         ))}
     </>
   );

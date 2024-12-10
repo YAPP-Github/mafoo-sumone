@@ -1,6 +1,12 @@
 import HeartIcon from "@/assets/HeartIcon";
 
-const CoupleModal = ({ onClose }: { onClose: () => void }) => {
+const CoupleModal = ({
+  onClose,
+  coupleModal,
+}: {
+  onClose: () => void;
+  coupleModal: Record<string, string>;
+}) => {
   const handleRegisterCouple = () => {
     if (typeof window !== "undefined" && window.ReactNativeWebView) {
       window.ReactNativeWebView.postMessage(
@@ -18,17 +24,20 @@ const CoupleModal = ({ onClose }: { onClose: () => void }) => {
             width={36}
             height={36}
           />
-          <span className="text-lg tracking-[0.36px] leading-[160%] text-center">
-            아직 썸원 커플이 아니에요
+          <span className="text-lg tracking-[0.36px] leading-[160%] text-center whitespace-pre">
+            {/* 아직 썸원 커플이 아니에요 */}
+            {coupleModal.not_a_couple_yet}
             <br />
-            등록 후 결산할 수 있어요
+            {/* 등록 후 결산할 수 있어요 */}
+            {coupleModal.register_and_get_recap}
           </span>
         </span>
         <button
           onClick={handleRegisterCouple}
           className="w-full h-12 shrink-0 bg-pink rounded-md text-white text-lg font-bold tracking-[0.36px] leading-[160%]"
         >
-          커플 등록하고 오기
+          {/* 커플 등록하고 오기 */}
+          {coupleModal.register_as_couple}
         </button>
       </div>
     </span>

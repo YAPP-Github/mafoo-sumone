@@ -9,7 +9,17 @@ import { ObjectedParams } from "@/types/user";
 import { useObjectToQueryString } from "@/utils/useQueryString";
 import Masonry from "react-responsive-masonry";
 
-const PhotoSelector = ({ userData }: { userData: ObjectedParams }) => {
+const PhotoSelector = ({
+  userData,
+  select_at_least_one_photo,
+  video_makeable,
+  make_video,
+}: {
+  userData: ObjectedParams;
+  select_at_least_one_photo: string;
+  video_makeable: string;
+  make_video: string;
+}) => {
   const navigation = useRouter();
   const OTQ = useObjectToQueryString();
   const { photos, setPhotos } = usePhotoStore();
@@ -150,21 +160,24 @@ const PhotoSelector = ({ userData }: { userData: ObjectedParams }) => {
             width="100%"
             height={48}
             fill="#CBD0D6"
-            text="최소 1장의 사진을 골라주세요"
+            // text="최소 1장의 사진을 골라주세요"
+            text={select_at_least_one_photo}
             textClass="text-white text-sm tracking-[0.28px] leading-[150%]"
           />
         </div>
       ) : (
         <div className="fixed bottom-0 pb-2 flex flex-col items-center w-[calc(100%-48px)]">
           <div className="fixed bottom-20 w-fit bg-white py-2.5 px-3 rounded-lg shadow-md z-20">
-            추억을 🎞영상으로 만들 수 있어요!
+            {/* 추억을 🎞영상으로 만들 수 있어요! */}
+            {video_makeable}
             <span className="absolute w-4 h-4 rotate-45 -translate-x-1/2 bg-white left-1/2 -bottom-2" />
           </div>
           <SumoneButton
             width="100%"
             height={48}
             fill="#C5B698"
-            text="추억 영상 만들기"
+            // text="추억 영상 만들기"
+            text={make_video}
             textClass="text-white text-sm tracking-[0.28px] leading-[150%]"
             onClick={handleFrameSelection}
           />

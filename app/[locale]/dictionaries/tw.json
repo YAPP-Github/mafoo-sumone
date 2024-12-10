@@ -1,0 +1,67 @@
+{
+  "MainPage": {
+    "title": "1用一頁來總結一年,\n2024 我的戀人回顧",
+    "description": "",
+    "couples_count": {
+      "before": "已經有",
+      "after": "{{1,565}}對情侶製作了回顧！"
+    },
+    "personal_data_agreement": "同意收集個人資料",
+    "view_details": "查看詳細內容",
+    "ask_for_mine": "我也來請求",
+    "agree_and_get_recap": "同意並立即查看回顧"
+  },
+  "personalDataCollection": {
+    "title": "收集的個人資料",
+    "institution": "收集·使用機構名稱 : MAFOO",
+    "collectedItems": "收集的個人資料 : 圖片檔案",
+    "purpose": "收集與使用的目的 : 活動內容生成及儲存",
+    "retention": "保存與使用的期間 : 保存1個月後銷毀"
+  },
+  "coupleModal": {
+    "not_a_couple_yet": "暫時不是想問情侶哦。",
+    "register_and_get_recap": "",
+    "register_as_couple": "註冊情侶"
+  },
+  "PickPhoto": {
+    "year_end_event": "年終結算活動",
+    "gather_lovely_moments": {
+      "before": "來看看2024年 ",
+      "after": "\n最可爱的時刻吧！"
+    },
+    "select_up_to_10_photos": "最多可以選擇10張圖片",
+    "select_at_least_one_photo": "請至少選擇一張照片。",
+    "video_makeable": "回憶可製作成 🎞回顧！",
+    "make_video": "製作回顧"
+  },
+  "Frame": {
+    "select_frame": "選擇框架",
+    "change_pose": "點擊查看更多",
+    "make_with_this_frame": "用這個框架製作喔",
+    "to_name": {
+      "before": "",
+      "after": "的"
+    },
+    "days": {
+      "before": "",
+      "after": "天紀念"
+    },
+    "full_of_love": {
+      "before": "正在製作回顧，滿滿的愛送予",
+      "after": "!"
+    }
+  },
+  "Result": {
+    "our_year_recap": "我們的1年結算",
+    "couples_showing_off": {
+      "before": "已經有 ",
+      "after": " 對情侶展現戀愛啦！"
+    },
+    "ask_for_partner": {
+      "before": "請 ",
+      "after": " 也幫我做做看"
+    },
+    "show_off_on_sns": "展現我們的戀愛",
+    "recap_complete": "回顧完成！"
+  }
+}

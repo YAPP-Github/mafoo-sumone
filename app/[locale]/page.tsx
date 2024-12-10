@@ -4,8 +4,20 @@ import MainPageUserInteraction from "./_components/UserInteraction";
 import VideoArea from "./_components/VideoArea";
 import { AsyncSearchParams } from "@/types/user";
 import "./mainpage.css";
+import { getDictionary } from "./dictionaries";
+import { Locale } from "@/types/page";
 
-export default async function Home(props: { searchParams: AsyncSearchParams }) {
+export default async function Home(props: {
+  params: { locale: Locale };
+  searchParams: AsyncSearchParams;
+}) {
+  const lang = await props.params;
+  const dict = await getDictionary(lang.locale);
+
+  if (!dict) {
+    return null;
+  }
+
   const {
     top,
     bottom,
@@ -56,14 +68,16 @@ export default async function Home(props: { searchParams: AsyncSearchParams }) {
         <span className="flex flex-col items-center gap-1">
           <span className="flex flex-row items-center gap-2">
             <HeartIcon width={24} />
-            <h1 className="text-xl tracking-[0.4px] leading-[160%]">
-              2024년 내 연인 결산
+            <h1 className="text-xl tracking-[0.4px] leading-[160%] whitespace-pre">
+              {/* 2024년 내 연인 결산 */}
+              {dict.MainPage.title}
             </h1>
             <span className="sprite yellowHeart" />
           </span>
 
           <h2 className="text-center text-base text-gray-800 tracking-[0.32px] leading-[160%]">
-            사랑스러운 연인의 1년을 1장에 담아보세요!
+            {/* 사랑스러운 연인의 1년을 1장에 담아보세요! */}
+            {dict.MainPage.description}
           </h2>
         </span>
       </header>
@@ -74,11 +88,14 @@ export default async function Home(props: { searchParams: AsyncSearchParams }) {
           height={24}
         />
         <span className="text-gray-700 text-sm tracking-[0.24px] leading-[140%]">
-          벌써 {userCount} 커플이 올해 추억을 결산했어요!
+          {/* 벌써 {userCount} 커플이 올해 추억을 결산했어요! */}
+          {dict.MainPage.couples_count.before} {userCount}{" "}
+          {dict.MainPage.couples_count.after}
         </span>
       </span>
       <MainPageUserInteraction
         code={data.code}
+        locale={lang.locale}
         userData={{
           top,
           bottom,
@@ -88,6 +105,12 @@ export default async function Home(props: { searchParams: AsyncSearchParams }) {
           isConnected,
           coupleId,
         }}
+        personal_data_agreement={dict.MainPage.personal_data_agreement}
+        view_details={dict.MainPage.view_details}
+        ask_for_mine={dict.MainPage.ask_for_mine}
+        agree_and_get_recap={dict.MainPage.agree_and_get_recap}
+        personalDataCollection={dict.personalDataCollection}
+        coupleModal={dict.coupleModal}
       />
     </main>
   );

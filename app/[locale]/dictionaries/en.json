@@ -1,0 +1,67 @@
+{
+  "MainPage": {
+    "title": "Capture the year in a page:\n2024 My Partner’s Recap",
+    "description": "",
+    "couples_count": {
+      "before": "Already, ",
+      "after": " couples have created their recap this year"
+    },
+    "personal_data_agreement": "Agree to Personal Data Collection",
+    "view_details": "View Details",
+    "ask_for_mine": "Ask for Mine",
+    "agree_and_get_recap": "Agree and Get Recap"
+  },
+  "personalDataCollection": {
+    "title": "Agree to Personal Data Collection",
+    "institution": "Institution Name for Collection and Use: MAFOO",
+    "collectedItems": "Collected Items: Image File",
+    "purpose": "Purpose of Collection and Use: To create and store event content",
+    "retention": "Retention and Usage Period: Stored for 1 month, then discarded"
+  },
+  "coupleModal": {
+    "not_a_couple_yet": "You haven't registered as\na SumOne couple yet.",
+    "register_and_get_recap": "Create your couple profile!",
+    "register_as_couple": "Register as a couple"
+  },
+  "PickPhoto": {
+    "year_end_event": "Year-end recap event",
+    "gather_lovely_moments": {
+      "before": "Shall we gather ",
+      "after": "’s\nlovely moments over 2024?"
+    },
+    "select_up_to_10_photos": "Select up to 10 photos",
+    "select_at_least_one_photo": "Select at least one photo",
+    "video_makeable": "Turn your memories into a recap",
+    "make_video": "Choose a frame"
+  },
+  "Frame": {
+    "select_frame": "Choose a frame",
+    "change_pose": "Tap to change",
+    "make_with_this_frame": "Make recap with this frame",
+    "to_name": {
+      "before": "To",
+      "after": ""
+    },
+    "days": {
+      "before": "Day",
+      "after": ""
+    },
+    "full_of_love": {
+      "before": "Creating this recap with\nall the love for",
+      "after": "!"
+    }
+  },
+  "Result": {
+    "our_year_recap": "2024 with partner",
+    "couples_showing_off": {
+      "before": "Join ",
+      "after": "couples sharing their partner's moments"
+    },
+    "ask_for_partner": {
+      "before": "Ask ",
+      "after": " to do mine too"
+    },
+    "show_off_on_sns": "Share my partner’s moments",
+    "recap_complete": "Completed!"
+  }
+}
