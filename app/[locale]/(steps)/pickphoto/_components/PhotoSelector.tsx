@@ -9,6 +9,7 @@ import { ObjectedParams } from "@/types/user";
 import { useObjectToQueryString } from "@/utils/useQueryString";
 import Masonry from "react-responsive-masonry";
 import Image from "next/image";
+import { useState } from "react";
 
 const PhotoSelector = ({
   userData,
@@ -24,10 +25,13 @@ const PhotoSelector = ({
   const navigation = useRouter();
   const OTQ = useObjectToQueryString();
   const { photos, setPhotos } = usePhotoStore();
+  const [isLoading, setIsLoading] = useState(false);
 
   const pathName = usePathname();
   const searchParams = useSearchParams();
   console.log(pathName, searchParams.toString());
+
+  console.log(isLoading);
 
   const handleSelectPhotos = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -113,17 +117,21 @@ const PhotoSelector = ({
 
   const handleFrameSelection = async () => {
     try {
+      setIsLoading(true);
       const photoUrl = await handleSendOriginalPhoto();
       console.log("photoUrl", photoUrl);
-
+      setIsLoading(false);
       navigation.push(`frame?${OTQ(userData)}`);
     } catch (err) {
       console.error("Failed to upload photos or create album:", err);
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="flex flex-1 w-full gap-2 p-6 overflow-y-scroll bg-white border border-b-0 border-gray-200 rounded-t-3xl">
+    <div
+      className={`flex flex-1 w-full gap-2 p-6 overflow-y-scroll bg-white border border-b-0 border-gray-200 rounded-t-3xl`}
+    >
       <Masonry
         key={photos.length}
         columnsCount={2}
@@ -147,7 +155,7 @@ const PhotoSelector = ({
         </>
         {photos.map((image, index) => (
           <div
-            className="block overflow-auto"
+            className="block overflow-hidden"
             key={`${index}`}
           >
             <Image
