@@ -45,6 +45,16 @@ const CanvasPrepData = [
   },
 ];
 
+interface CanvasProps {
+  frameType: number;
+  images: File[];
+  canvasSize: { width: number; height: number };
+  imageIdx: number;
+  setImageIdx: Dispatch<SetStateAction<number>>;
+  userData: ObjectedParams;
+  dict: Record<string, any>;
+}
+
 const Canvas = ({
   frameType,
   images,
@@ -53,15 +63,7 @@ const Canvas = ({
   setImageIdx,
   userData,
   dict,
-}: {
-  frameType: number;
-  images: File[];
-  canvasSize: { width: number; height: number };
-  imageIdx: number;
-  setImageIdx: Dispatch<SetStateAction<number>>;
-  userData: ObjectedParams;
-  dict: Record<string, any>;
-}) => {
+}: CanvasProps) => {
   const { frameSrc, character, mainColor, subColor } =
     CanvasPrepData[frameType - 1];
 
@@ -78,6 +80,7 @@ const Canvas = ({
     >
       <Image
         src={frameSrc}
+        priority
         alt="frame"
         fill
         className="absolute top-0 z-20 object-contain w-full h-full bg-blend-overlay"

@@ -34,7 +34,7 @@ const CoupleModal = ({
         </span>
         <button
           onClick={handleRegisterCouple}
-          className="w-full h-12 shrink-0 bg-pink rounded-md text-white text-lg font-bold tracking-[0.36px] leading-[160%]"
+          className="w-full h-12 shrink-0 bg-pink rounded-md text-white text-lg font-bold tracking-[0.36px] leading-[160%] focus:outline-none"
         >
           {/* 커플 등록하고 오기 */}
           {coupleModal.register_as_couple}

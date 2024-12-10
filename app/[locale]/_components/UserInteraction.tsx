@@ -12,7 +12,6 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { sendGAEvent } from "@next/third-parties/google";
 import Link from "next/link";
-import InfoIcon from "@/assets/InfoIcon";
 import CheckCircleIcon from "@/assets/CheckCircleIcon";
 import RegisterCode from "@/components/RegisterCode";
 import CloseTransparentIcon from "@/assets/CloseTrasparentIcon";
@@ -203,29 +202,31 @@ const MainPageUserInteraction = ({
         />
       </span>
       <div
-        className="fixed px-6 w-full flex flex-row-reverse justify-between items-center"
+        className="fixed px-6 w-full flex flex-row justify-between items-center"
         style={{
           top: Number(32) + Number(userData.top) + "px",
         }}
       >
         {/* TODO: FAQ 문서 링크 변경 */}
-        <Link
-          href="https://chisel-promise-9ff.notion.site/FAQ-f366f55df31b49ef96e7db35c73b8921?pvs=4"
-          className="rounded-full bg-[rgba(255, 255, 255, 0.60)] backdrop-blur-xl w-11 h-11 flex items-center justify-center"
-        >
-          <InfoIcon width={24} />
-        </Link>
-        {locale === "ko" && code && (
-          <RegisterCode
-            tooltip
-            onClickHandler={() => handleCopyToClipboard(code)}
-          />
-        )}
+        <span className="flex flex-row gap-3">
+          {locale === "ko" && code && (
+            <RegisterCode
+              tooltip
+              onClickHandler={() => handleCopyToClipboard(code)}
+            />
+          )}
+          <Link
+            href="https://chisel-promise-9ff.notion.site/FAQ-f366f55df31b49ef96e7db35c73b8921?pvs=4"
+            className="border border-white rounded-lg px-2 py-1.5 bg-[rgba(255, 255, 255, 0.70)] backdrop-blur-xl flex items-center justify-center text-brown text-base"
+          >
+            이벤트 FAQ
+          </Link>
+        </span>
         <div
           role="button"
           tabIndex={0}
           onClick={handleClose}
-          className="w-11 h-11 rounded-full bg-[rgba(255, 255, 255, 0.60)] flex items-center justify-center backdrop-blur-xl"
+          className="w-11 h-11 border border-white rounded-full bg-[rgba(255, 255, 255, 0.70)] flex items-center justify-center backdrop-blur-xl"
         >
           <CloseTransparentIcon width={28} />
         </div>

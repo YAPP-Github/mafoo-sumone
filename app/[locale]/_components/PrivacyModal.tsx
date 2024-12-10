@@ -15,7 +15,7 @@ const PrivacyModal = ({
     <div className="fixed bottom-0 z-50 w-full bg-image rounded-t-3xl">
       <CloseIcon
         width={36}
-        className="absolute right-2.5 top-2.5 z-20"
+        className="absolute right-2.5 top-2.5 z-20 focus:outline-none"
         onClick={handleClose}
       />
       <div className="relative flex flex-col w-full h-full gap-4 p-6">

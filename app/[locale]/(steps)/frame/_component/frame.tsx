@@ -259,7 +259,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
                 <button
                   key={index}
                   onClick={() => setFrameType(index + 1)}
-                  className={`w-14 h-14 rounded-full bg-white flex items-center justify-center relative`}
+                  className={`w-14 h-14 rounded-full bg-white flex items-center justify-center relative focus:outline-none`}
                 >
                   <span
                     className={`sprite_f chip chip_${character} ${

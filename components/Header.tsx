@@ -20,7 +20,7 @@ const Header = ({ titleComponent, onClickPrev }: HeaderProps) => {
         width={24}
         direction="left"
         onClick={onClickPrev ?? handleClickPrev}
-        className="absolute left-4"
+        className="absolute left-4 focus:outline-none"
       />
       {titleComponent}
     </header>

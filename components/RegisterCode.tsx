@@ -12,12 +12,23 @@ const RegisterCode = ({
       role="button"
       tabIndex={0}
       onClick={onClickHandler}
-      className="flex h-fit flex-row items-center gap-1 bg-pink rounded-lg px-2 py-1.5 relative"
+      className={`${
+        tooltip
+          ? "bg-[rgba(255, 255, 255, 0.7)] backdrop-blur-xl border border-white"
+          : "bg-pink"
+      } flex h-fit flex-row items-center gap-1 rounded-lg px-2 py-1.5 relative`}
     >
-      <span className="text-sm text-white tracking-[0.28px]">가입코드</span>
+      <span
+        className={`${
+          tooltip ? "text-pink" : "text-white"
+        } text-base tracking-[0.28px]`}
+      >
+        가입코드
+      </span>
       <CopyIcon
         width={16}
         height={16}
+        fill={tooltip ? "#FF9092" : "#ffffff"}
       />
       {tooltip && (
         <div className="absolute bg-white px-3 py-2.5 text-xs tracking-[0.24px] top-12 rounded-md whitespace-pre shadow-sm">
