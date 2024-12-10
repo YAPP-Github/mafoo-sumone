@@ -101,7 +101,10 @@ const ResultPage = async (props: {
         </span>
       </span>
 
-      <UserInteraction dict={dict.Result} />
+      <UserInteraction
+        dict={dict.Result}
+        shareText={dict.Share}
+      />
     </main>
   );
 };

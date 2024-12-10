@@ -3,8 +3,14 @@
 import SumoneButton from "@/assets/SumoneButton";
 import { usePathname, useSearchParams } from "next/navigation";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const UserInteraction = ({ dict }: { dict: Record<string, any> }) => {
+const UserInteraction = ({
+  dict,
+  shareText,
+}: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  dict: Record<string, any>;
+  shareText: string;
+}) => {
   const searchParams = useSearchParams();
 
   const pathName = usePathname();
@@ -15,7 +21,7 @@ const UserInteraction = ({ dict }: { dict: Record<string, any> }) => {
     console.log("ask event", {
       type: "RESULT_ASK",
       message: {
-        title: "[썸원-마푸] 2024 내 연인 결산",
+        title: shareText,
         file: searchParams.get("recapUrl"),
       },
     });
@@ -24,7 +30,7 @@ const UserInteraction = ({ dict }: { dict: Record<string, any> }) => {
         JSON.stringify({
           type: "RESULT_ASK",
           message: {
-            title: "[썸원-마푸] 2024 내 연인 결산",
+            title: shareText,
             file: searchParams.get("recapUrl"),
           },
         })
