@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import { use } from "react";
 import { Locale } from "@/types/page";
 
@@ -52,6 +52,9 @@ export default function RootLayout(props: {
       <GoogleAnalytics
         gaId={`${process.env.NEXT_PUBLIC_GA || "G-LYZW7D247W"}`}
       />
+      {process.env.NEXT_PUBLIC_GTM && (
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM} />
+      )}
     </html>
   );
 }

@@ -67,7 +67,8 @@ const MainPageUserInteraction = ({
   }, [modalType]);
 
   useEffect(() => {
-    sendGAEvent("event", "MainPageView", {
+    //[GA] Web_View_Page_01: 페이지 진입 유저 수
+    sendGAEvent("event", "[Web_View_Page_01]: 페이지 진입 유저 수", {
       locale: pathName.split("/")[1],
     });
   });
@@ -103,6 +104,19 @@ const MainPageUserInteraction = ({
         })
       );
     }
+    //[GA] Web_View_Page_01: [나도 부탁하기] 버튼 누른 유저 수
+    sendGAEvent(
+      "event",
+      "[Web_View_Page_01]: [나도 부탁하기] 버튼 누른 유저 수",
+      {
+        locale: pathName.split("/")[1],
+        userName: userData.nickName,
+      }
+    );
+    //[GA] Web_View_Page_01: [나도 부탁하기] 버튼 누른 횟수
+    sendGAEvent("event", "[Web_View_Page_01]: [나도 부탁하기] 버튼 누른 횟수", {
+      locale: pathName.split("/")[1],
+    });
   };
 
   const handleClose = () => {
@@ -113,6 +127,14 @@ const MainPageUserInteraction = ({
 
   const checkCouple = () => {
     if (!userData || userData.isConnected !== "true") {
+      //[GA] Web_View_Page_01: 커플 연결 필요 팝업 노출 유저 수
+      sendGAEvent(
+        "event",
+        "[Web_View_Page_01]: 커플 연결 필요 팝업 노출 유저 수",
+        {
+          locale: pathName.split("/")[1],
+        }
+      );
       return false;
     }
     return true;
