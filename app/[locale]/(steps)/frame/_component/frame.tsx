@@ -27,6 +27,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
   const { photos } = usePhotoStore();
   const canvasRef = useRef<HTMLDivElement>(null);
   const [imageIdx, setImageIdx] = useState(0);
+  console.log(canvasSize);
 
   const [
     isUploadPhotosAndCreateAlbumLoading,
@@ -68,54 +69,52 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  /*
-                                                                                const handleTestRecap = async () => {
-                                                                                  if (!canvasRef.current || !canvasSize.width) return;
-                                                                              
-                                                                                  // Set the canvas size based on the available width and height
-                                                                                  // canvasRef.current.style.width = canvasSize.width + "px";
-                                                                                  // canvasRef.current.style.height = canvasSize.height + "px";
-                                                                                  canvasRef.current.style.width = "393px";
-                                                                                  canvasRef.current.style.height = "680px";
-                                                                              
-                                                                                  setIsLoading(true); // Show loading indicator
-                                                                                  const dataUrls: string[] = [];
-                                                                              
-                                                                                  // Iterate over all photos
-                                                                                  for (let idx = 0; idx < photos.length; idx++) {
-                                                                                    try {
-                                                                                      // Wait for the canvas to be updated with the new image
-                                                                                      const canvas = await html2canvas(canvasRef.current, {
-                                                                                        onclone: (el) => {
-                                                                                          const elementsWithShiftedDownwardText =
-                                                                                            el.querySelectorAll(".shifted-text");
-                                                                                          elementsWithShiftedDownwardText.forEach((element) => {
-                                                                                            const htmlElement = element as HTMLElement;
-                                                                                            // Adjust styles or do whatever you want here
-                                                                                            htmlElement.style.transform = "translateY(-40%)";
-                                                                                          });
-                                                                                        },
-                                                                                      });
-                                                                              
-                                                                                      // Convert the canvas to a data URL (image)
-                                                                                      const dataUrl = canvas.toDataURL("image/jpeg");
-                                                                                      dataUrls.push(dataUrl);
-                                                                              
-                                                                                      // Create a temporary link to download the image
-                                                                                      const link = document.createElement("a");
-                                                                                      link.href = dataUrl;
-                                                                                      link.download = `canvas_frame.jpeg`;
-                                                                                      link.click();
-                                                                                      setImageIdx((prev) => (prev + idx) % photos.length);
-                                                                                      await new Promise((resolve) => setTimeout(resolve, 10));
-                                                                                    } catch (error) {
-                                                                                      console.error("Failed to capture the frame:", error);
-                                                                                    }
-                                                                                  }
-                                                                                  setIsLoading(false);
-                                                                              
-                                                                                  // Hide the loading indicator after all downloads
-                                                                                };*/
+  const handleTestRecap = async () => {
+    if (!canvasRef.current || !canvasSize.width) return;
+
+    // Set the canvas size based on the available width and height
+    canvasRef.current.style.width = canvasSize.width + "px";
+    canvasRef.current.style.height = canvasSize.height + "px";
+
+    setIsLoading(true); // Show loading indicator
+    const dataUrls: string[] = [];
+
+    // Iterate over all photos
+    // for (let idx = 0; idx < photos.length; idx++) {
+    try {
+      const idx = 0;
+      // Wait for the canvas to be updated with the new image
+      const canvas = await html2canvas(canvasRef.current, {
+        onclone: (el) => {
+          const elementsWithShiftedDownwardText =
+            el.querySelectorAll(".shifted-text");
+          elementsWithShiftedDownwardText.forEach((element) => {
+            const htmlElement = element as HTMLElement;
+            // Adjust styles or do whatever you want here
+            htmlElement.style.transform = "translateY(-40%)";
+          });
+        },
+      });
+
+      // Convert the canvas to a data URL (image)
+      const dataUrl = canvas.toDataURL("image/jpeg");
+      dataUrls.push(dataUrl);
+
+      // Create a temporary link to download the image
+      const link = document.createElement("a");
+      link.href = dataUrl;
+      link.download = `canvas_frame.jpeg`;
+      link.click();
+      setImageIdx((prev) => (prev + idx) % photos.length);
+      await new Promise((resolve) => setTimeout(resolve, 10));
+    } catch (error) {
+      console.error("Failed to capture the frame:", error);
+    }
+    // }
+    setIsLoading(false);
+
+    // Hide the loading indicator after all downloads
+  };
 
   const getAlbumIdFromCookie = () => {
     const albumIdCookie = document.cookie
@@ -324,7 +323,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
               // text="이 프레임으로 만들게요"
               text={dict.make_with_this_frame}
               textClass="text-white text-sm tracking-[0.28px] leading-[150%]"
-              onClick={handleSelectFrame}
+              onClick={handleTestRecap}
             />
           </div>
         </div>

@@ -23,38 +23,52 @@ import SumoneLogo from "@/assets/SumoneLogo";
 const CanvasPrepData = [
   {
     id: 1,
-    character: "puppy",
     mainColor: "#F64435",
   },
   {
     id: 2,
-    character: "penguin",
     mainColor: "#5B7F38",
   },
   {
     id: 3,
-    character: "cat",
     mainColor: "#F64435",
   },
   {
     id: 4,
-    character: "panda",
     mainColor: "#5B7F38",
   },
   {
     id: 5,
-    character: "egg",
     mainColor: "#444E5C",
     subColor: "#FBF3EE",
   },
 ];
 
 const frameSrcs = [
-  "/_assets/frame/puppy.png",
-  "/_assets/frame/penguin.png",
-  "/_assets/frame/cat.png",
-  "/_assets/frame/panda.png",
-  "/_assets/frame/egg.png",
+  // Local 1x
+  // "/_assets/frame/puppy.png",
+  // "/_assets/frame/penguin.png",
+  // "/_assets/frame/cat.png",
+  // "/_assets/frame/panda.png",
+  // "/_assets/frame/egg.png",
+  // CDN 1x
+  "https://mafoo-sumone-event.imgix.net/_assets/frame/puppy.png",
+  "https://mafoo-sumone-event.imgix.net/_assets/frame/penguin.png",
+  "https://mafoo-sumone-event.imgix.net/_assets/frame/cat.png",
+  "https://mafoo-sumone-event.imgix.net/_assets/frame/panda.png",
+  "https://mafoo-sumone-event.imgix.net/_assets/frame/egg.png",
+  // Local 3x
+  // "/_assets/frame/3x/Frame.png",
+  // "/_assets/frame/3x/Frame-1.png",
+  // "/_assets/frame/3x/Frame-2.png",
+  // "/_assets/frame/3x/Frame-3.png",
+  // "/_assets/frame/3x/Frame-4.png",
+  // CDN 3x
+  // "https://mafoo-sumone-event.imgix.net/_assets/frame/3x/Frame.png",
+  // "https://mafoo-sumone-event.imgix.net/_assets/frame/3x/Frame-1.png",
+  // "https://mafoo-sumone-event.imgix.net/_assets/frame/3x/Frame-2.png",
+  // "https://mafoo-sumone-event.imgix.net/_assets/frame/3x/Frame-3.png",
+  // "https://mafoo-sumone-event.imgix.net/_assets/frame/3x/Frame-4.png",
 ] as const;
 
 interface CanvasProps {
@@ -76,7 +90,7 @@ const Canvas = ({
   userData,
   dict,
 }: CanvasProps) => {
-  const { character, mainColor, subColor } = CanvasPrepData[frameType - 1];
+  const { mainColor, subColor } = CanvasPrepData[frameType - 1];
   const [isFrameStackLoaded, setIsFrameStackLoaded] = useState(false);
 
   const photoSrc = useMemo(() => {
@@ -166,10 +180,9 @@ const Canvas = ({
             />
           </div>
         )}
-
         <Character
+          frameType={frameType}
           canvasSize={canvasSize}
-          character={character}
           isAbleToChangeCharacter={frameType !== 5}
           dict={dict}
         />
@@ -182,7 +195,9 @@ const Canvas = ({
           <DayHeartIcon width={28} />
           <span className="shifted-text text-lg leading-[140%] tracking-[0.36px]">
             {/* {userData.dDay} 일째 */}
-            {dict.days.before} {userData.dDay} {dict.days.after}
+            {dict.days.before}
+            {userData.dDay}
+            {dict.days.after}
           </span>
         </span>
       </div>
