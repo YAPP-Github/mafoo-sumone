@@ -213,7 +213,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
     <main
       className={`${
         isLoading && "dark-overlay"
-      } w-full h-full bg-black flex-col items-center flex justify-center`}
+      } bg-black flex h-full w-full flex-col items-center justify-center`}
       style={{
         paddingTop: userData.top + "px",
         paddingBottom: userData.bottom + "px",
@@ -221,7 +221,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
     >
       <Header
         titleComponent={
-          <div className="flex flex-row gap-1 items-center  text-lg tracking-[0.36px] leading-[140%]">
+          <div className="flex flex-row items-center gap-1 text-lg leading-[140%] tracking-[0.36px]">
             {/* 프레임 선택 */}
             {dict.select_frame}
           </div>
@@ -230,7 +230,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
           navigation.push(`pickphoto?${searchParams.toString()}`)
         }
       />
-      <div className="flex flex-col items-center justify-center w-full h-full gap-6">
+      <div className="flex h-full w-full flex-col items-center justify-center gap-6">
         {/* Canvas Component Wrapper */}
         <div
           ref={canvasRef}
@@ -249,19 +249,19 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
           )}
         </div>
 
-        <div className="flex flex-col w-full gap-5 px-6">
-          <div className="flex flex-row justify-between w-full overflow-x-scroll">
+        <div className="flex w-full flex-col gap-5 px-6">
+          <div className="flex w-full flex-row justify-between overflow-x-scroll">
             {["puppy", "penguin", "cat", "panda", "egg"].map(
               (character, index) => (
                 <button
                   key={index}
                   onClick={() => setFrameType(index + 1)}
-                  className={`w-14 h-14 rounded-full bg-white flex items-center justify-center relative focus:outline-none`}
+                  className={`relative flex h-14 w-14 items-center justify-center rounded-full bg-white focus:outline-none`}
                 >
                   <span
                     className={`sprite_f chip chip_${character} ${
                       index + 1 === frameType
-                        ? "border-2 border-white rounded-full"
+                        ? "rounded-full border-2 border-white"
                         : "opacity-40"
                     }`}
                   />
@@ -269,7 +269,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
               )
             )}
           </div>
-          <div className="w-full flex">
+          <div className="flex w-full">
             <SumoneButton
               width="100%"
               height={48}
@@ -283,25 +283,25 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
         </div>
       </div>
       {isLoading && (
-        <div className="fixed w-[calc(100%-48px)] h-[500px] bg-image z-50 mx-6 flex flex-col">
-          <div className="w-full h-full flex flex-col gap-2.5 pt-12 pb-14">
-            <div className="flex flex-col items-center pb-12 gap-7">
+        <div className="bg-image fixed z-50 mx-6 flex h-[500px] w-[calc(100%-48px)] flex-col">
+          <div className="flex h-full w-full flex-col gap-2.5 pb-14 pt-12">
+            <div className="flex flex-col items-center gap-7 pb-12">
               <HeartIcon width={28} />
               {locale === "ko" && (
-                <span className="text-center text-lg text-gray-800 tracking-[0.36px] leading-[160%]">
+                <span className="text-center text-lg leading-[160%] tracking-[0.36px] text-gray-800">
                   지금 만든 추억
                   <br />
                   마푸에서 한 달간 다시 볼 수 있어요
                 </span>
               )}
-              <span className="text-center text-sm text-gray-600 tracking-[0.28px] leading-[150%] whitespace-pre">
+              <span className="whitespace-pre text-center text-sm leading-[150%] tracking-[0.28px] text-gray-600">
                 {/* {userData.partnerNickName}님을 사랑하는 마음을 */}
                 {dict.full_of_love.before} {userData.partnerNickName}{" "}
                 {dict.full_of_love.after}
               </span>
             </div>
             {/* Carousel */}
-            <div className="w-full h-[150px] bg-pastelpink">캐러셀~~~</div>
+            <div className="h-[150px] w-full bg-pastelpink">캐러셀~~~</div>
           </div>
         </div>
       )}

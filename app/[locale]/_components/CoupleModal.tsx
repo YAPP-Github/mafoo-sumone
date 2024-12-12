@@ -17,14 +17,14 @@ const CoupleModal = ({
   };
 
   return (
-    <span className="fixed z-50 -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 bg-image w-[345px] h-[300px] rounded-md">
-      <div className="flex flex-col justify-between w-full h-full px-6 pt-12 pb-8">
+    <span className="bg-image fixed left-1/2 top-1/2 z-50 h-[300px] w-[345px] -translate-x-1/2 -translate-y-1/2 rounded-md">
+      <div className="flex h-full w-full flex-col justify-between px-6 pb-8 pt-12">
         <span className="flex flex-col items-center gap-7">
           <HeartIcon
             width={36}
             height={36}
           />
-          <span className="text-lg tracking-[0.36px] leading-[160%] text-center whitespace-pre">
+          <span className="whitespace-pre text-center text-lg leading-[160%] tracking-[0.36px]">
             {/* 아직 썸원 커플이 아니에요 */}
             {coupleModal.not_a_couple_yet}
             <br />
@@ -34,7 +34,7 @@ const CoupleModal = ({
         </span>
         <button
           onClick={handleRegisterCouple}
-          className="w-full h-12 shrink-0 bg-pink rounded-md text-white text-lg font-bold tracking-[0.36px] leading-[160%] focus:outline-none"
+          className="h-12 w-full shrink-0 rounded-md bg-pink text-lg font-bold leading-[160%] tracking-[0.36px] text-white focus:outline-none"
         >
           {/* 커플 등록하고 오기 */}
           {coupleModal.register_as_couple}

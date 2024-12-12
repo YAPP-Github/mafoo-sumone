@@ -15,7 +15,7 @@ const Header = ({ titleComponent, onClickPrev }: HeaderProps) => {
   };
 
   return (
-    <header className="flex items-center w-full h-14 px-4 py-3.5 justify-center relative">
+    <header className="relative flex h-14 w-full items-center justify-center px-4 py-3.5">
       <Chevron
         width={24}
         direction="left"

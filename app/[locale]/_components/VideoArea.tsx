@@ -6,15 +6,15 @@ const VideoArea = () => {
   const windowSize = useGetScreenSize();
 
   return (
-    <div className="h-[calc(100%-360px)] w-full flex mb-7 relative">
-      <div className="flex w-full h-full items-center justify-center mx-6 mb-7">
+    <div className="relative mb-7 flex h-[calc(100%-360px)] w-full">
+      <div className="mx-6 mb-7 flex h-full w-full items-center justify-center">
         <video
           src="/_assets/main_video.mp4"
           autoPlay
           playsInline
           loop
           muted
-          className="flex w-full h-full rounded-lg"
+          className="flex h-full w-full rounded-lg"
         />
       </div>
       <span

@@ -132,7 +132,7 @@ const PhotoSelector = ({
 
   return (
     <div
-      className={`flex flex-1 w-full gap-2 p-6 overflow-y-scroll bg-white border border-b-0 border-gray-200 rounded-t-3xl`}
+      className={`flex w-full flex-1 gap-2 overflow-y-scroll rounded-t-3xl border border-b-0 border-gray-200 bg-white p-6`}
     >
       <Masonry
         key={photos.length}
@@ -151,7 +151,7 @@ const PhotoSelector = ({
           <label htmlFor="addImage">
             <AlbumIcon
               width="100%"
-              className="flex-shrink aspect-square"
+              className="aspect-square flex-shrink"
             />
           </label>
         </>
@@ -165,7 +165,7 @@ const PhotoSelector = ({
               width={100}
               height={100}
               layout="responsive"
-              className="object-contain border border-gray-200 rounded-xl"
+              className="rounded-xl border border-gray-200 object-contain"
               alt={"image" + index + 5}
             />
           </div>
@@ -177,7 +177,7 @@ const PhotoSelector = ({
       </div> */}
       {photos.length < 1 ? (
         <div
-          className="fixed flex w-[calc(100%-48px)] h-12"
+          className="fixed flex h-12 w-[calc(100%-48px)]"
           style={{
             bottom: 8 + Number(userData.bottom) + "px",
           }}
@@ -193,15 +193,15 @@ const PhotoSelector = ({
         </div>
       ) : (
         <div
-          className="fixed bottom-0 flex flex-col items-center w-[calc(100%-48px)]"
+          className="fixed bottom-0 flex w-[calc(100%-48px)] flex-col items-center"
           style={{
             bottom: 8 + Number(userData.bottom) + "px",
           }}
         >
-          <div className="fixed bottom-20 w-fit bg-white py-2.5 px-3 rounded-lg shadow-md z-20">
+          <div className="fixed bottom-20 z-20 w-fit rounded-lg bg-white px-3 py-2.5 shadow-md">
             {/* 추억을 🎞영상으로 만들 수 있어요! */}
             {video_makeable}
-            <span className="absolute w-4 h-4 rotate-45 -translate-x-1/2 bg-white left-1/2 -bottom-2" />
+            <span className="absolute -bottom-2 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 bg-white" />
           </div>
           <SumoneButton
             width="100%"

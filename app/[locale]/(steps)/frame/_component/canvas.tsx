@@ -76,20 +76,20 @@ const Canvas = ({
 
   return (
     <div
-      className={`w-full h-full rounded-2xl relative flex items-center flex-col p-4`}
+      className={`relative flex h-full w-full flex-col items-center rounded-2xl p-4`}
     >
       <Image
         src={frameSrc}
         priority
         alt="frame"
         fill
-        className="absolute top-0 z-20 object-contain w-full h-full bg-blend-overlay"
+        className="absolute top-0 z-20 h-full w-full object-contain bg-blend-overlay"
         onClick={handleClickBackground}
       />
       {/* 상단 Title */}
-      <div className="absolute top-0 flex flex-col items-center w-full h-full gap-4 pt-4">
+      <div className="absolute top-0 flex h-full w-full flex-col items-center gap-4 pt-4">
         <span
-          className="flex flex-col gap-2.5 items-center z-30 relative"
+          className="relative z-30 flex flex-col items-center gap-2.5"
           style={{
             marginTop: canvasSize.height * 0.025,
           }}
@@ -97,7 +97,7 @@ const Canvas = ({
           <span className="z-30 flex flex-row items-center gap-1">
             <span
               style={{ color: frameType === 5 ? mainColor : "#ffffff" }}
-              className="text-lg font-bold shifted-text"
+              className="shifted-text text-lg font-bold"
             >
               {/* @{userData.partnerNickName}{님의}{" "} */}
               {dict.to_name.before}@{userData.partnerNickName}
@@ -159,10 +159,10 @@ const Canvas = ({
           style={{
             left: xPadding,
           }}
-          className="absolute bottom-6 flex flex-row gap-1 z-30 bg-[rgba(255,255,255,0.7)] px-4 rounded-full py-2 items-center justify-center"
+          className="absolute bottom-6 z-30 flex flex-row items-center justify-center gap-1 rounded-full bg-[rgba(255,255,255,0.7)] px-4 py-2"
         >
           <DayHeartIcon width={28} />
-          <span className="text-lg tracking-[0.36px] leading-[140%] shifted-text">
+          <span className="shifted-text text-lg leading-[140%] tracking-[0.36px]">
             {/* {userData.dDay} 일째 */}
             {dict.days.before} {userData.dDay} {dict.days.after}
           </span>

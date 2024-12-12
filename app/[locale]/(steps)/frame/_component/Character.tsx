@@ -28,7 +28,7 @@ const Character = ({
       onClick={handleClickCharacter}
     >
       <span
-        className={`flex sprite_f character ${character}${characterState}`}
+        className={`sprite_f character flex ${character}${characterState}`}
         style={{
           zoom: `${((canvasSize.height / 543) * 144) / 180}`,
         }}
@@ -36,13 +36,13 @@ const Character = ({
       {isAbleToChangeCharacter && (
         <span
           style={{ bottom: (canvasSize.height * 144) / 543 + 40 + "px" }}
-          className="relative z-30 flex transform -translate-x-1/3 left-1/2 w-fit"
+          className="relative left-1/2 z-30 flex w-fit -translate-x-1/3 transform"
           data-html2canvas-ignore="true"
         >
-          <div className="w-fit bg-white py-2.5 px-3 rounded-lg shadow-sm z-20 whitespace-pre text-xs tracking-[0.24px] leading-[150%]">
+          <div className="z-20 w-fit whitespace-pre rounded-lg bg-white px-3 py-2.5 text-xs leading-[150%] tracking-[0.24px] shadow-sm">
             {/* 저 포즈도 바꿀 수 있어요! */}
             {dict.change_pose}
-            <span className="absolute w-4 h-4 rotate-45 -translate-x-1/2 bg-white rounded-sm left-1/2 -bottom-2" />
+            <span className="absolute -bottom-2 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 rounded-sm bg-white" />
           </div>
         </span>
       )}

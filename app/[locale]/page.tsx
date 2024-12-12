@@ -71,23 +71,23 @@ export default async function Home(props: {
     <main
       id="mainBg"
       style={{ paddingTop: top + "px", paddingBottom: bottom + "px" }}
-      className="flex flex-col items-center w-full h-full bg-gradient"
+      className="bg-gradient flex h-full w-full flex-col items-center"
     >
-      <header className="flex flex-col items-center w-full gap-2 py-4">
+      <header className="flex w-full flex-col items-center gap-2 py-4">
         {/* Top Orgament Part */}
-        <span className="sprite garland w-full flex" />
+        <span className="sprite garland flex w-full" />
         <span className="sprite tree" />
         <span className="flex flex-col items-center gap-1">
           <span className="flex flex-row items-center gap-2">
             <HeartIcon width={24} />
-            <h1 className="text-xl tracking-[0.4px] leading-[160%] whitespace-pre">
+            <h1 className="whitespace-pre text-xl leading-[160%] tracking-[0.4px]">
               {/* 2024년 내 연인 결산 */}
               {dict.MainPage.title}
             </h1>
             <span className="sprite yellowHeart" />
           </span>
 
-          <h2 className="text-center text-base text-gray-800 tracking-[0.32px] leading-[160%]">
+          <h2 className="text-center text-base leading-[160%] tracking-[0.32px] text-gray-800">
             {/* 사랑스러운 연인의 1년을 1장에 담아보세요! */}
             {dict.MainPage.description}
           </h2>
@@ -99,7 +99,7 @@ export default async function Home(props: {
           width={24}
           height={24}
         />
-        <span className="text-gray-700 text-sm tracking-[0.24px] leading-[140%]">
+        <span className="text-sm leading-[140%] tracking-[0.24px] text-gray-700">
           {/* 벌써 {userCount} 커플이 올해 추억을 결산했어요! */}
           {dict.MainPage.couples_count.before} {userCount}{" "}
           {dict.MainPage.couples_count.after}

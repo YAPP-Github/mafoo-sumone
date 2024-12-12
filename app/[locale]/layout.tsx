@@ -44,7 +44,7 @@ export default function RootLayout(props: {
   return (
     <html lang={params.locale}>
       <body
-        className={`${fonts[params.locale as Locale]} antialiased bg-image`}
+        className={`${fonts[params.locale as Locale]} bg-image antialiased`}
       >
         {props.children}
       </body>
