@@ -84,11 +84,6 @@ const UserInteraction = ({
       action: "share",
       userName: userName,
     });
-
-    // [GA] Web_View_Page_04: [우리 1년 SNS에 자랑하기] 버튼 누른 횟수
-    sendGAEvent("event", "[우리 1년 SNS에 자랑하기] 버튼 누른 횟수", {
-      locale: pathName.split("/")[1],
-    });
   };
   return (
     <div className="flex items-center w-full h-[108px] flex-grow-0 flex-shrink-0 my-3">
