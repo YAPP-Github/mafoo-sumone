@@ -28,67 +28,112 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
   const canvasRef = useRef<HTMLDivElement>(null);
   const [imageIdx, setImageIdx] = useState(0);
 
+  const [
+    isUploadPhotosAndCreateAlbumLoading,
+    setIsUploadPhotoAndCreateAlbumLoading,
+  ] = useState(false);
+
+  const uploadPhotosAndCreateAlbum = async () => {
+    try {
+      setIsUploadPhotoAndCreateAlbumLoading(true);
+
+      const formData = new FormData();
+
+      photos.forEach((photo) => {
+        formData.append(`photo`, photo);
+      });
+
+      const res = await fetch("/api/originalPhoto", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      console.log("🚀[Success] Uploaded Photo Urls", data.photoUrls);
+    } catch (err) {
+      console.error("Failed to upload photos or create album:", err);
+    }
+
+    setIsUploadPhotoAndCreateAlbumLoading(false);
+  };
+
   useEffect(() => {
     if (!photos.length) {
       navigation.push(`pickphoto?${searchParams.toString()}`);
+      return;
     }
+
+    uploadPhotosAndCreateAlbum();
   }, [photos, navigation]);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   /*
-  const handleTestRecap = async () => {
-    if (!canvasRef.current || !canvasSize.width) return;
+                                                                                const handleTestRecap = async () => {
+                                                                                  if (!canvasRef.current || !canvasSize.width) return;
+                                                                              
+                                                                                  // Set the canvas size based on the available width and height
+                                                                                  // canvasRef.current.style.width = canvasSize.width + "px";
+                                                                                  // canvasRef.current.style.height = canvasSize.height + "px";
+                                                                                  canvasRef.current.style.width = "393px";
+                                                                                  canvasRef.current.style.height = "680px";
+                                                                              
+                                                                                  setIsLoading(true); // Show loading indicator
+                                                                                  const dataUrls: string[] = [];
+                                                                              
+                                                                                  // Iterate over all photos
+                                                                                  for (let idx = 0; idx < photos.length; idx++) {
+                                                                                    try {
+                                                                                      // Wait for the canvas to be updated with the new image
+                                                                                      const canvas = await html2canvas(canvasRef.current, {
+                                                                                        onclone: (el) => {
+                                                                                          const elementsWithShiftedDownwardText =
+                                                                                            el.querySelectorAll(".shifted-text");
+                                                                                          elementsWithShiftedDownwardText.forEach((element) => {
+                                                                                            const htmlElement = element as HTMLElement;
+                                                                                            // Adjust styles or do whatever you want here
+                                                                                            htmlElement.style.transform = "translateY(-40%)";
+                                                                                          });
+                                                                                        },
+                                                                                      });
+                                                                              
+                                                                                      // Convert the canvas to a data URL (image)
+                                                                                      const dataUrl = canvas.toDataURL("image/jpeg");
+                                                                                      dataUrls.push(dataUrl);
+                                                                              
+                                                                                      // Create a temporary link to download the image
+                                                                                      const link = document.createElement("a");
+                                                                                      link.href = dataUrl;
+                                                                                      link.download = `canvas_frame.jpeg`;
+                                                                                      link.click();
+                                                                                      setImageIdx((prev) => (prev + idx) % photos.length);
+                                                                                      await new Promise((resolve) => setTimeout(resolve, 10));
+                                                                                    } catch (error) {
+                                                                                      console.error("Failed to capture the frame:", error);
+                                                                                    }
+                                                                                  }
+                                                                                  setIsLoading(false);
+                                                                              
+                                                                                  // Hide the loading indicator after all downloads
+                                                                                };*/
 
-    // Set the canvas size based on the available width and height
-    // canvasRef.current.style.width = canvasSize.width + "px";
-    // canvasRef.current.style.height = canvasSize.height + "px";
-    canvasRef.current.style.width = "393px";
-    canvasRef.current.style.height = "680px";
+  const getAlbumIdFromCookie = () => {
+    const albumIdCookie = document.cookie
+      .split(";")
+      .find((cookie) => cookie.includes("albumId"));
 
-    setIsLoading(true); // Show loading indicator
-    const dataUrls: string[] = [];
-
-    // Iterate over all photos
-    for (let idx = 0; idx < photos.length; idx++) {
-      try {
-        // Wait for the canvas to be updated with the new image
-        const canvas = await html2canvas(canvasRef.current, {
-          onclone: (el) => {
-            const elementsWithShiftedDownwardText =
-              el.querySelectorAll(".shifted-text");
-            elementsWithShiftedDownwardText.forEach((element) => {
-              const htmlElement = element as HTMLElement;
-              // Adjust styles or do whatever you want here
-              htmlElement.style.transform = "translateY(-40%)";
-            });
-          },
-        });
-
-        // Convert the canvas to a data URL (image)
-        const dataUrl = canvas.toDataURL("image/jpeg");
-        dataUrls.push(dataUrl);
-
-        // Create a temporary link to download the image
-        const link = document.createElement("a");
-        link.href = dataUrl;
-        link.download = `canvas_frame.jpeg`;
-        link.click();
-        setImageIdx((prev) => (prev + idx) % photos.length);
-        await new Promise((resolve) => setTimeout(resolve, 10));
-      } catch (error) {
-        console.error("Failed to capture the frame:", error);
-      }
-    }
-    setIsLoading(false);
-
-    // Hide the loading indicator after all downloads
-  };*/
+    return albumIdCookie?.split("=")[1];
+  };
 
   const handleRecapFramedPhoto = async (dataUrls: string[]) => {
     // presigned URLs 가져오기
     console.time("리캡 이미지 presigned url 발급");
-    const presignedResult = await getPresignedUrls(photos);
+
+    const albumIdFromCookie = getAlbumIdFromCookie();
+    if (!albumIdFromCookie)
+      return console.log("Fail to fetch albumId from cookie");
+
+    const presignedResult = await getPresignedUrls(photos, albumIdFromCookie);
     if (!presignedResult) {
       console.error("Failed to get presigned URLs");
       navigation.push(`/pickphoto?${searchParams.toString()}`);
@@ -163,6 +208,8 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
   };
 
   const handleSelectFrame = async () => {
+    if (isUploadPhotosAndCreateAlbumLoading) return;
+
     if (!canvasRef.current || !canvasSize.width) return;
 
     // Set the canvas size based on the available width and height
@@ -273,7 +320,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
             <SumoneButton
               width="100%"
               height={48}
-              fill="#ff9092"
+              fill={isUploadPhotosAndCreateAlbumLoading ? "#9c7374" : "#ff9092"}
               // text="이 프레임으로 만들게요"
               text={dict.make_with_this_frame}
               textClass="text-white text-sm tracking-[0.28px] leading-[150%]"

@@ -2,13 +2,12 @@
 
 import AlbumIcon from "@/assets/AlbumIcon";
 import SumoneButton from "@/assets/SumoneButton";
-import { usePhotoStore } from "@/atom/photo";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { getPresignedUrls } from "../../api";
 import { ObjectedParams } from "@/types/user";
-import { useObjectToQueryString } from "@/utils/useQueryString";
 import Masonry from "react-responsive-masonry";
 import Image from "next/image";
+import { useObjectToQueryString } from "@/utils/useQueryString";
+import { usePhotoStore } from "@/atom/photo";
 import { useState } from "react";
 
 const PhotoSelector = ({
@@ -48,86 +47,8 @@ const PhotoSelector = ({
     setPhotos(selectedFiles);
   };
 
-  const handleSendOriginalPhoto = async () => {
-    try {
-      // presigned URL 가져오기
-      const presignedResult = await getPresignedUrls(photos);
-      if (!presignedResult) {
-        console.error("Failed to get presigned URLs");
-        navigation.refresh();
-        return;
-      }
-
-      const [albumId, urls] = presignedResult;
-
-      // 파일 업로드 요청 생성
-      const uploadPromises = photos.map((photo, index) => {
-        const file = new File([photo], photo.name, { type: photo.type });
-        const presignedUrl = urls[index];
-
-        return fetch(presignedUrl, {
-          method: "PUT",
-          body: file,
-        })
-          .then((res) => {
-            if (!res.ok) {
-              throw new Error(`Failed to upload ${photo.name}`);
-            }
-            return res;
-          })
-          .catch((err) => {
-            console.error(`Upload failed for ${photo.name}:`, err);
-            throw err; // Upload 실패 시 에러 던지기
-          });
-      });
-
-      // 모든 파일 업로드가 완료될 때까지 기다리기
-      await Promise.all(uploadPromises);
-
-      // 업로드가 완료된 후 새로운 URL 처리
-      const newUrls = urls.map((url: string) => {
-        return url.split("?")[0]; // presigned URL에서 query string 제거
-      });
-
-      // albums API 호출
-      const { photoUrl } = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/sumone/albums/${albumId}/photos`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            fileUrls: newUrls,
-          }),
-        }
-      )
-        .then((res) => res.json())
-        .catch((err) => {
-          console.error("Error while calling albums API:", err);
-          throw err; // albums API 호출 실패 시 에러 던지기
-        });
-
-      console.log("photoUrl", photoUrl);
-      return photoUrl;
-    } catch (err) {
-      console.error("Error in handleSendOriginalPhoto:", err);
-      throw err; // 전체 오류 처리
-    }
-  };
-
-  const handleFrameSelection = async () => {
-    try {
-      setIsLoading(true);
-      const photoUrl = await handleSendOriginalPhoto();
-      console.log("photoUrl", photoUrl);
-      setIsLoading(false);
-      // 미리 이미지, js를 prefetch로 불러오기
-      navigation.push(`frame?${OTQ(userData)}`);
-    } catch (err) {
-      console.error("Failed to upload photos or create album:", err);
-      setIsLoading(false);
-    }
+  const handleFrameSelection = () => {
+    navigation.push(`frame?${OTQ(userData)}`);
   };
 
   return (

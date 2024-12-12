@@ -1,12 +1,5 @@
-export const getPresignedUrls = async (photos: File[]) => {
-  const albumIdCookie = document.cookie.split(";").find((cookie) => {
-    return cookie.includes("albumId");
-  });
-  const albumId = albumIdCookie?.split("=")[1];
-
-  if (!albumId) {
-    return;
-  }
+export const getPresignedUrls = async (photos: File[], albumId: string) => {
+  if (!albumId.length) return;
 
   const formatedFileNames = photos.map((photo) => {
     return photo.name.split(".")[0] + ".jpeg";
