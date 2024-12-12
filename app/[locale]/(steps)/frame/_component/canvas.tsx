@@ -5,7 +5,16 @@ import DayHeartIcon from "@/assets/DayHeartIcon";
 import MafooLogo from "@/assets/MafooLogo";
 import { ObjectedParams } from "@/types/user";
 import Image from "next/image";
-import { Dispatch, SetStateAction, memo } from "react";
+import {
+  Dispatch,
+  memo,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import Character from "./Character";
 import SumoneLogo from "@/assets/SumoneLogo";
 // import TitleSvg from "@/app/assets/Logo";
@@ -14,36 +23,39 @@ import SumoneLogo from "@/assets/SumoneLogo";
 const CanvasPrepData = [
   {
     id: 1,
-    frameSrc: "/_assets/frame/puppy.png",
     character: "puppy",
     mainColor: "#F64435",
   },
   {
     id: 2,
-    frameSrc: "/_assets/frame/penguin.png",
     character: "penguin",
     mainColor: "#5B7F38",
   },
   {
     id: 3,
-    frameSrc: "/_assets/frame/cat.png",
     character: "cat",
     mainColor: "#F64435",
   },
   {
     id: 4,
-    frameSrc: "/_assets/frame/panda.png",
     character: "panda",
     mainColor: "#5B7F38",
   },
   {
     id: 5,
-    frameSrc: "/_assets/frame/egg.png",
     character: "egg",
     mainColor: "#444E5C",
     subColor: "#FBF3EE",
   },
 ];
+
+const frameSrcs = [
+  "/_assets/frame/puppy.png",
+  "/_assets/frame/penguin.png",
+  "/_assets/frame/cat.png",
+  "/_assets/frame/panda.png",
+  "/_assets/frame/egg.png",
+] as const;
 
 interface CanvasProps {
   frameType: number;
@@ -64,12 +76,20 @@ const Canvas = ({
   userData,
   dict,
 }: CanvasProps) => {
-  const { frameSrc, character, mainColor, subColor } =
-    CanvasPrepData[frameType - 1];
+  const { character, mainColor, subColor } = CanvasPrepData[frameType - 1];
+  const [isFrameStackLoaded, setIsFrameStackLoaded] = useState(false);
 
-  const handleClickBackground = () => {
+  const photoSrc = useMemo(() => {
+    return URL.createObjectURL(images[imageIdx]);
+  }, [images, imageIdx]);
+
+  const handleClickBackground = useCallback(() => {
     setImageIdx((prev) => (prev + 1) % images.length);
-  };
+  }, [images]);
+
+  const onFrameStackLoad = useCallback(() => {
+    setIsFrameStackLoaded(true);
+  }, []);
 
   const xPadding = (canvasSize.height * 37) / 543;
   const topIndex = (canvasSize.height * 110) / 543;
@@ -78,13 +98,10 @@ const Canvas = ({
     <div
       className={`relative flex h-full w-full flex-col items-center rounded-2xl p-4`}
     >
-      <Image
-        src={frameSrc}
-        priority
-        alt="frame"
-        fill
-        className="absolute top-0 z-20 h-full w-full object-contain bg-blend-overlay"
-        onClick={handleClickBackground}
+      <FrameStack
+        frameType={frameType}
+        handleClickBackground={handleClickBackground}
+        onFrameStackLoad={onFrameStackLoad}
       />
       {/* 상단 Title */}
       <div className="absolute top-0 flex h-full w-full flex-col items-center gap-4 pt-4">
@@ -129,12 +146,13 @@ const Canvas = ({
               justifyContent: "center",
               alignItems: "center",
               overflow: "hidden",
+              opacity: isFrameStackLoaded ? 1 : 0,
             }}
             className="z-10"
           >
             <Image
               id="targetImage"
-              src={URL.createObjectURL(images[imageIdx])}
+              src={photoSrc}
               alt="image"
               width={(canvasSize.height * 240) / 543}
               height={(canvasSize.height * 354) / 543}
@@ -171,5 +189,68 @@ const Canvas = ({
     </div>
   );
 };
+
+const FrameStack = memo(function ({
+  frameType,
+  handleClickBackground,
+  onFrameStackLoad,
+}: {
+  frameType: number;
+  handleClickBackground: () => void;
+  onFrameStackLoad: () => void;
+}) {
+  const loadedCountRef = useRef(frameSrcs.length);
+
+  const onLoad = () => {
+    loadedCountRef.current--;
+    if (loadedCountRef.current) return;
+
+    onFrameStackLoad();
+  };
+
+  useEffect(() => {
+    const frameStack = document.getElementById("frame-stack") as HTMLDivElement;
+    if (!frameStack) return;
+
+    const frameElements = Array.from(
+      document.querySelectorAll(".frame-element")
+    ).reverse() as HTMLImageElement[];
+
+    frameElements.find((el) => {
+      const id = el.id;
+
+      if (id === `frame-${frameType}`) {
+        el.style.opacity = "1";
+        return true;
+      }
+
+      el.remove();
+      el.style.opacity = "0";
+      frameStack.prepend(el);
+
+      return false;
+    });
+  }, [frameType]);
+
+  return (
+    <div id="frame-stack">
+      {frameSrcs.map((frameSrc, idx) => (
+        <Image
+          key={idx}
+          id={`frame-${idx + 1}`}
+          src={frameSrc}
+          priority
+          alt="frame"
+          fill
+          className="frame-element absolute top-0 z-20 h-full w-full object-contain bg-blend-overlay"
+          onClick={handleClickBackground}
+          onLoad={onLoad}
+        />
+      ))}
+    </div>
+  );
+});
+
+FrameStack.displayName = "FrameStack";
 
 export default memo(Canvas);
