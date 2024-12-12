@@ -9,8 +9,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useGetCanvasSize } from "@/utils/useScreenSize";
 import { usePhotoStore } from "@/atom/photo";
 import SumoneButton from "@/assets/SumoneButton";
-import { getPresignedUrls } from "../../api";
 import { ObjectedParams } from "@/types/user";
+import { getPresignedUrls } from "../../api";
 
 interface FrameProps {
   locale: string;
@@ -69,6 +69,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  /*
   const handleTestRecap = async () => {
     if (!canvasRef.current || !canvasSize.width) return;
 
@@ -115,6 +116,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
 
     // Hide the loading indicator after all downloads
   };
+  */
 
   const getAlbumIdFromCookie = () => {
     const albumIdCookie = document.cookie
@@ -323,7 +325,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
               // text="이 프레임으로 만들게요"
               text={dict.make_with_this_frame}
               textClass="text-white text-sm tracking-[0.28px] leading-[150%]"
-              onClick={handleTestRecap}
+              onClick={handleSelectFrame}
             />
           </div>
         </div>

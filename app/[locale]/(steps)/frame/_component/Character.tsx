@@ -26,7 +26,9 @@ const Character = ({
   console.log(loadedCountRef.current);
 
   const handleClickCharacter = () => {
-    setCharacterState((prev: number) => 1 - prev);
+    if (characterSrcs[frameType as CharacterFrameType].length > 1) {
+      setCharacterState((prev: number) => 1 - prev);
+    }
   };
 
   const characterSrc =
