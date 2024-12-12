@@ -24,7 +24,7 @@ const PhotoSelector = ({
   const navigation = useRouter();
   const OTQ = useObjectToQueryString();
   const { photos, setPhotos } = usePhotoStore();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
 
   const pathName = usePathname();
   const searchParams = useSearchParams();

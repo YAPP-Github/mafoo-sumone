@@ -9,7 +9,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useGetCanvasSize } from "@/utils/useScreenSize";
 import { usePhotoStore } from "@/atom/photo";
 import SumoneButton from "@/assets/SumoneButton";
-import { getPresignedUrls } from "../../api";
+// import { getPresignedUrls } from "../../api";
 import { ObjectedParams } from "@/types/user";
 
 interface FrameProps {
@@ -116,144 +116,144 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
     // Hide the loading indicator after all downloads
   };
 
-  const getAlbumIdFromCookie = () => {
-    const albumIdCookie = document.cookie
-      .split(";")
-      .find((cookie) => cookie.includes("albumId"));
+  // const getAlbumIdFromCookie = () => {
+  //   const albumIdCookie = document.cookie
+  //     .split(";")
+  //     .find((cookie) => cookie.includes("albumId"));
+  //
+  //   return albumIdCookie?.split("=")[1];
+  // };
 
-    return albumIdCookie?.split("=")[1];
-  };
+  // const handleRecapFramedPhoto = async (dataUrls: string[]) => {
+  //   // presigned URLs 가져오기
+  //   console.time("리캡 이미지 presigned url 발급");
+  //
+  //   const albumIdFromCookie = getAlbumIdFromCookie();
+  //   if (!albumIdFromCookie)
+  //     return console.log("Fail to fetch albumId from cookie");
+  //
+  //   const presignedResult = await getPresignedUrls(photos, albumIdFromCookie);
+  //   if (!presignedResult) {
+  //     console.error("Failed to get presigned URLs");
+  //     navigation.push(`/pickphoto?${searchParams.toString()}`);
+  //     return;
+  //   }
+  //   console.timeEnd("리캡 이미지 presigned url 발급");
+  //
+  //   const [albumId, urls] = presignedResult;
+  //   console.log("Presigned URLs: ", urls);
+  //
+  //   // dataUrls (프레임된 이미지들) 업로드
+  //   try {
+  //     console.time("이미지 PUT");
+  //     const uploadPromises = dataUrls.map(async (dataUrl, index) => {
+  //       const blob = await fetch(dataUrl).then((res) => res.blob());
+  //       const file = new File([blob], `frame_${index + 1}.jpeg`, {
+  //         type: "image/jpeg",
+  //       });
+  //       const presignedUrl = urls[index];
+  //
+  //       return fetch(presignedUrl, {
+  //         method: "PUT",
+  //         body: file,
+  //       }).then((res) => {
+  //         if (!res.ok) {
+  //           throw new Error(`Failed to upload frame ${index + 1}`);
+  //         }
+  //         return res;
+  //       });
+  //     });
+  //
+  //     await Promise.all(uploadPromises);
+  //
+  //     console.timeEnd("이미지 PUT");
+  //     // presigned URL에서 query string 제거 후 새 URL 생성
+  //     const newUrls = urls.map((url: string) => {
+  //       return url.split("?")[0];
+  //     });
+  //
+  //     console.time("리캡 생성 요청");
+  //     // recap API 호출
+  //     const { recapUrl } = await fetch(
+  //       `${process.env.NEXT_PUBLIC_API_URL}/sumone/albums/${albumId}/recap`,
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           fileUrls: newUrls,
+  //         }),
+  //       }
+  //     )
+  //       .then((res) => res.json())
+  //       .catch((err) => {
+  //         console.error("Error calling recap API:", err);
+  //         throw err;
+  //       });
+  //
+  //     console.log("recapUrl", recapUrl);
+  //     console.timeEnd("리캡 생성 요청");
+  //
+  //     setIsLoading(false);
+  //     navigation.push(`result?${searchParams.toString()}&recapUrl=${recapUrl}`);
+  //   } catch (err) {
+  //     console.error("Error during recap processing:", err);
+  //     setIsLoading(false);
+  //     if (typeof window !== "undefined" && window.ReactNativeWebView) {
+  //       window.ReactNativeWebView.postMessage(JSON.stringify({ type: "exit" }));
+  //     }
+  //   }
+  // };
 
-  const handleRecapFramedPhoto = async (dataUrls: string[]) => {
-    // presigned URLs 가져오기
-    console.time("리캡 이미지 presigned url 발급");
-
-    const albumIdFromCookie = getAlbumIdFromCookie();
-    if (!albumIdFromCookie)
-      return console.log("Fail to fetch albumId from cookie");
-
-    const presignedResult = await getPresignedUrls(photos, albumIdFromCookie);
-    if (!presignedResult) {
-      console.error("Failed to get presigned URLs");
-      navigation.push(`/pickphoto?${searchParams.toString()}`);
-      return;
-    }
-    console.timeEnd("리캡 이미지 presigned url 발급");
-
-    const [albumId, urls] = presignedResult;
-    console.log("Presigned URLs: ", urls);
-
-    // dataUrls (프레임된 이미지들) 업로드
-    try {
-      console.time("이미지 PUT");
-      const uploadPromises = dataUrls.map(async (dataUrl, index) => {
-        const blob = await fetch(dataUrl).then((res) => res.blob());
-        const file = new File([blob], `frame_${index + 1}.jpeg`, {
-          type: "image/jpeg",
-        });
-        const presignedUrl = urls[index];
-
-        return fetch(presignedUrl, {
-          method: "PUT",
-          body: file,
-        }).then((res) => {
-          if (!res.ok) {
-            throw new Error(`Failed to upload frame ${index + 1}`);
-          }
-          return res;
-        });
-      });
-
-      await Promise.all(uploadPromises);
-
-      console.timeEnd("이미지 PUT");
-      // presigned URL에서 query string 제거 후 새 URL 생성
-      const newUrls = urls.map((url: string) => {
-        return url.split("?")[0];
-      });
-
-      console.time("리캡 생성 요청");
-      // recap API 호출
-      const { recapUrl } = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/sumone/albums/${albumId}/recap`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            fileUrls: newUrls,
-          }),
-        }
-      )
-        .then((res) => res.json())
-        .catch((err) => {
-          console.error("Error calling recap API:", err);
-          throw err;
-        });
-
-      console.log("recapUrl", recapUrl);
-      console.timeEnd("리캡 생성 요청");
-
-      setIsLoading(false);
-      navigation.push(`result?${searchParams.toString()}&recapUrl=${recapUrl}`);
-    } catch (err) {
-      console.error("Error during recap processing:", err);
-      setIsLoading(false);
-      if (typeof window !== "undefined" && window.ReactNativeWebView) {
-        window.ReactNativeWebView.postMessage(JSON.stringify({ type: "exit" }));
-      }
-    }
-  };
-
-  const handleSelectFrame = async () => {
-    if (isUploadPhotosAndCreateAlbumLoading) return;
-
-    if (!canvasRef.current || !canvasSize.width) return;
-
-    // Set the canvas size based on the available width and height
-    canvasRef.current.style.width = canvasSize.width + "px";
-    canvasRef.current.style.height = canvasSize.height + "px";
-
-    setIsLoading(true); // Show loading indicator
-    const dataUrls: string[] = [];
-
-    // Iterate over all photos
-    for (let idx = 0; idx < photos.length; idx++) {
-      try {
-        // Wait for the canvas to be updated with the new image
-        const canvas = await html2canvas(canvasRef.current, {
-          onclone: (el) => {
-            const elementsWithShiftedDownwardText =
-              el.querySelectorAll(".shifted-text");
-            elementsWithShiftedDownwardText.forEach((element) => {
-              const htmlElement = element as HTMLElement;
-              // Adjust styles or do whatever you want here
-              htmlElement.style.transform = "translateY(-40%)";
-            });
-          },
-        });
-
-        // Convert the canvas to a data URL (image)
-        const dataUrl = canvas.toDataURL("image/jpeg");
-        dataUrls.push(dataUrl);
-
-        // Create a temporary link to download the image
-        // const link = document.createElement("a");
-        // link.href = dataUrl;
-        // link.download = `canvas_frame_${idx + 1}.jpeg`;
-        // link.click();
-        setImageIdx((prev) => (prev + 1) % photos.length);
-        await new Promise((resolve) => setTimeout(resolve, 10));
-      } catch (error) {
-        console.error("Failed to capture the frame:", error);
-      }
-    }
-
-    handleRecapFramedPhoto(dataUrls);
-
-    // Hide the loading indicator after all downloads
-  };
+  // const handleSelectFrame = async () => {
+  //   if (isUploadPhotosAndCreateAlbumLoading) return;
+  //
+  //   if (!canvasRef.current || !canvasSize.width) return;
+  //
+  //   // Set the canvas size based on the available width and height
+  //   canvasRef.current.style.width = canvasSize.width + "px";
+  //   canvasRef.current.style.height = canvasSize.height + "px";
+  //
+  //   setIsLoading(true); // Show loading indicator
+  //   const dataUrls: string[] = [];
+  //
+  //   // Iterate over all photos
+  //   for (let idx = 0; idx < photos.length; idx++) {
+  //     try {
+  //       // Wait for the canvas to be updated with the new image
+  //       const canvas = await html2canvas(canvasRef.current, {
+  //         onclone: (el) => {
+  //           const elementsWithShiftedDownwardText =
+  //             el.querySelectorAll(".shifted-text");
+  //           elementsWithShiftedDownwardText.forEach((element) => {
+  //             const htmlElement = element as HTMLElement;
+  //             // Adjust styles or do whatever you want here
+  //             htmlElement.style.transform = "translateY(-40%)";
+  //           });
+  //         },
+  //       });
+  //
+  //       // Convert the canvas to a data URL (image)
+  //       const dataUrl = canvas.toDataURL("image/jpeg");
+  //       dataUrls.push(dataUrl);
+  //
+  //       // Create a temporary link to download the image
+  //       // const link = document.createElement("a");
+  //       // link.href = dataUrl;
+  //       // link.download = `canvas_frame_${idx + 1}.jpeg`;
+  //       // link.click();
+  //       setImageIdx((prev) => (prev + 1) % photos.length);
+  //       await new Promise((resolve) => setTimeout(resolve, 10));
+  //     } catch (error) {
+  //       console.error("Failed to capture the frame:", error);
+  //     }
+  //   }
+  //
+  //   handleRecapFramedPhoto(dataUrls);
+  //
+  //   // Hide the loading indicator after all downloads
+  // };
 
   return (
     <main
