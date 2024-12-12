@@ -1,13 +1,24 @@
+import Image from "next/image";
 import { useState } from "react";
 
+const characterSrcs = {
+  1: ["/_assets/character/puppy0.png", "/_assets/character/puppy1.png"],
+  2: ["/_assets/character/penguin0.png", "/_assets/character/penguin1.png"],
+  3: ["/_assets/character/cat0.png", "/_assets/character/cat1.png"],
+  4: ["/_assets/character/panda0.png", "/_assets/character/panda1.png"],
+  5: ["/_assets/character/egg0.png"],
+} as const;
+
+type CharacterFrameType = keyof typeof characterSrcs;
+
 const Character = ({
+  frameType,
   isAbleToChangeCharacter,
-  character,
   canvasSize,
   dict,
 }: {
+  frameType: number;
   isAbleToChangeCharacter?: boolean;
-  character: string;
   canvasSize: { width: number; height: number };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dict: Record<string, any>;
@@ -15,8 +26,13 @@ const Character = ({
   const [characterState, setCharacterState] = useState<number>(0);
 
   const handleClickCharacter = () => {
-    setCharacterState((prev: number) => 1 - prev);
+    if (characterSrcs[frameType as CharacterFrameType].length > 1) {
+      setCharacterState((prev: number) => 1 - prev);
+    }
   };
+
+  const characterSrc =
+    characterSrcs[frameType as CharacterFrameType][characterState];
 
   return (
     <span
@@ -27,11 +43,11 @@ const Character = ({
       className="absolute bottom-0 right-0 z-30 grow-0"
       onClick={handleClickCharacter}
     >
-      <span
-        className={`sprite_f character flex ${character}${characterState}`}
-        style={{
-          zoom: `${((canvasSize.height / 543) * 144) / 180}`,
-        }}
+      <Image
+        src={characterSrc}
+        alt="character image"
+        width={(canvasSize.height * 144) / 543}
+        height={(canvasSize.height * 144) / 543}
       />
       {isAbleToChangeCharacter && (
         <span
@@ -40,7 +56,6 @@ const Character = ({
           data-html2canvas-ignore="true"
         >
           <div className="z-20 w-fit whitespace-pre rounded-lg bg-white px-3 py-2.5 text-xs leading-[150%] tracking-[0.24px] shadow-sm">
-            {/* 저 포즈도 바꿀 수 있어요! */}
             {dict.change_pose}
             <span className="absolute -bottom-2 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 rounded-sm bg-white" />
           </div>
