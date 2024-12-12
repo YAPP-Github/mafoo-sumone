@@ -36,6 +36,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  /*
   const handleTestRecap = async () => {
     if (!canvasRef.current || !canvasSize.width) return;
 
@@ -82,7 +83,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
     setIsLoading(false);
 
     // Hide the loading indicator after all downloads
-  };
+  };*/
 
   const handleRecapFramedPhoto = async (dataUrls: string[]) => {
     // presigned URLs 가져오기
@@ -160,7 +161,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
       }
     }
   };
-  /*
+
   const handleSelectFrame = async () => {
     if (!canvasRef.current || !canvasSize.width) return;
 
@@ -207,7 +208,6 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
 
     // Hide the loading indicator after all downloads
   };
-  */
 
   return (
     <main
@@ -277,7 +277,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
               // text="이 프레임으로 만들게요"
               text={dict.make_with_this_frame}
               textClass="text-white text-sm tracking-[0.28px] leading-[150%]"
-              onClick={handleTestRecap}
+              onClick={handleSelectFrame}
             />
           </div>
         </div>
