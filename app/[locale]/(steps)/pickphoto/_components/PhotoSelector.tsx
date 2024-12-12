@@ -123,7 +123,7 @@ const PhotoSelector = ({
             bottom: 8 + Number(userData.bottom) + "px",
           }}
         >
-          <div className="fixed bottom-20 z-20 w-fit rounded-lg bg-white px-3 py-2.5 shadow-md">
+          <div className="relative z-20 w-fit -translate-y-4 rounded-lg bg-white px-3 py-2.5 shadow-md">
             {/* 추억을 🎞영상으로 만들 수 있어요! */}
             {video_makeable}
             <span className="absolute -bottom-2 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 bg-white" />
