@@ -173,7 +173,7 @@ const MainPageUserInteraction = ({
         role="button"
         tabIndex={0}
         onClick={handleOpenPrivacyModal}
-        className="py-2.5 px-6 w-full flex justify-between mt-3 tracking-[0.24px] leading-[140%]"
+        className="mt-3 flex w-full justify-between px-6 py-2.5 leading-[140%] tracking-[0.24px]"
       >
         <span className="text-sm">
           {/* 개인정보 수집 동의 */}
@@ -188,7 +188,7 @@ const MainPageUserInteraction = ({
           />
         </span>
       </span>
-      <span className="flex flex-row gap-3 mb-2">
+      <span className="mb-2 flex flex-row gap-3">
         <SumoneButton
           width={160}
           height={56}
@@ -209,7 +209,7 @@ const MainPageUserInteraction = ({
         />
       </span>
       <div
-        className="fixed px-6 w-full flex flex-row justify-between items-center"
+        className="fixed flex w-full flex-row items-center justify-between px-6"
         style={{
           top: Number(32) + Number(userData.top) + "px",
         }}
@@ -224,7 +224,7 @@ const MainPageUserInteraction = ({
           )}
           <Link
             href="https://chisel-promise-9ff.notion.site/FAQ-f366f55df31b49ef96e7db35c73b8921?pvs=4"
-            className="border border-white rounded-lg px-2 py-1.5 bg-[rgba(255, 255, 255, 0.70)] backdrop-blur-xl flex items-center justify-center text-brown text-base"
+            className="bg-[rgba(255, 255, 255, 0.70)] flex items-center justify-center rounded-lg border border-white px-2 py-1.5 text-base text-brown backdrop-blur-xl"
           >
             이벤트 FAQ
           </Link>
@@ -233,19 +233,19 @@ const MainPageUserInteraction = ({
           role="button"
           tabIndex={0}
           onClick={handleClose}
-          className="w-11 h-11 border border-white rounded-full bg-[rgba(255, 255, 255, 0.70)] flex items-center justify-center backdrop-blur-xl"
+          className="bg-[rgba(255, 255, 255, 0.70)] flex h-11 w-11 items-center justify-center rounded-full border border-white backdrop-blur-xl"
         >
           <CloseTransparentIcon width={28} />
         </div>
       </div>
       {showClipboardModal && (
-        <div className="fixed w-full h-full flex items-center justify-center">
-          <div className="bg-white rounded-full shadow-lg px-4 py-3 text-center flex flex-row gap-1">
+        <div className="fixed flex h-full w-full items-center justify-center">
+          <div className="flex flex-row gap-1 rounded-full bg-white px-4 py-3 text-center shadow-lg">
             <CheckCircleIcon
               width={24}
               height={24}
             />
-            <span className="text-base text-gray-700 tracking-[0.32px] leading-[150%]">
+            <span className="text-base leading-[150%] tracking-[0.32px] text-gray-700">
               마푸 회원가입 시 붙여 넣어주세요!
             </span>
           </div>

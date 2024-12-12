@@ -76,8 +76,8 @@ const UserInteraction = ({
     });
   };
   return (
-    <div className="flex items-center w-full h-[108px] flex-grow-0 flex-shrink-0 my-3">
-      <div className="flex flex-col gap-3 mx-6 w-full h-full">
+    <div className="my-3 flex h-[108px] w-full flex-shrink-0 flex-grow-0 items-center">
+      <div className="mx-6 flex h-full w-full flex-col gap-3">
         <SumoneButton
           width="100%"
           height={48}

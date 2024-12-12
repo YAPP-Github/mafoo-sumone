@@ -24,7 +24,7 @@ const SumoneButton = ({
       role={role || "button"}
       tabIndex={tabIndex || 0}
       onClick={onClick}
-      className="flex items-center justify-center relative"
+      className="relative flex items-center justify-center"
       style={{ width: width, height: height }}
     >
       <SumoneButtonAsset

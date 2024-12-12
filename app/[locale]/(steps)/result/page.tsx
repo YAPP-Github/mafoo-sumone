@@ -60,7 +60,7 @@ const ResultPage = async (props: {
   return (
     <main
       id="mainBg"
-      className="flex flex-col items-center w-full h-full"
+      className="flex h-full w-full flex-col items-center"
       style={{
         paddingTop: top + "px",
         paddingBottom: bottom + "px",
@@ -68,7 +68,7 @@ const ResultPage = async (props: {
     >
       <Header
         titleComponent={
-          <div className="flex flex-row gap-1 items-center text-lg tracking-[0.36px] leading-[140%]">
+          <div className="flex flex-row items-center gap-1 text-lg leading-[140%] tracking-[0.36px]">
             <HeartIcon width={28} />
             {/* 우리의 1년 결산 */}
             {dict.Result.our_year_recap}
@@ -82,9 +82,9 @@ const ResultPage = async (props: {
           height:
             lang.locale === "ko" ? `calc(100% - 272px)` : `calc(100% - 216px)`,
         }}
-        className="w-full flex mb-3"
+        className="mb-3 flex w-full"
       >
-        <div className="flex w-full h-full items-center justify-center mx-6">
+        <div className="mx-6 flex h-full w-full items-center justify-center">
           <video
             src={recapUrl}
             autoPlay={true}
@@ -100,12 +100,12 @@ const ResultPage = async (props: {
         </div>
       </div>
 
-      <span className="flex items-center gap-2 w-full justify-center">
+      <span className="flex w-full items-center justify-center gap-2">
         <DoubleHeartIcon
           width={24}
           height={24}
         />
-        <span className="text-gray-700 text-sm tracking-[0.24px] leading-[140%]">
+        <span className="text-sm leading-[140%] tracking-[0.24px] text-gray-700">
           {/* 벌써 {userCount} 커플이 서로를 자랑했어요 */}
           {dict.Result.couples_showing_off.before} {userCount}
           {dict.Result.couples_showing_off.after}

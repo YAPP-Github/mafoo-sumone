@@ -19,7 +19,7 @@ const PickPhotoHeader = ({
   return (
     <Header
       titleComponent={
-        <div className="flex flex-row gap-1 items-center  text-lg tracking-[0.36px] leading-[140%]">
+        <div className="flex flex-row items-center gap-1 text-lg leading-[140%] tracking-[0.36px]">
           <HeartIcon width={28} />
           {/* 연말결산 이벤트 */}
           {text}

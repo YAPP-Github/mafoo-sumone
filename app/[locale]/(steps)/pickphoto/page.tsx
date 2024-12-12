@@ -39,7 +39,7 @@ const PickPhotoPage = async (props: {
   return (
     <main
       style={{ paddingTop: top + "px" }}
-      className="flex flex-col w-full h-full"
+      className="flex h-full w-full flex-col"
     >
       <PickPhotoHeader
         searchParams={{
@@ -54,12 +54,12 @@ const PickPhotoPage = async (props: {
         text={dict.PickPhoto.year_end_event}
       />
       <div className="flex flex-col gap-4 p-6 pt-4">
-        <div className="text-xl tracking-[0.4px] leading-[160%] whitespace-pre">
+        <div className="whitespace-pre text-xl leading-[160%] tracking-[0.4px]">
           {/* 2024년, {partnerNickName}님의 */}
           {dict.PickPhoto.gather_lovely_moments.before} {partnerNickName}
           {dict.PickPhoto.gather_lovely_moments.after}
         </div>
-        <div className="text-lg tracking-[0.32px] leading-[140%] text-gray-600">
+        <div className="text-lg leading-[140%] tracking-[0.32px] text-gray-600">
           {/* 최대 10장을 선택할 수 있어요 */}
           {dict.PickPhoto.select_up_to_10_photos}
         </div>

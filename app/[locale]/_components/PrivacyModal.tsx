@@ -12,19 +12,19 @@ const PrivacyModal = ({
   };
 
   return (
-    <div className="fixed bottom-0 z-50 w-full bg-image rounded-t-3xl">
+    <div className="bg-image fixed bottom-0 z-50 w-full rounded-t-3xl">
       <CloseIcon
         width={36}
         className="absolute right-2.5 top-2.5 z-20 focus:outline-none"
         onClick={handleClose}
       />
-      <div className="relative flex flex-col w-full h-full gap-4 p-6">
-        <span className="text-lg tracking-[0.36px] leading-[150%]">
+      <div className="relative flex h-full w-full flex-col gap-4 p-6">
+        <span className="text-lg leading-[150%] tracking-[0.36px]">
           {/* 개인정보 수집 항목 */}
           {personalDataCollection.title}
         </span>
         <span className="w-full border-b border-gray-200" />
-        <div className="flex flex-col text-sm tracking-[0.28px] leading-[200%] text-gray-500">
+        <div className="flex flex-col text-sm leading-[200%] tracking-[0.28px] text-gray-500">
           <span>
             {/* 수집·이용기관명 : 마푸 */}
             {personalDataCollection.institution}
