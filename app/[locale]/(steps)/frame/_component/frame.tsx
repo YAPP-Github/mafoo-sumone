@@ -78,40 +78,40 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
     canvasRef.current.style.height = canvasSize.height + "px";
 
     setIsLoading(true); // Show loading indicator
+    await new Promise((resolve) => setTimeout(resolve, 10));
     const dataUrls: string[] = [];
 
     // Iterate over all photos
-    // for (let idx = 0; idx < photos.length; idx++) {
-    try {
-      const idx = 0;
-      // Wait for the canvas to be updated with the new image
-      const canvas = await html2canvas(canvasRef.current, {
-        onclone: (el) => {
-          const elementsWithShiftedDownwardText =
-            el.querySelectorAll(".shifted-text");
-          elementsWithShiftedDownwardText.forEach((element) => {
-            const htmlElement = element as HTMLElement;
-            // Adjust styles or do whatever you want here
-            htmlElement.style.transform = "translateY(-40%)";
-          });
-        },
-      });
+    for (let idx = 0; idx < photos.length; idx++) {
+      try {
+        // Wait for the canvas to be updated with the new image
+        const canvas = await html2canvas(canvasRef.current, {
+          onclone: (el) => {
+            const elementsWithShiftedDownwardText =
+              el.querySelectorAll(".shifted-text");
+            elementsWithShiftedDownwardText.forEach((element) => {
+              const htmlElement = element as HTMLElement;
+              // Adjust styles or do whatever you want here
+              htmlElement.style.transform = "translateY(-40%)";
+            });
+          },
+        });
 
-      // Convert the canvas to a data URL (image)
-      const dataUrl = canvas.toDataURL("image/jpeg");
-      dataUrls.push(dataUrl);
+        // Convert the canvas to a data URL (image)
+        const dataUrl = canvas.toDataURL("image/jpeg");
+        dataUrls.push(dataUrl);
 
-      // Create a temporary link to download the image
-      const link = document.createElement("a");
-      link.href = dataUrl;
-      link.download = `canvas_frame.jpeg`;
-      link.click();
-      setImageIdx((prev) => (prev + idx) % photos.length);
-      await new Promise((resolve) => setTimeout(resolve, 10));
-    } catch (error) {
-      console.error("Failed to capture the frame:", error);
+        // Create a temporary link to download the image
+        const link = document.createElement("a");
+        link.href = dataUrl;
+        link.download = `canvas_frame_${idx}.jpeg`;
+        link.click();
+        setImageIdx((prev) => (prev + idx) % photos.length);
+        await new Promise((resolve) => setTimeout(resolve, 10));
+      } catch (error) {
+        console.error("Failed to capture the frame:", error);
+      }
     }
-    // }
     setIsLoading(false);
 
     // Hide the loading indicator after all downloads
@@ -217,20 +217,19 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
     canvasRef.current.style.width = canvasSize.width + "px";
     canvasRef.current.style.height = canvasSize.height + "px";
 
-    setIsLoading(true); // Show loading indicator
+    setIsLoading(true);
+    await new Promise((resolve) => setTimeout(resolve, 10));
     const dataUrls: string[] = [];
 
     // Iterate over all photos
     for (let idx = 0; idx < photos.length; idx++) {
       try {
-        // Wait for the canvas to be updated with the new image
         const canvas = await html2canvas(canvasRef.current, {
           onclone: (el) => {
             const elementsWithShiftedDownwardText =
               el.querySelectorAll(".shifted-text");
             elementsWithShiftedDownwardText.forEach((element) => {
               const htmlElement = element as HTMLElement;
-              // Adjust styles or do whatever you want here
               htmlElement.style.transform = "translateY(-40%)";
             });
           },
@@ -240,11 +239,6 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
         const dataUrl = canvas.toDataURL("image/jpeg");
         dataUrls.push(dataUrl);
 
-        // Create a temporary link to download the image
-        // const link = document.createElement("a");
-        // link.href = dataUrl;
-        // link.download = `canvas_frame_${idx + 1}.jpeg`;
-        // link.click();
         setImageIdx((prev) => (prev + 1) % photos.length);
         await new Promise((resolve) => setTimeout(resolve, 10));
       } catch (error) {
@@ -293,6 +287,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
               setImageIdx={setImageIdx}
               userData={userData}
               dict={dict}
+              isMakingFrame={isLoading}
             />
           )}
         </div>
@@ -326,6 +321,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
               text={dict.make_with_this_frame}
               textClass="text-white text-sm tracking-[0.28px] leading-[150%]"
               onClick={handleSelectFrame}
+              // onClick={handleTestRecap}
             />
           </div>
         </div>

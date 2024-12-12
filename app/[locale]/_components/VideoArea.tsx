@@ -1,20 +1,29 @@
 "use client";
 
 import { useGetScreenSize } from "@/utils/useScreenSize";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const VideoArea = () => {
   const windowSize = useGetScreenSize();
+  const [imgIdx, setImgIdx] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setImgIdx((prev) => (prev + 1) % 10);
+    }, 500);
+    return () => clearInterval(interval);
+  });
 
   return (
     <div className="relative mb-7 flex h-[calc(100%-360px)] w-full">
-      <div className="mx-6 mb-7 flex h-full w-full items-center justify-center">
-        <video
-          src="/_assets/main_video.mp4"
-          autoPlay
-          playsInline
-          loop
-          muted
-          className="flex h-full w-full rounded-lg"
+      <div className="relative mx-6 mb-7 flex h-full w-full items-center justify-center">
+        <Image
+          priority
+          src={`/_assets/mainpage/${imgIdx}.png`}
+          alt={`video image ${imgIdx}`}
+          fill
+          className="w-fit object-contain"
         />
       </div>
       <span
