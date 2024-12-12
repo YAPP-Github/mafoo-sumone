@@ -1,15 +1,17 @@
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const characterSrcs = {
-  1: ["/_assets/character/puppy0.png", "/_assets/character/puppy1.png"],
-  2: ["/_assets/character/penguin0.png", "/_assets/character/penguin1.png"],
-  3: ["/_assets/character/cat0.png", "/_assets/character/cat1.png"],
-  4: ["/_assets/character/panda0.png", "/_assets/character/panda1.png"],
-  5: ["/_assets/character/egg0.png"],
-} as const;
-
-type CharacterFrameType = keyof typeof characterSrcs;
+const characterSrcs = [
+  "/_assets/character/puppy0.png",
+  "/_assets/character/puppy1.png",
+  "/_assets/character/penguin0.png",
+  "/_assets/character/penguin1.png",
+  "/_assets/character/cat0.png",
+  "/_assets/character/cat1.png",
+  "/_assets/character/panda0.png",
+  "/_assets/character/panda1.png",
+  "/_assets/character/egg0.png",
+] as const;
 
 const Character = ({
   frameType,
@@ -22,22 +24,49 @@ const Character = ({
   dict: Record<string, any>;
 }) => {
   const [characterState, setCharacterState] = useState<number>(0);
+  const [isCharacterLoaded, setIsCharacterLoaded] = useState<boolean>(false);
   const loadedCountRef = useRef(9);
-  console.log(loadedCountRef.current);
+
+  const onLoad = () => {
+    loadedCountRef.current--;
+    if (loadedCountRef.current) return;
+    setIsCharacterLoaded(true);
+  };
 
   const handleClickCharacter = () => {
-    if (characterSrcs[frameType as CharacterFrameType].length > 1) {
+    if (frameType !== 5 && isCharacterLoaded) {
       setCharacterState((prev: number) => 1 - prev);
     }
   };
 
-  const characterSrc =
-    characterSrcs[frameType as CharacterFrameType][
-      frameType === 5 ? 0 : characterState
-    ];
+  useEffect(() => {
+    const characterStack = document.getElementById(
+      "character-stack"
+    ) as HTMLDivElement;
+    if (!characterStack) return;
+
+    const characterElements = Array.from(
+      document.querySelectorAll(".character-element")
+    ).reverse() as HTMLImageElement[];
+    characterElements.find((el) => {
+      const id = el.id;
+
+      if (id === `character-${2 * (frameType - 1) + characterState}`) {
+        el.style.opacity = "1";
+        return true;
+      }
+
+      el.remove();
+      el.style.opacity = "0";
+      characterStack.prepend(el);
+
+      return false;
+    });
+  }, [frameType, characterState]);
 
   return (
     <span
+      id="character-stack"
       style={{
         width: (canvasSize.height * 144) / 543 + "px",
         height: (canvasSize.height * 144) / 543 + "px",
@@ -45,12 +74,18 @@ const Character = ({
       className="absolute bottom-0 right-0 z-30 grow-0"
       onClick={handleClickCharacter}
     >
-      <Image
-        priority
-        src={characterSrc}
-        alt="character image"
-        fill
-      />
+      {characterSrcs.map((src, i) => (
+        <Image
+          key={i}
+          id={`character-${i}`}
+          src={src}
+          alt="character image"
+          fill
+          priority
+          className="character-element"
+          onLoad={onLoad}
+        />
+      ))}
       {frameType !== 5 && (
         <span
           style={{ bottom: "40px" }}
