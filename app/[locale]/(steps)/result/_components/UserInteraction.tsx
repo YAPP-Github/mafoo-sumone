@@ -18,7 +18,7 @@ const UserInteraction = ({
 
   const pathName = usePathname();
 
-  console.log(pathName, searchParams.toString());
+  console.log(pathName, "/result", searchParams.toString());
 
   // '나도 부탁하기' 버튼 클릭 시
   const handleAskEvent = () => {

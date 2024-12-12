@@ -29,7 +29,7 @@ const PhotoSelector = ({
 
   const pathName = usePathname();
   const searchParams = useSearchParams();
-  console.log(pathName, searchParams.toString());
+  console.log(pathName, "/pickphoto", searchParams.toString());
 
   // TODO: TMP - Remove this when isLoading logic added
   console.log(isLoading);
@@ -122,6 +122,7 @@ const PhotoSelector = ({
       const photoUrl = await handleSendOriginalPhoto();
       console.log("photoUrl", photoUrl);
       setIsLoading(false);
+      // 미리 이미지, js를 prefetch로 불러오기
       navigation.push(`frame?${OTQ(userData)}`);
     } catch (err) {
       console.error("Failed to upload photos or create album:", err);

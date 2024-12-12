@@ -20,6 +20,16 @@ const ResultPage = async (props: {
   const { top, bottom, recapUrl, nickName, coupleId } =
     await props.searchParams;
 
+  console.log(
+    "/result",
+    lang.locale,
+    top,
+    bottom,
+    nickName,
+    coupleId,
+    recapUrl
+  );
+
   const { userCount } = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/sumone/summary`,
     {

@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import "./globals.css";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import { use } from "react";
 import { Locale } from "@/types/page";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Mafoo-Sumone Recap",
@@ -41,7 +41,6 @@ export default function RootLayout(props: {
     tw: "font-mamelon",
     es: "font-contra",
   };
-  console.log(params.locale, "[locale]");
   return (
     <html lang={params.locale}>
       <body

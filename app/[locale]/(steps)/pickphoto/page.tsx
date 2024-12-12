@@ -24,6 +24,18 @@ const PickPhotoPage = async (props: {
     coupleId,
   } = await props.searchParams;
 
+  console.log(
+    "/pickphoto",
+    lang.locale,
+    top,
+    bottom,
+    nickName,
+    partnerNickName,
+    dDay,
+    isConnected,
+    coupleId
+  );
+
   return (
     <main
       style={{ paddingTop: top + "px" }}

@@ -25,6 +25,17 @@ const FramePage = async (props: {
     coupleId,
   } = await props.searchParams;
 
+  console.log(
+    "/frame",
+    top,
+    bottom,
+    nickName,
+    partnerNickName,
+    dDay,
+    isConnected,
+    coupleId
+  );
+
   return (
     <Frame
       locale={lang.locale}

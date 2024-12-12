@@ -28,6 +28,18 @@ export default async function Home(props: {
     coupleId,
   } = await props.searchParams;
 
+  console.log(
+    "/",
+    lang.locale,
+    top,
+    bottom,
+    nickName,
+    partnerNickName,
+    dDay,
+    isConnected,
+    coupleId
+  );
+
   const { userCount } = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/sumone/summary`,
     {

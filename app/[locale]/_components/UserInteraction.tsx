@@ -53,7 +53,6 @@ const MainPageUserInteraction = ({
   console.log(pathName, searchParams.toString());
 
   useEffect(() => {
-    console.log("modalType:", modalType);
     const mainElement = document.getElementById("mainBg");
 
     if (mainElement) {
