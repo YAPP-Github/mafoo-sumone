@@ -68,7 +68,8 @@ const MainPageUserInteraction = ({
 
   useEffect(() => {
     //[GA] Web_View_Page_01: 페이지 진입 유저 수
-    sendGAEvent("event", "[Web_View_Page_01]: 페이지 진입 유저 수", {
+    sendGAEvent("event", "page_view", {
+      pathName: "Web_View_Page_01",
       locale: pathName.split("/")[1],
     });
   });
@@ -114,7 +115,9 @@ const MainPageUserInteraction = ({
       }
     );
     //[GA] Web_View_Page_01: [나도 부탁하기] 버튼 누른 횟수
-    sendGAEvent("event", "[Web_View_Page_01]: [나도 부탁하기] 버튼 누른 횟수", {
+    sendGAEvent("event", "click", {
+      pathName: "Web_View_Page_01",
+      action: "ask",
       locale: pathName.split("/")[1],
     });
   };

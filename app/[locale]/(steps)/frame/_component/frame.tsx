@@ -40,8 +40,9 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
 
   useEffect(() => {
     // [GA] Web_View_Page_03: 페이지 진입 유저 수
-    sendGAEvent("event", "[Web_View_Page_03]: 페이지 진입 유저 수", {
+    sendGAEvent("event", "page_view", {
       locale: pathName.split("/")[1],
+      pathName: "Web_View_Page_03",
       userName: userData.nickName,
     });
   }, []);

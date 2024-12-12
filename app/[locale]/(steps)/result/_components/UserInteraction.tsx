@@ -23,13 +23,9 @@ const UserInteraction = ({
 
   useEffect(() => {
     // [GA] Web_View_Page_04: 페이지 진입 횟수
-    sendGAEvent("event", "[Web_View_Page_04]: 페이지 진입 횟수", {
+    sendGAEvent("event", "page_view", {
       locale: pathName.split("/")[1],
-    });
-
-    // [GA] Web_View_Page_04: 페이지 진입 유저 수
-    sendGAEvent("event", "[Web_View_Page_04]: 페이지 진입 유저 수", {
-      locale: pathName.split("/")[1],
+      pathName: "Web_View_Page_04",
       userName: userName,
     });
   }, []);
@@ -55,18 +51,11 @@ const UserInteraction = ({
       );
     }
     // [GA] Web_View_Page_04: [나도 부탁하기] 버튼 누른 유저 수
-    sendGAEvent(
-      "event",
-      "[Web_View_Page_04]: [나도 부탁하기] 버튼 누른 유저 수",
-      {
-        locale: pathName.split("/")[1],
-        userName: userName,
-      }
-    );
-
-    // [GA] Web_View_Page_04: [나도 부탁하기] 버튼 누른 횟수
-    sendGAEvent("event", "[나도 부탁하기] 버튼 누른 횟수", {
+    sendGAEvent("event", "click", {
       locale: pathName.split("/")[1],
+      pathName: "Web_View_Page_04",
+      share: "ask_result",
+      userName: userName,
     });
   };
 
@@ -89,14 +78,12 @@ const UserInteraction = ({
       );
     }
     // [GA] Web_View_Page_04: [우리 1년 SNS에 자랑하기] 버튼 누른 유저 수
-    sendGAEvent(
-      "event",
-      "[Web_View_Page_04]: [우리 1년 SNS에 자랑하기] 버튼 누른 유저 수",
-      {
-        locale: pathName.split("/")[1],
-        userName: userName,
-      }
-    );
+    sendGAEvent("event", "click", {
+      locale: pathName.split("/")[1],
+      pathName: "Web_View_Page_04",
+      action: "share",
+      userName: userName,
+    });
 
     // [GA] Web_View_Page_04: [우리 1년 SNS에 자랑하기] 버튼 누른 횟수
     sendGAEvent("event", "[우리 1년 SNS에 자랑하기] 버튼 누른 횟수", {

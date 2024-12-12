@@ -37,8 +37,9 @@ const PhotoSelector = ({
 
   useEffect(() => {
     // [GA] Web_View_Page_02: 페이지 진입 유저 수
-    sendGAEvent("event", "[Web_View_Page_02]: 페이지 진입 유저 수", {
+    sendGAEvent("event", "page_view", {
       locale: pathName.split("/")[1],
+      pathName: "Web_View_Page_02",
       userName: userData.nickName,
     });
   }, []);
