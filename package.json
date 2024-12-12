@@ -17,6 +17,7 @@
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
     "react-responsive-masonry": "^2.6.0",
+    "react-spinners": "^0.15.0",
     "zustand": "^5.0.1"
   },
   "devDependencies": {
