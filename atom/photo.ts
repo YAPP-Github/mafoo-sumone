@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface PhotoStore {
+export interface PhotoStore {
   photos: File[];
   setPhotos: (photos: File[]) => void;
   getSinglePhoto: () => File | null;
