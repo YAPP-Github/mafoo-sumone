@@ -1,15 +1,19 @@
 "use client";
 
 import SumoneButton from "@/assets/SumoneButton";
+import { sendGAEvent } from "@next/third-parties/google";
 import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 const UserInteraction = ({
   dict,
   shareText,
+  userName,
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dict: Record<string, any>;
   shareText: string;
+  userName: string;
 }) => {
   const searchParams = useSearchParams();
 
@@ -17,6 +21,20 @@ const UserInteraction = ({
 
   console.log(pathName, searchParams.toString());
 
+  useEffect(() => {
+    // [GA] Web_View_Page_04: 페이지 진입 횟수
+    sendGAEvent("event", "[Web_View_Page_04]: 페이지 진입 횟수", {
+      locale: pathName.split("/")[1],
+    });
+
+    // [GA] Web_View_Page_04: 페이지 진입 유저 수
+    sendGAEvent("event", "[Web_View_Page_04]: 페이지 진입 유저 수", {
+      locale: pathName.split("/")[1],
+      userName: userName,
+    });
+  }, []);
+
+  // '나도 부탁하기' 버튼 클릭 시
   const handleAskEvent = () => {
     console.log("ask event", {
       type: "RESULT_ASK",
@@ -36,7 +54,23 @@ const UserInteraction = ({
         })
       );
     }
+    // [GA] Web_View_Page_04: [나도 부탁하기] 버튼 누른 유저 수
+    sendGAEvent(
+      "event",
+      "[Web_View_Page_04]: [나도 부탁하기] 버튼 누른 유저 수",
+      {
+        locale: pathName.split("/")[1],
+        userName: userName,
+      }
+    );
+
+    // [GA] Web_View_Page_04: [나도 부탁하기] 버튼 누른 횟수
+    sendGAEvent("event", "[나도 부탁하기] 버튼 누른 횟수", {
+      locale: pathName.split("/")[1],
+    });
   };
+
+  // '우리 1년 SNS에 자랑하기' 버튼 클릭 시
   const handleShareEvent = () => {
     console.log("share event", {
       type: "RESULT_SHARE",
@@ -54,6 +88,20 @@ const UserInteraction = ({
         })
       );
     }
+    // [GA] Web_View_Page_04: [우리 1년 SNS에 자랑하기] 버튼 누른 유저 수
+    sendGAEvent(
+      "event",
+      "[Web_View_Page_04]: [우리 1년 SNS에 자랑하기] 버튼 누른 유저 수",
+      {
+        locale: pathName.split("/")[1],
+        userName: userName,
+      }
+    );
+
+    // [GA] Web_View_Page_04: [우리 1년 SNS에 자랑하기] 버튼 누른 횟수
+    sendGAEvent("event", "[우리 1년 SNS에 자랑하기] 버튼 누른 횟수", {
+      locale: pathName.split("/")[1],
+    });
   };
   return (
     <div className="flex items-center w-full h-[108px] flex-grow-0 flex-shrink-0 my-3">

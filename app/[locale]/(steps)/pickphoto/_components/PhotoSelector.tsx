@@ -9,7 +9,8 @@ import { ObjectedParams } from "@/types/user";
 import { useObjectToQueryString } from "@/utils/useQueryString";
 import Masonry from "react-responsive-masonry";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { sendGAEvent } from "@next/third-parties/google";
 
 const PhotoSelector = ({
   userData,
@@ -31,7 +32,16 @@ const PhotoSelector = ({
   const searchParams = useSearchParams();
   console.log(pathName, searchParams.toString());
 
+  // TODO: TMP - Remove this when isLoading logic added
   console.log(isLoading);
+
+  useEffect(() => {
+    // [GA] Web_View_Page_02: 페이지 진입 유저 수
+    sendGAEvent("event", "[Web_View_Page_02]: 페이지 진입 유저 수", {
+      locale: pathName.split("/")[1],
+      userName: userData.nickName,
+    });
+  }, []);
 
   const handleSelectPhotos = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;

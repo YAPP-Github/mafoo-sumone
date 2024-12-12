@@ -17,7 +17,8 @@ const ResultPage = async (props: {
   if (!dict) {
     return null;
   }
-  const { top, bottom, recapUrl, coupleId } = await props.searchParams;
+  const { top, bottom, recapUrl, nickName, coupleId } =
+    await props.searchParams;
 
   const { userCount } = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/sumone/summary`,
@@ -104,6 +105,7 @@ const ResultPage = async (props: {
       <UserInteraction
         dict={dict.Result}
         shareText={dict.Share}
+        userName={nickName}
       />
     </main>
   );
