@@ -224,9 +224,9 @@ const MainPageUserInteraction = ({
           )}
           <Link
             href="https://chisel-promise-9ff.notion.site/FAQ-f366f55df31b49ef96e7db35c73b8921?pvs=4"
-            className="bg-[rgba(255, 255, 255, 0.70)] flex items-center justify-center rounded-lg border border-white px-2 py-1.5 text-base text-brown backdrop-blur-xl"
+            className="bg-[rgba(255, 255, 255, 0.70)] flex items-center justify-center rounded-lg border border-white px-6 py-1.5 text-base text-brown backdrop-blur-xl"
           >
-            이벤트 FAQ
+            FAQ
           </Link>
         </span>
         <div
