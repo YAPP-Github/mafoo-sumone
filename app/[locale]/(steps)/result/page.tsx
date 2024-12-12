@@ -91,9 +91,10 @@ const ResultPage = async (props: {
             loop
             playsInline
             muted
+            className="rounded-2xl"
             style={{
               objectFit: "contain",
-              width: "100%",
+              width: "fit-content",
               height: "100%",
             }}
           />
