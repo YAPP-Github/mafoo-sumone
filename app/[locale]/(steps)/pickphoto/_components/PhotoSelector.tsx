@@ -8,7 +8,7 @@ import Masonry from "react-responsive-masonry";
 import Image from "next/image";
 import { useObjectToQueryString } from "@/utils/useQueryString";
 import { usePhotoStore } from "@/atom/photo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const PhotoSelector = ({
   userData,
@@ -32,6 +32,10 @@ const PhotoSelector = ({
 
   // TODO: TMP - Remove this when isLoading logic added
   console.log(isLoading);
+
+  useEffect(() => {
+    setPhotos([]);
+  }, []);
 
   const handleSelectPhotos = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
