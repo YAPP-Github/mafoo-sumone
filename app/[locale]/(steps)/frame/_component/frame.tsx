@@ -11,7 +11,6 @@ import { usePhotoStore } from "@/atom/photo";
 import SumoneButton from "@/assets/SumoneButton";
 import { getPresignedUrls } from "../../api";
 import { ObjectedParams } from "@/types/user";
-import { sendGAEvent } from "@next/third-parties/google";
 
 interface FrameProps {
   locale: string;
@@ -37,15 +36,6 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
       navigation.push(`pickphoto?${searchParams.toString()}`);
     }
   }, [photos, navigation]);
-
-  useEffect(() => {
-    // [GA] Web_View_Page_03: 페이지 진입 유저 수
-    sendGAEvent("event", "page_view", {
-      locale: pathName.split("/")[1],
-      pathName: "Web_View_Page_03",
-      userName: userData.nickName,
-    });
-  }, []);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 

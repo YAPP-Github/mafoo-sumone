@@ -66,14 +66,6 @@ const MainPageUserInteraction = ({
     }
   }, [modalType]);
 
-  useEffect(() => {
-    //[GA] Web_View_Page_01: 페이지 진입 유저 수
-    sendGAEvent("event", "page_view", {
-      pathName: "Web_View_Page_01",
-      locale: pathName.split("/")[1],
-    });
-  }, []);
-
   const handleOpenPrivacyModal = () => {
     setModalType("privacy");
   };

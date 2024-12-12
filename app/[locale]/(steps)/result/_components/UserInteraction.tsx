@@ -3,7 +3,6 @@
 import SumoneButton from "@/assets/SumoneButton";
 import { sendGAEvent } from "@next/third-parties/google";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 
 const UserInteraction = ({
   dict,
@@ -20,15 +19,6 @@ const UserInteraction = ({
   const pathName = usePathname();
 
   console.log(pathName, searchParams.toString());
-
-  useEffect(() => {
-    // [GA] Web_View_Page_04: 페이지 진입 횟수
-    sendGAEvent("event", "page_view", {
-      locale: pathName.split("/")[1],
-      pathName: "Web_View_Page_04",
-      userName: userName,
-    });
-  }, []);
 
   // '나도 부탁하기' 버튼 클릭 시
   const handleAskEvent = () => {
