@@ -46,17 +46,17 @@ const CanvasPrepData = [
 
 const frameSrcs = [
   // Local 1x
-  // "/_assets/frame/puppy.png",
-  // "/_assets/frame/penguin.png",
-  // "/_assets/frame/cat.png",
-  // "/_assets/frame/panda.png",
-  // "/_assets/frame/egg.png",
+  "/_assets/frame/puppy.png",
+  "/_assets/frame/penguin.png",
+  "/_assets/frame/cat.png",
+  "/_assets/frame/panda.png",
+  "/_assets/frame/egg.png",
   // CDN 1x
-  "https://mafoo-sumone-event.imgix.net/_assets/frame/puppy.png",
-  "https://mafoo-sumone-event.imgix.net/_assets/frame/penguin.png",
-  "https://mafoo-sumone-event.imgix.net/_assets/frame/cat.png",
-  "https://mafoo-sumone-event.imgix.net/_assets/frame/panda.png",
-  "https://mafoo-sumone-event.imgix.net/_assets/frame/egg.png",
+  // "https://mafoo-sumone-event.imgix.net/_assets/frame/puppy.png",
+  // "https://mafoo-sumone-event.imgix.net/_assets/frame/penguin.png",
+  // "https://mafoo-sumone-event.imgix.net/_assets/frame/cat.png",
+  // "https://mafoo-sumone-event.imgix.net/_assets/frame/panda.png",
+  // "https://mafoo-sumone-event.imgix.net/_assets/frame/egg.png",
   // Local 3x
   // "/_assets/frame/3x/Frame.png",
   // "/_assets/frame/3x/Frame-1.png",
@@ -79,6 +79,7 @@ interface CanvasProps {
   setImageIdx: Dispatch<SetStateAction<number>>;
   userData: ObjectedParams;
   dict: Record<string, any>;
+  isMakingFrame: boolean;
 }
 
 const Canvas = ({
@@ -89,6 +90,7 @@ const Canvas = ({
   setImageIdx,
   userData,
   dict,
+  isMakingFrame,
 }: CanvasProps) => {
   const { mainColor, subColor } = CanvasPrepData[frameType - 1];
   const [isFrameStackLoaded, setIsFrameStackLoaded] = useState(false);
@@ -114,6 +116,7 @@ const Canvas = ({
         frameType={frameType}
         handleClickBackground={handleClickBackground}
         onFrameStackLoad={onFrameStackLoad}
+        isMakingFrame={isMakingFrame}
       />
       {/* 상단 Title */}
       <div className="absolute top-0 flex h-full w-full flex-col items-center gap-4 pt-4">
@@ -206,10 +209,12 @@ const FrameStack = memo(function ({
   frameType,
   handleClickBackground,
   onFrameStackLoad,
+  isMakingFrame,
 }: {
   frameType: number;
   handleClickBackground: () => void;
   onFrameStackLoad: () => void;
+  isMakingFrame: boolean;
 }) {
   const loadedCountRef = useRef(frameSrcs.length);
 
@@ -254,7 +259,7 @@ const FrameStack = memo(function ({
           priority
           alt="frame"
           fill
-          className="frame-element absolute top-0 z-20 h-full w-full object-contain bg-blend-overlay"
+          className={`frame-element absolute top-0 z-20 h-full w-full object-contain bg-blend-overlay ${isMakingFrame ? "" : "rounded-2xl"}`}
           onClick={handleClickBackground}
           onLoad={onLoad}
         />
