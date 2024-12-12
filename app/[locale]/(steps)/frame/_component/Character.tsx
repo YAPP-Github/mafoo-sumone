@@ -51,6 +51,11 @@ const Character = ({
     characterElements.find((el) => {
       const id = el.id;
 
+      if (id === `character-8` && frameType === 5) {
+        el.style.opacity = "1";
+        return true;
+      }
+
       if (id === `character-${2 * (frameType - 1) + characterState}`) {
         el.style.opacity = "1";
         return true;
@@ -89,7 +94,7 @@ const Character = ({
       {frameType !== 5 && (
         <span
           style={{ bottom: "40px" }}
-          className="relative left-1/2 z-30 flex w-fit -translate-x-1/3 transform"
+          className="relative left-1/2 z-30 flex w-fit translate-x-[-40%] transform"
           data-html2canvas-ignore="true"
         >
           <div className="z-20 w-fit whitespace-pre rounded-lg bg-white px-3 py-2.5 text-xs leading-[150%] tracking-[0.24px] shadow-sm">
