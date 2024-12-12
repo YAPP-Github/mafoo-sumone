@@ -25,9 +25,6 @@ export default function RootLayout(props: {
 
   if (!params.locale) {
     console.log(params, "here");
-    redirect(
-      "https://mafoo.kr/en?top=10&bottom=10&nickName=test&partnerNickName=partner&dDay=234&isConnected=true&coupleId=test123"
-    );
   }
 
   console.log(params);
