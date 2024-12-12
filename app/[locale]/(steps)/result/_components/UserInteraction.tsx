@@ -54,7 +54,7 @@ const UserInteraction = ({
     sendGAEvent("event", "click", {
       locale: pathName.split("/")[1],
       pathName: "Web_View_Page_04",
-      share: "ask_result",
+      action: "ask_result",
       userName: userName,
     });
   };
