@@ -109,9 +109,7 @@ const Canvas = ({
   const topIndex = (canvasSize.height * 110) / 543;
 
   return (
-    <div
-      className={`relative flex h-full w-full flex-col items-center rounded-2xl p-4`}
-    >
+    <div className={`relative flex h-full w-full flex-col items-center p-4`}>
       <FrameStack
         frameType={frameType}
         handleClickBackground={handleClickBackground}
@@ -183,7 +181,6 @@ const Canvas = ({
         <Character
           frameType={frameType}
           canvasSize={canvasSize}
-          isAbleToChangeCharacter={frameType !== 5}
           dict={dict}
         />
         <span

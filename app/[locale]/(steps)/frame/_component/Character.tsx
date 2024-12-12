@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const characterSrcs = {
   1: ["/_assets/character/puppy0.png", "/_assets/character/puppy1.png"],
@@ -13,26 +13,26 @@ type CharacterFrameType = keyof typeof characterSrcs;
 
 const Character = ({
   frameType,
-  isAbleToChangeCharacter,
   canvasSize,
   dict,
 }: {
   frameType: number;
-  isAbleToChangeCharacter?: boolean;
   canvasSize: { width: number; height: number };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dict: Record<string, any>;
 }) => {
   const [characterState, setCharacterState] = useState<number>(0);
+  const loadedCountRef = useRef(9);
+  console.log(loadedCountRef.current);
 
   const handleClickCharacter = () => {
-    if (characterSrcs[frameType as CharacterFrameType].length > 1) {
-      setCharacterState((prev: number) => 1 - prev);
-    }
+    setCharacterState((prev: number) => 1 - prev);
   };
 
   const characterSrc =
-    characterSrcs[frameType as CharacterFrameType][characterState];
+    characterSrcs[frameType as CharacterFrameType][
+      frameType === 5 ? 0 : characterState
+    ];
 
   return (
     <span
@@ -44,14 +44,14 @@ const Character = ({
       onClick={handleClickCharacter}
     >
       <Image
+        priority
         src={characterSrc}
         alt="character image"
-        width={(canvasSize.height * 144) / 543}
-        height={(canvasSize.height * 144) / 543}
+        fill
       />
-      {isAbleToChangeCharacter && (
+      {frameType !== 5 && (
         <span
-          style={{ bottom: (canvasSize.height * 144) / 543 + 40 + "px" }}
+          style={{ bottom: "40px" }}
           className="relative left-1/2 z-30 flex w-fit -translate-x-1/3 transform"
           data-html2canvas-ignore="true"
         >
