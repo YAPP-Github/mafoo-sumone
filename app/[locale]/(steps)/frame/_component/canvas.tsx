@@ -5,7 +5,7 @@ import DayHeartIcon from "@/assets/DayHeartIcon";
 import MafooLogo from "@/assets/MafooLogo";
 import { ObjectedParams } from "@/types/user";
 import Image from "next/image";
-import { Dispatch, SetStateAction, memo } from "react";
+import { Dispatch, memo, SetStateAction, useMemo } from "react";
 import Character from "./Character";
 import SumoneLogo from "@/assets/SumoneLogo";
 // import TitleSvg from "@/app/assets/Logo";
@@ -66,6 +66,10 @@ const Canvas = ({
 }: CanvasProps) => {
   const { frameSrc, character, mainColor, subColor } =
     CanvasPrepData[frameType - 1];
+
+  const photoSrc = useMemo(() => {
+    return URL.createObjectURL(images[imageIdx]);
+  }, [images, imageIdx]);
 
   const handleClickBackground = () => {
     setImageIdx((prev) => (prev + 1) % images.length);
@@ -134,7 +138,7 @@ const Canvas = ({
           >
             <Image
               id="targetImage"
-              src={URL.createObjectURL(images[imageIdx])}
+              src={photoSrc}
               alt="image"
               width={(canvasSize.height * 240) / 543}
               height={(canvasSize.height * 354) / 543}
