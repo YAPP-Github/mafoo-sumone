@@ -72,7 +72,7 @@ const MainPageUserInteraction = ({
       pathName: "Web_View_Page_01",
       locale: pathName.split("/")[1],
     });
-  });
+  }, []);
 
   const handleOpenPrivacyModal = () => {
     setModalType("privacy");
