@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { redirect } from "next/navigation";
 import { use } from "react";
 
 export const metadata: Metadata = {
