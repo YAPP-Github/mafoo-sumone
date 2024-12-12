@@ -15,10 +15,19 @@ import Link from "next/link";
 import CheckCircleIcon from "@/assets/CheckCircleIcon";
 import RegisterCode from "@/components/RegisterCode";
 import CloseTransparentIcon from "@/assets/CloseTrasparentIcon";
+import { Locale } from "@/types/page";
+
+const FAQ_URL = {
+  ko: "https://chisel-promise-9ff.notion.site/2024-FAQ-KR-153385a9a75b80acabeffd1b81648b71?pvs=4",
+  tw: "https://chisel-promise-9ff.notion.site/2024-FAQ-TW-153385a9a75b8082b64ac8b475066eb8?pvs=4",
+  en: "https://chisel-promise-9ff.notion.site/2024-Year-End-Event-FAQ-EN-153385a9a75b8028b0cdfcc7d04ebcbf?pvs=4",
+  es: "https://chisel-promise-9ff.notion.site/Preguntas-Frecuentes-del-Evento-de-Fin-de-A-o-2024-SP-153385a9a75b801386e7d8cf9cf3e47a?pvs=4",
+  ja: "https://chisel-promise-9ff.notion.site/2024-FAQ-JP-153385a9a75b805daba5d750d7e7e3f7?pvs=4",
+};
 
 interface MPUIProps {
   code?: string;
-  locale: string;
+  locale: Locale;
   userData: ObjectedParams;
   personal_data_agreement: string;
   view_details: string;
@@ -74,8 +83,15 @@ const MainPageUserInteraction = ({
   };
 
   const handleCopyToClipboard = (code: string) => {
-    if (typeof window !== "undefined") {
-      navigator.clipboard.writeText(code);
+    if (typeof window !== "undefined" && window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({
+          type: "COPY",
+          message: {
+            text: code,
+          },
+        })
+      );
       setShowClipboardModal(true);
 
       setTimeout(() => {
@@ -211,7 +227,7 @@ const MainPageUserInteraction = ({
       <div
         className="fixed flex w-full flex-row items-center justify-between px-6"
         style={{
-          top: Number(32) + Number(userData.top) + "px",
+          top: Number(24) + Number(userData.top) + "px",
         }}
       >
         {/* TODO: FAQ 문서 링크 변경 */}
@@ -223,7 +239,7 @@ const MainPageUserInteraction = ({
             />
           )}
           <Link
-            href="https://chisel-promise-9ff.notion.site/FAQ-f366f55df31b49ef96e7db35c73b8921?pvs=4"
+            href={FAQ_URL[locale]}
             className="bg-[rgba(255, 255, 255, 0.70)] flex items-center justify-center rounded-lg border border-white px-6 py-1.5 text-base text-brown backdrop-blur-xl"
           >
             FAQ

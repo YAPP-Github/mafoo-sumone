@@ -8,7 +8,15 @@ import { useState } from "react";
 const MovieInteraction = ({ code }: { code: string }) => {
   const [showClipboardModal, setShowClipboardModal] = useState<boolean>(false);
   const handleCopyToClipboard = (code: string) => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({
+          type: "COPY",
+          message: {
+            text: code,
+          },
+        })
+      );
       navigator.clipboard.writeText(code);
       setShowClipboardModal(true);
 
