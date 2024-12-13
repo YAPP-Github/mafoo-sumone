@@ -4,12 +4,12 @@
     "description": "",
     "couples_count": {
       "before": "已經有",
-      "after": "{{1,565}}對情侶製作了回顧！"
+      "after": "對情侶製作了回顧！"
     },
     "personal_data_agreement": "同意收集個人資料",
     "view_details": "查看詳細內容",
     "ask_for_mine": "我也來請求",
-    "agree_and_get_recap": "同意並立即查看回顧"
+    "agree_and_get_recap": "同意並開始"
   },
   "personalDataCollection": {
     "title": "收集的個人資料",
@@ -47,7 +47,7 @@
       "after": "天紀念"
     },
     "full_of_love": {
-      "before": "正在製作回顧，滿滿的愛送予",
+      "before": "正在製作回顧,\n滿滿的愛送予",
       "after": "!"
     }
   },

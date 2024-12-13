@@ -76,27 +76,27 @@ const UserInteraction = ({
     });
   };
   return (
-    <div className="my-3 flex h-[108px] w-full flex-shrink-0 flex-grow-0 items-center">
-      <div className="mx-6 flex h-full w-full flex-col gap-3">
+    <div className="bm-8 flex h-[108px] w-full flex-shrink-0 flex-grow-0 items-center">
+      <div className="mx-6 flex h-full w-full flex-col gap-1">
         <SumoneButton
           width="100%"
-          height={48}
+          height={50}
           fill="#c5b698"
           // text={`${searchParams.get("partnerNickName")}에게도 부탁하기`}
           text={`${dict.ask_for_partner.before}${searchParams.get(
             "partnerNickName"
           )}${dict.ask_for_partner.after}`}
-          textClass="text-white text-sm tracking-[0.24px] leading-[150%]"
+          textClass="text-white text-m tracking-[0.24px] leading-[150%]"
           onClick={handleAskEvent}
         />
 
         <SumoneButton
           width="100%"
-          height={48}
+          height={50}
           fill="#ff9092"
           // text="우리 1년 SNS에 자랑하기"
           text={dict.show_off_on_sns}
-          textClass="text-white text-sm tracking-[0.24px] leading-[150%]"
+          textClass="text-white text-m tracking-[0.24px] leading-[150%]"
           onClick={handleShareEvent}
         />
       </div>

@@ -94,12 +94,12 @@ const Character = ({
       {frameType !== 5 && (
         <span
           style={{ bottom: "40px" }}
-          className="relative left-1/2 z-30 flex w-fit translate-x-[-40%] transform"
+          className="relative left-1/2 z-30 flex w-fit translate-x-[-50%] transform"
           data-html2canvas-ignore="true"
         >
           <div className="z-20 w-fit whitespace-pre rounded-lg bg-white px-3 py-2.5 text-xs leading-[150%] tracking-[0.24px] shadow-sm">
             {dict.change_pose}
-            <span className="absolute -bottom-2 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 rounded-sm bg-white" />
+            <span className="absolute -bottom-1 left-2/3 h-4 w-4 -translate-x-1/2 rotate-45 rounded-sm bg-white" />
           </div>
         </span>
       )}
