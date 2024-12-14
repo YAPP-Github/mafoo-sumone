@@ -49,7 +49,13 @@ export default async function Home(props: {
       },
       cache: "no-cache",
     }
-  ).then((res) => res.json());
+  )
+    .then((res) => res.json())
+    .catch(() => {
+      return {
+        userCount: -1,
+      };
+    });
 
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/sumone/invite-code?userId=${coupleId}`,
@@ -67,7 +73,7 @@ export default async function Home(props: {
       return { code: null };
     });
 
-  return (
+  return userCount > 0 ? (
     <main
       id="mainBg"
       style={{ paddingTop: top + "px", paddingBottom: bottom + "px" }}
@@ -126,5 +132,7 @@ export default async function Home(props: {
         ShareText={dict.Share}
       />
     </main>
+  ) : (
+    <main>Error</main>
   );
 }
