@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "netstat": "netstat -tlnp",
+    "start:ec2": "nohup npm run start 1>output.log 2>error.log & disown -h"
   },
   "dependencies": {
     "@next/third-parties": "^15.0.3",
