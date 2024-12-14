@@ -16,7 +16,7 @@ import CheckCircleIcon from "@/assets/CheckCircleIcon";
 import RegisterCode from "@/components/RegisterCode";
 import { Locale } from "@/types/page";
 import Image from "next/image";
-import CloseIconSrc from "@/assets/SumoneCloseIcon.png";
+import CloseIconSrc from "@/assets/SumoneCloseIconBlack.png";
 
 const FAQ_URL = {
   ko: "https://chisel-promise-9ff.notion.site/2024-FAQ-KR-153385a9a75b80acabeffd1b81648b71?pvs=4",
@@ -228,7 +228,6 @@ const MainPageUserInteraction = ({
           top: Number(24) + Number(userData.top) + "px",
         }}
       >
-        {/* TODO: FAQ 문서 링크 변경 */}
         <span className="flex flex-row gap-3">
           {locale === "ko" && code && (
             <RegisterCode
@@ -238,16 +237,16 @@ const MainPageUserInteraction = ({
           )}
           <Link
             href={FAQ_URL[locale]}
-            className="bg-[rgba(255, 255, 255, 0.70)] flex items-center justify-center rounded-lg border border-white px-6 py-1.5 text-sm text-brown backdrop-blur-xl"
+            className="flex h-7 w-7 items-center justify-center rounded-lg"
           >
-            FAQ
+            <span className="sprite faq" />
           </Link>
         </span>
         <div
           role="button"
           tabIndex={0}
           onClick={handleClose}
-          className="bg-[rgba(255, 255, 255, 0.70)] flex h-11 w-11 items-center justify-center rounded-full border border-white backdrop-blur-xl"
+          className="flex h-8 w-8 items-center justify-center rounded-full"
         >
           <Image
             src={CloseIconSrc}

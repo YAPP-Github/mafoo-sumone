@@ -1,9 +1,9 @@
 "use client";
 
-import Chevron from "@/assets/Chevron";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import CloseIconSrc from "@/assets/SumoneCloseIconBlack.png";
+import PrevIconSrc from "@/assets/SumonePrevIcon.png";
 
 interface HeaderProps {
   titleComponent: React.ReactElement;
@@ -17,28 +17,36 @@ const Header = ({
   displayCloseIcon = false,
 }: HeaderProps) => {
   const router = useRouter();
-  const pathName = usePathname();
-  const searchParams = useSearchParams();
   const handleClickPrev = () => {
     router.back();
   };
 
-  const handleNavigateToHome = () => {
-    router.push(`/${pathName.split("/")[1]}?${searchParams.toString()}`);
+  const handleClickCloseIcon = () => {
+    if (typeof window !== "undefined" && window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(JSON.stringify({ type: "CLOSE" }));
+    }
   };
 
   return (
     <header className="relative flex h-14 w-full items-center justify-center px-4 py-3.5">
-      <Chevron
+      {/* <Chevron
         width={28}
         direction="left"
         onClick={onClickPrev ?? handleClickPrev}
         className="absolute left-4 focus:outline-none"
+      /> */}
+      <Image
+        src={PrevIconSrc}
+        width={28}
+        height={28}
+        alt="prevIcon"
+        className="absolute left-4 focus:outline-none"
+        onClick={onClickPrev ?? handleClickPrev}
       />
       {titleComponent}
       {displayCloseIcon && (
         <div
-          onClick={handleNavigateToHome}
+          onClick={handleClickCloseIcon}
           className="absolute right-4 focus:outline-none"
         >
           <Image
