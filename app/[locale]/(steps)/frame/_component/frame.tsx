@@ -27,7 +27,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
   const { photos } = usePhotoStore();
   const canvasRef = useRef<HTMLDivElement>(null);
   const [imageIdx, setImageIdx] = useState(0);
-  const [isTesting, setIsTesting] = useState(false);
+  // const [isTesting, setIsTesting] = useState(false);
 
   const [
     isUploadPhotosAndCreateAlbumLoading,
@@ -73,6 +73,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  /*
   const handleTestRecap = async () => {
     if (!canvasRef.current || !canvasSize.width) return;
 
@@ -124,6 +125,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
 
     // Hide the loading indicator after all downloads
   };
+  */
 
   const getAlbumIdFromCookie = () => {
     const albumIdCookie = document.cookie
@@ -274,7 +276,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
         paddingBottom: userData.bottom + "px",
       }}
     >
-      {isTesting ? (
+      {/* {isTesting ? (
         <div
           onClick={() => setIsTesting(false)}
           className="absolute left-20 top-10 z-50"
@@ -288,7 +290,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
         >
           Prod
         </div>
-      )}
+      )} */}
       <Header
         titleComponent={
           <div className="flex flex-row items-center gap-1 text-lg leading-[140%] tracking-[0.36px]">
@@ -347,7 +349,8 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
               // text="이 프레임으로 만들게요"
               text={dict.make_with_this_frame}
               textClass="text-white text-base tracking-[0.28px] leading-[150%]"
-              onClick={isTesting ? handleTestRecap : handleSelectFrame}
+              // onClick={isTesting ? handleTestRecap : handleSelectFrame}
+              onClick={handleSelectFrame}
               isLoading={isUploadPhotosAndCreateAlbumLoading}
             />
           </div>
