@@ -273,7 +273,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
           navigation.push(`pickphoto?${searchParams.toString()}`)
         }
       />
-      <div className="flex h-full w-full flex-col items-center justify-center gap-6">
+      <div className="flex h-full w-full flex-col items-center justify-center gap-10 mt-8">
         {/* Canvas Component Wrapper */}
         <div
           ref={canvasRef}
@@ -316,11 +316,11 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
           <div className="flex w-full">
             <SumoneButton
               width="100%"
-              height={48}
+              height={54}
               fill={"#ff9092"}
               // text="이 프레임으로 만들게요"
               text={dict.make_with_this_frame}
-              textClass="text-white text-sm tracking-[0.28px] leading-[150%]"
+              textClass="text-white text-m tracking-[0.28px] leading-[150%]"
               onClick={handleSelectFrame}
               isLoading={isUploadPhotosAndCreateAlbumLoading}
             />
@@ -330,7 +330,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
       {isLoading && (
         <div className="bg-image fixed z-50 mx-6 flex h-[500px] w-[calc(100%-48px)] flex-col">
           <div className="flex h-full w-full flex-col gap-2.5 pb-14 pt-12">
-            <div className="flex flex-col items-center gap-7 pb-12">
+            <div className="flex flex-col items-center gap-5 pb-12">
               <HeartIcon width={28} />
               {locale === "ko" && (
                 <span className="text-center text-lg leading-[160%] tracking-[0.36px] text-gray-800">
@@ -341,7 +341,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
               )}
               <span className="whitespace-pre text-center text-sm leading-[150%] tracking-[0.28px] text-gray-600">
                 {/* {userData.partnerNickName}님을 사랑하는 마음을 */}
-                {dict.full_of_love.before} {userData.partnerNickName}{" "}
+                {dict.full_of_love.before} {userData.partnerNickName}
                 {dict.full_of_love.after}
               </span>
             </div>

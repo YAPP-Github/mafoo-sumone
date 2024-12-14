@@ -57,12 +57,13 @@ const PhotoSelector = ({
 
   return (
     <div
-      className={`flex w-full flex-1 gap-2 overflow-y-scroll rounded-t-3xl border border-b-0 border-gray-200 bg-white p-6`}
+      className={`flex w-full flex-1 gap-2 overflow-y-scroll rounded-t-3xl border border-b-0 border-gray-200 bg-white `}
     >
       <Masonry
         key={photos.length}
         columnsCount={2}
-        gutter="4px"
+        gutter="8px"
+        className="px-6 py-6"
       >
         <>
           <input
@@ -95,50 +96,55 @@ const PhotoSelector = ({
             />
           </div>
         ))}
+        <div className="flex h-48 w-full" style={{ background:'white'}}/>
       </Masonry>
-
       {/* <div className="flex flex-col items-start w-1/2 gap-1">
         <span className="w-full h-16 shrink-0" />
       </div> */}
       {photos.length < 1 ? (
         <div
-          className="fixed flex h-12 w-[calc(100%-48px)]"
+          className="fixed bottom-0 flex h-12 w-full items-center justify-center"
           style={{
+            background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, #FFF 100%)',
             bottom: 8 + Number(userData.bottom) + "px",
           }}
         >
+          <div className="fixed bottom-0 flex h-12 w-full" style={{ background:'white'}}/>
           <SumoneButton
-            width="100%"
-            height={48}
+            width="calc(100% - 12px)"
+            height={54}
             fill="#CBD0D6"
             // text="최소 1장의 사진을 골라주세요"
             text={select_at_least_one_photo}
-            textClass="text-white text-sm tracking-[0.28px] leading-[150%]"
+            textClass="text-white text-m tracking-[0.28px] leading-[150%]"
           />
         </div>
       ) : (
         <div
-          className="fixed bottom-0 flex w-[calc(100%-48px)] flex-col items-center"
+          className="fixed bottom-0 flex w-full h-20.1 flex-col items-center justify-center"
           style={{
+            background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, #FFF 48.53%)',
             bottom: 8 + Number(userData.bottom) + "px",
           }}
         >
-          <div className="relative z-20 w-fit -translate-y-4 rounded-lg bg-white px-3 py-2.5 shadow-md">
+          <div className="relative z-20 w-fit -translate-y-5 rounded-lg bg-white px-3 py-2.5 shadow-md text-sm">
             {/* 추억을 🎞영상으로 만들 수 있어요! */}
             {video_makeable}
-            <span className="absolute -bottom-2 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 bg-white" />
+            <span className="absolute -bottom-1 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 bg-white" />
           </div>
+          <div className="fixed bottom-0 flex h-12 w-full" style={{ background:'white'}}/>
           <SumoneButton
-            width="100%"
-            height={48}
+            width="calc(100% - 12px)"
+            height={54}
             fill="#C5B698"
             // text="추억 영상 만들기"
             text={make_video}
-            textClass="text-white text-sm tracking-[0.28px] leading-[150%]"
+            textClass="text-white text-m tracking-[0.28px] leading-[150%]"
             onClick={handleFrameSelection}
           />
         </div>
       )}
+      
     </div>
   );
 };

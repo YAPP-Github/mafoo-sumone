@@ -60,7 +60,7 @@ const PickPhotoPage = async (props: {
           {partnerNickName}
           {dict.PickPhoto.gather_lovely_moments.after}
         </div>
-        <div className="text-lg leading-[140%] tracking-[0.32px] text-gray-600">
+        <div className="text-m leading-[140%] tracking-[0.32px] text-gray-600">
           {/* 최대 10장을 선택할 수 있어요 */}
           {dict.PickPhoto.select_up_to_10_photos}
         </div>
