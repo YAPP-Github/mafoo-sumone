@@ -207,7 +207,6 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
       console.log("recapUrl", recapUrl);
       console.timeEnd("리캡 생성 요청");
 
-      setIsLoading(false);
       navigation.push(`result?${searchParams.toString()}&recapUrl=${recapUrl}`);
     } catch (err) {
       console.error("Error during recap processing:", err);
