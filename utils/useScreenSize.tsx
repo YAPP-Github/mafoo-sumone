@@ -35,12 +35,16 @@ export const useGetCanvasSize = (paddingTop: string, paddingBottom: string) => {
     if (typeof window !== "undefined") {
       const height =
         window.innerHeight - (268 + Number(paddingTop) + Number(paddingBottom));
+      let width = Math.floor((height / 543) * 314);
+      if (width % 2 !== 0) {
+        width = width + 1;
+      }
       setCanvasSize({
-        width: (height / 543) * 314,
+        width: width,
         height: height,
       });
     }
-  }, []); // Only run once when the component mounts (client-side)
+  }, [paddingTop, paddingBottom]);
 
   return canvasSize;
 };

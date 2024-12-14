@@ -111,7 +111,7 @@ const Canvas = ({
   const topIndex = (canvasSize.height * 110) / 543;
 
   return (
-    <div className={`relative flex h-full w-full flex-col items-center p-4`}>
+    <div className={`relative flex h-full w-full flex-col items-center`}>
       <FrameStack
         frameType={frameType}
         handleClickBackground={handleClickBackground}
@@ -121,21 +121,22 @@ const Canvas = ({
       {/* 상단 Title */}
       <div className="absolute top-0 flex h-full w-full flex-col items-center gap-4 pt-4">
         <span
-          className="relative z-30 flex flex-col items-center gap-2"
-          style={{
-            marginTop: canvasSize.height * 0.025,
-          }}
+          className="relative z-30 flex flex-col items-center"
+          style={
+            {
+              // marginTop: canvasSize.height * 0.025,
+            }
+          }
         >
-          {/* TODO: 수연님 오시면 다시 볼곳 
-            content - scale이 html2canvas에서 지원되지 않음
-          */}
           <span
             className="z-30 flex flex-row items-center gap-1"
-            style={{ opacity: 0.8, scale: "80%" }}
+            style={{
+              opacity: 0.8,
+            }}
           >
             <span
               style={{ color: frameType === 5 ? mainColor : "#ffffff" }}
-              className="shifted-text text-lg font-bold"
+              className="shifted-text text-sm font-bold leading-[140%] tracking-[0.28px]"
             >
               {/* @{userData.partnerNickName}{님의}{" "} */}
               {dict.to_name.before}@{userData.partnerNickName}
@@ -143,11 +144,11 @@ const Canvas = ({
             </span>
             {/* <TitleSvg fillColor="#f7807a" /> */}
             <MafooLogo
-              width={78}
+              width={62}
               fill={frameType === 5 ? mainColor : "#ffffff"}
             />
           </span>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
+
           <SumoneLogo
             width={canvasSize.width / 3}
             height={30}
@@ -200,7 +201,7 @@ const Canvas = ({
           className="absolute bottom-7 z-30 flex flex-row items-center justify-center gap-1 rounded-full bg-[rgba(255,255,255,0.8)] px-3 py-1.5"
         >
           <DayHeartIcon width={28} />
-          <span className="shifted-text text-lg leading-[140%] tracking-[0.36px]">
+          <span className="shifted-text text-center text-sm font-bold leading-[140%] tracking-[0.28px]">
             {/* {userData.dDay} 일째 */}
             {dict.days.before}
             {userData.dDay}
@@ -257,7 +258,10 @@ const FrameStack = memo(function ({
   }, [frameType]);
 
   return (
-    <div id="frame-stack">
+    <div
+      id="frame-stack"
+      className="relative h-full w-full"
+    >
       {frameSrcs.map((frameSrc, idx) => (
         <Image
           key={idx}

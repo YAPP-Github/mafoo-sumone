@@ -76,33 +76,43 @@ const Character = ({
         width: (canvasSize.height * 144) / 543 + "px",
         height: (canvasSize.height * 144) / 543 + "px",
       }}
-      className="absolute bottom-0 right-0 z-30 grow-0"
+      className="absolute bottom-0 right-0 z-30 flex grow-0 flex-col"
       onClick={handleClickCharacter}
     >
-      {characterSrcs.map((src, i) => (
-        <Image
-          key={i}
-          id={`character-${i}`}
-          src={src}
-          alt="character image"
-          fill
-          priority
-          className="character-element"
-          onLoad={onLoad}
-        />
-      ))}
-      {frameType !== 5 && (
-        <span
-          style={{ bottom: "40px" }}
-          className="relative left-1/2 z-30 flex w-fit translate-x-[-50%] transform"
-          data-html2canvas-ignore="true"
-        >
-          <div className="z-20 w-fit whitespace-pre rounded-lg bg-white px-3 py-2.5 text-xs leading-[150%] tracking-[0.24px] shadow-sm">
-            {dict.change_pose}
-            <span className="absolute -bottom-1 left-2/3 h-4 w-4 -translate-x-1/2 rotate-45 rounded-sm bg-white" />
-          </div>
-        </span>
-      )}
+      <span
+        className="relative flex shrink-0"
+        style={{
+          width: (canvasSize.height * 144) / 543 + "px",
+          height: (canvasSize.height * 144) / 543 + "px",
+        }}
+      >
+        {frameType !== 5 && (
+          <span
+            style={{ bottom: "40px" }}
+            className="relative left-1/2 z-30 flex h-fit w-fit translate-x-[-50%] transform"
+            data-html2canvas-ignore="true"
+          >
+            <div className="z-20 w-fit whitespace-pre rounded-lg bg-white px-3 py-2.5 text-xs leading-[150%] tracking-[0.24px] shadow-sm">
+              {dict.change_pose}
+              <span className="absolute -bottom-1 left-2/3 h-4 w-4 -translate-x-1/2 rotate-45 rounded-sm bg-white" />
+            </div>
+          </span>
+        )}
+        {characterSrcs.map((src, i) => (
+          <Image
+            key={i}
+            id={`character-${i}`}
+            src={src}
+            priority
+            quality={100}
+            alt="character image"
+            fill
+            className="character-element"
+            onLoad={onLoad}
+            sizes="30vw"
+          />
+        ))}
+      </span>
     </span>
   );
 };

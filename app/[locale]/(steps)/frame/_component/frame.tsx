@@ -27,7 +27,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
   const { photos } = usePhotoStore();
   const canvasRef = useRef<HTMLDivElement>(null);
   const [imageIdx, setImageIdx] = useState(0);
-  console.log(canvasSize);
+  const [isTesting, setIsTesting] = useState(false);
 
   const [
     isUploadPhotosAndCreateAlbumLoading,
@@ -69,54 +69,52 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  /*
-      const handleTestRecap = async () => {
-        if (!canvasRef.current || !canvasSize.width) return;
-    
-        // Set the canvas size based on the available width and height
-        canvasRef.current.style.width = canvasSize.width + "px";
-        canvasRef.current.style.height = canvasSize.height + "px";
-    
-        setIsLoading(true); // Show loading indicator
-        const dataUrls: string[] = [];
-    
-        // Iterate over all photos
-        // for (let idx = 0; idx < photos.length; idx++) {
-        try {
-          const idx = 0;
-          // Wait for the canvas to be updated with the new image
-          const canvas = await html2canvas(canvasRef.current, {
-            onclone: (el) => {
-              const elementsWithShiftedDownwardText =
-                el.querySelectorAll(".shifted-text");
-              elementsWithShiftedDownwardText.forEach((element) => {
-                const htmlElement = element as HTMLElement;
-                // Adjust styles or do whatever you want here
-                htmlElement.style.transform = "translateY(-40%)";
-              });
-            },
+  const handleTestRecap = async () => {
+    if (!canvasRef.current || !canvasSize.width) return;
+
+    // Set the canvas size based on the available width and height
+    canvasRef.current.style.width = canvasSize.width + "px";
+    canvasRef.current.style.height = canvasSize.height + "px";
+
+    setIsLoading(true); // Show loading indicator
+    const dataUrls: string[] = [];
+
+    // Iterate over all photos
+    // for (let idx = 0; idx < photos.length; idx++) {
+    try {
+      const idx = 0;
+      // Wait for the canvas to be updated with the new image
+      const canvas = await html2canvas(canvasRef.current, {
+        onclone: (el) => {
+          const elementsWithShiftedDownwardText =
+            el.querySelectorAll(".shifted-text");
+          elementsWithShiftedDownwardText.forEach((element) => {
+            const htmlElement = element as HTMLElement;
+            // Adjust styles or do whatever you want here
+            htmlElement.style.transform = "translateY(-40%)";
           });
-    
-          // Convert the canvas to a data URL (image)
-          const dataUrl = canvas.toDataURL("image/jpeg");
-          dataUrls.push(dataUrl);
-    
-          // Create a temporary link to download the image
-          const link = document.createElement("a");
-          link.href = dataUrl;
-          link.download = `canvas_frame.jpeg`;
-          link.click();
-          setImageIdx((prev) => (prev + idx) % photos.length);
-          await new Promise((resolve) => setTimeout(resolve, 10));
-        } catch (error) {
-          console.error("Failed to capture the frame:", error);
-        }
-        // }
-        setIsLoading(false);
-    
-        // Hide the loading indicator after all downloads
-      };
-      */
+        },
+      });
+
+      // Convert the canvas to a data URL (image)
+      const dataUrl = canvas.toDataURL("image/jpeg");
+      dataUrls.push(dataUrl);
+
+      // Create a temporary link to download the image
+      const link = document.createElement("a");
+      link.href = dataUrl;
+      link.download = `canvas_frame.jpeg`;
+      link.click();
+      setImageIdx((prev) => (prev + idx) % photos.length);
+      await new Promise((resolve) => setTimeout(resolve, 10));
+    } catch (error) {
+      console.error("Failed to capture the frame:", error);
+    }
+    // }
+    setIsLoading(false);
+
+    // Hide the loading indicator after all downloads
+  };
 
   const getAlbumIdFromCookie = () => {
     const albumIdCookie = document.cookie
@@ -233,6 +231,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
               const htmlElement = element as HTMLElement;
               htmlElement.style.transform = "translateY(-40%)";
             });
+            // const elementImage;
           },
         });
 
@@ -262,6 +261,21 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
         paddingBottom: userData.bottom + "px",
       }}
     >
+      {isTesting ? (
+        <div
+          onClick={() => setIsTesting(false)}
+          className="absolute left-20 top-10 z-50"
+        >
+          Test
+        </div>
+      ) : (
+        <div
+          onClick={() => setIsTesting(true)}
+          className="absolute left-20 top-10 z-50"
+        >
+          Prod
+        </div>
+      )}
       <Header
         titleComponent={
           <div className="flex flex-row items-center gap-1 text-lg leading-[140%] tracking-[0.36px]">
@@ -321,7 +335,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
               // text="이 프레임으로 만들게요"
               text={dict.make_with_this_frame}
               textClass="text-white text-base tracking-[0.28px] leading-[150%]"
-              onClick={handleSelectFrame}
+              onClick={isTesting ? handleTestRecap : handleSelectFrame}
               isLoading={isUploadPhotosAndCreateAlbumLoading}
             />
           </div>
