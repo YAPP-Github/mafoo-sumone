@@ -1,7 +1,7 @@
 import { TouchableIcon } from "@/types/icon";
 import SumoneButtonAsset from "./SumoneButtonAsset";
-import { PulseLoader } from "react-spinners";
-import { useMemo } from "react";
+// import { PulseLoader } from "react-spinners";
+// import { useMemo } from "react";
 
 interface SumeoneButtonProps extends TouchableIcon {
   width: number | string;
@@ -21,8 +21,9 @@ const SumoneButton = ({
   tabIndex,
   role,
   textClass,
-  isLoading,
+  // isLoading,
 }: SumeoneButtonProps) => {
+  /*
   const LoadingDot = useMemo(() => {
     return (
       <div className="flex h-full items-center justify-center">
@@ -35,6 +36,7 @@ const SumoneButton = ({
       </div>
     );
   }, []);
+  */
 
   const Label = () => {
     return <span className={`${textClass} z-10`}>{text}</span>;
@@ -54,7 +56,8 @@ const SumoneButton = ({
         fill={fill}
         className="absolute -z-10"
       />
-      {isLoading ? LoadingDot : <Label />}
+      {/* {isLoading ? LoadingDot : <Label />} */}
+      <Label />
     </div>
   );
 };
