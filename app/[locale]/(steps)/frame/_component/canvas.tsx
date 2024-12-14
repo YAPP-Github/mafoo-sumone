@@ -121,12 +121,18 @@ const Canvas = ({
       {/* 상단 Title */}
       <div className="absolute top-0 flex h-full w-full flex-col items-center gap-4 pt-4">
         <span
-          className="relative z-30 flex flex-col items-center gap-2.5"
+          className="relative z-30 flex flex-col items-center gap-2"
           style={{
             marginTop: canvasSize.height * 0.025,
           }}
         >
-          <span className="z-30 flex flex-row items-center gap-1">
+          {/* TODO: 수연님 오시면 다시 볼곳 
+            content - scale이 html2canvas에서 지원되지 않음
+          */}
+          <span
+            className="z-30 flex flex-row items-center gap-1"
+            style={{ opacity: 0.8, scale: "80%" }}
+          >
             <span
               style={{ color: frameType === 5 ? mainColor : "#ffffff" }}
               className="shifted-text text-lg font-bold"
@@ -143,8 +149,8 @@ const Canvas = ({
           </span>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <SumoneLogo
-            width={canvasSize.width / 4}
-            height={27}
+            width={canvasSize.width / 3}
+            height={30}
             fill={frameType === 5 ? mainColor : "#ffffff"}
           />
         </span>
@@ -188,9 +194,10 @@ const Canvas = ({
         />
         <span
           style={{
-            left: xPadding,
+            left: xPadding - 10,
+            scale: "80%",
           }}
-          className="absolute bottom-6 z-30 flex flex-row items-center justify-center gap-1 rounded-full bg-[rgba(255,255,255,0.7)] px-4 py-2"
+          className="absolute bottom-7 z-30 flex flex-row items-center justify-center gap-1 rounded-full bg-[rgba(255,255,255,0.8)] px-3 py-1.5"
         >
           <DayHeartIcon width={28} />
           <span className="shifted-text text-lg leading-[140%] tracking-[0.36px]">

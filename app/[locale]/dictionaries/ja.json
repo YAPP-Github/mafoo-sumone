@@ -4,12 +4,12 @@
     "description": "",
     "couples_count": {
       "before": "既に",
-      "after": "{{1,565}}組がリキャップを作成！"
+      "after": "組がリキャップを作成！"
     },
     "personal_data_agreement": "個人情報取扱に同意",
     "view_details": "詳細はこちら",
     "ask_for_mine": "私もお願いする",
-    "agree_and_get_recap": "同意して今すぐ決算"
+    "agree_and_get_recap": "同意して開始"
   },
   "personalDataCollection": {
     "title": "個人情報収集項目",
@@ -48,7 +48,7 @@
     },
     "full_of_love": {
       "before": "",
-      "after": "さんへの愛をたっぷり込めて作っています！"
+      "after": "さんへの愛を\nたっぷり込めて作っています！"
     }
   },
   "Result": {

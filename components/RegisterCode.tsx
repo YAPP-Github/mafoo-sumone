@@ -33,7 +33,7 @@ const RegisterCode = ({
       <span
         className={`${
           tooltip ? "text-pink" : "text-white"
-        } text-base tracking-[0.28px]`}
+        } text-sm tracking-[0.28px]`}
       >
         가입코드
       </span>
@@ -43,8 +43,8 @@ const RegisterCode = ({
         fill={tooltip ? "#FF9092" : "#ffffff"}
       />
       {tooltip && showTooltip && (
-        <div className="absolute top-12 whitespace-pre rounded-md bg-white px-3 py-2.5 text-xs tracking-[0.24px] shadow-sm">
-          <span className="absolute -top-2 left-[20%] h-4 w-4 -translate-x-1/2 rotate-45 rounded-sm bg-white" />
+        <div className="absolute top-12 whitespace-pre rounded-md bg-white px-3 py-2.5 text-xs tracking-[0.24px] shadow-sm" style={{ transform: 'translateX(-5%)', color: '#444E5C' }}>
+          <span className="absolute -top-1 left-[20%] h-4 w-4 -translate-x-1/2 rotate-45 rounded-sm bg-white" />
           마푸에서 내 추억을 확인하고싶다면?
         </div>
       )}

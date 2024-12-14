@@ -3,94 +3,27 @@
   background-repeat: no-repeat;
 }
 
-.character {
-  width: 180px;
-  height: 180px;
-}
-
-.puppy0 {
-  background-position: 0px 0px;
-}
-
-.puppy1 {
-  background-position: -190px 0px;
-}
-
-.penguin0 {
-  background-position: -380px 0px;
-}
-
-.penguin1 {
-  background-position: -570px 0px;
-}
-
-.cat0 {
-  background-position: -760px 0px;
-}
-
-.cat1 {
-  background-position: -950px 0px;
-}
-
-.panda0 {
-  background-position: -1140px 0px;
-}
-
-.panda1 {
-  background-position: -1330px 0px;
-}
-
-.egg0,
-.egg1 {
-  background-position: -1520px 0px;
-}
-
 .chip {
   width: 56px;
   height: 56px;
 }
 
 .chip_puppy {
-  background-position: -1710px 0px;
+  background-position: 0px 0px;
 }
 
 .chip_penguin {
-  background-position: -1776px 0px;
+  background-position: -66px 0px;
 }
 
 .chip_cat {
-  background-position: -1842px 0px;
+  background-position: -132px 0px;
 }
 
 .chip_panda {
-  background-position: -1908px 0px;
+  background-position: -198px 0px;
 }
 
 .chip_egg {
-  background-position: -1974px 0px;
-}
-
-.frame {
-  width: 393px;
-  height: 680px;
-}
-
-.frame_puppy {
-  background-position: 0px -190px;
-}
-
-.frame_penguin {
-  background-position: -403px -190px;
-}
-
-.frame_cat {
-  background-position: -806px -190px;
-}
-
-.frame_panda {
-  background-position: -1209px -190px;
-}
-
-.frame_egg {
-  background-position: -1612px -190px;
+  background-position: -264px 0px;
 }

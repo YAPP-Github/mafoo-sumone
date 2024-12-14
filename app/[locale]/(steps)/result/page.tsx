@@ -60,7 +60,7 @@ const ResultPage = async (props: {
   return (
     <main
       id="mainBg"
-      className="flex h-full w-full flex-col items-center"
+      className="bg-gradient flex h-full w-full flex-col items-center"
       style={{
         paddingTop: top + "px",
         paddingBottom: bottom + "px",
@@ -82,7 +82,7 @@ const ResultPage = async (props: {
           height:
             lang.locale === "ko" ? `calc(100% - 272px)` : `calc(100% - 216px)`,
         }}
-        className="mb-3 flex w-full"
+        className="mb-2 flex w-full"
       >
         <div className="mx-6 flex h-full w-full items-center justify-center">
           <video
@@ -101,7 +101,7 @@ const ResultPage = async (props: {
         </div>
       </div>
 
-      <span className="flex w-full items-center justify-center gap-2">
+      <span className="flex w-full items-center justify-center gap-1 py-1">
         <DoubleHeartIcon
           width={24}
           height={24}

@@ -7,7 +7,7 @@ import { useObjectToQueryString } from "@/utils/useQueryString";
 
 import CoupleModal from "./CoupleModal";
 import PrivacyModal from "./PrivacyModal";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
 import { sendGAEvent } from "@next/third-parties/google";
@@ -57,9 +57,6 @@ const MainPageUserInteraction = ({
   const [modalType, setModalType] = useState<
     "privacy" | "couple" | "loading" | null
   >(null);
-
-  const searchParams = useSearchParams();
-  console.log(pathName, searchParams.toString());
 
   useEffect(() => {
     const mainElement = document.getElementById("mainBg");
@@ -189,13 +186,13 @@ const MainPageUserInteraction = ({
         role="button"
         tabIndex={0}
         onClick={handleOpenPrivacyModal}
-        className="mt-3 flex w-full justify-between px-6 py-2.5 leading-[140%] tracking-[0.24px]"
+        className="mt-3 flex w-full justify-between px-6 py-4 leading-[140%] tracking-[0.24px]"
       >
         <span className="text-sm">
           {/* 개인정보 수집 동의 */}
           {personal_data_agreement}
         </span>
-        <span className="flex flex-row items-center gap-1 text-xs text-gray-500">
+        <span className="flex flex-row items-center gap-1 text-sm text-gray-500">
           {/* 자세히 보기 */}
           {view_details}
           <Chevron
@@ -204,23 +201,23 @@ const MainPageUserInteraction = ({
           />
         </span>
       </span>
-      <span className="mb-2 flex flex-row gap-3">
+      <span className="mb-2 flex flex-row gap-2">
         <SumoneButton
-          width={160}
-          height={56}
+          width={180}
+          height={54}
           fill={"#C5B698"}
           // text="결산 부탁하기"
           text={ask_for_mine}
-          textClass="text-white text-sm tracking-[0.24px] leading-[150%]"
+          textClass="text-white text-base tracking-[0.24px] leading-[150%]"
           onClick={handleAskShare}
         />
         <SumoneButton
-          width={160}
-          height={56}
+          width={180}
+          height={54}
           fill={"#FF9092"}
           // text="동의하고 바로 결산"
           text={agree_and_get_recap}
-          textClass="text-white text-sm tracking-[0.24px] leading-[150%]"
+          textClass="text-white text-base tracking-[0.24px] leading-[150%]"
           onClick={handleCreateRecap}
         />
       </span>
@@ -240,7 +237,7 @@ const MainPageUserInteraction = ({
           )}
           <Link
             href={FAQ_URL[locale]}
-            className="bg-[rgba(255, 255, 255, 0.70)] flex items-center justify-center rounded-lg border border-white px-6 py-1.5 text-base text-brown backdrop-blur-xl"
+            className="bg-[rgba(255, 255, 255, 0.70)] flex items-center justify-center rounded-lg border border-white px-6 py-1.5 text-sm text-brown backdrop-blur-xl"
           >
             FAQ
           </Link>

@@ -4,12 +4,12 @@
     "description": "",
     "couples_count": {
       "before": "Already, ",
-      "after": " couples have created their recap this year"
+      "after": " couples have created"
     },
     "personal_data_agreement": "Agree to Personal Data Collection",
-    "view_details": "View Details",
+    "view_details": "Details",
     "ask_for_mine": "Ask for Mine",
-    "agree_and_get_recap": "Agree and Get Recap"
+    "agree_and_get_recap": "Agree & Get Recap"
   },
   "personalDataCollection": {
     "title": "Agree to Personal Data Collection",
@@ -39,7 +39,7 @@
     "change_pose": "Tap to change",
     "make_with_this_frame": "Make recap with this frame",
     "to_name": {
-      "before": "To",
+      "before": "To ",
       "after": ""
     },
     "days": {
@@ -54,8 +54,8 @@
   "Result": {
     "our_year_recap": "2024 with partner",
     "couples_showing_off": {
-      "before": "Join ",
-      "after": "couples sharing their partner's moments"
+      "before": "",
+      "after": " couples shared their moments"
     },
     "ask_for_partner": {
       "before": "Ask ",

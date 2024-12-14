@@ -6,10 +6,10 @@
       "before": "Ya ",
       "after": " parejas han creado su recap"
     },
-    "personal_data_agreement": "Consentimiento para recopilar datos personales",
-    "view_details": "Ver detalles",
+    "personal_data_agreement": "Recopilar imagen",
+    "view_details": "Detalles",
     "ask_for_mine": "Enviar solicitud",
-    "agree_and_get_recap": "Aceptar y crear el resumen ahora"
+    "agree_and_get_recap": "Aceptar y empezar"
   },
   "personalDataCollection": {
     "title": "Consentimiento para la recopilación de datos personales",
@@ -39,7 +39,7 @@
     "change_pose": "Por favor, pulsa aquí",
     "make_with_this_frame": "Seleccionar",
     "to_name": {
-      "before": "de",
+      "before": "de ",
       "after": ""
     },
     "days": {
@@ -47,7 +47,7 @@
       "after": ""
     },
     "full_of_love": {
-      "before": "¡Estamos creando esto con todo el amor para",
+      "before": "¡Estamos creando esto \n con todo el amor para",
       "after": "!"
     }
   },
