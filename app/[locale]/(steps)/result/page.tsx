@@ -6,6 +6,7 @@ import { AsyncSearchParams } from "@/types/user";
 import MovieInteraction from "./_components/MovieInteraction";
 import { Locale } from "@/types/page";
 import { getDictionary } from "../../dictionaries";
+import VideoArea from "./_components/VideoArea";
 
 const ResultPage = async (props: {
   params: Promise<{ locale: Locale }>;
@@ -86,19 +87,7 @@ const ResultPage = async (props: {
         className="mb-2 flex w-full"
       >
         <div className="mx-6 flex h-full w-full items-center justify-center">
-          <video
-            src={recapUrl}
-            autoPlay={true}
-            loop
-            playsInline
-            muted
-            className="rounded-2xl"
-            style={{
-              objectFit: "contain",
-              width: "fit-content",
-              height: "100%",
-            }}
-          />
+          <VideoArea videoSrc={recapUrl} />
         </div>
       </div>
 
