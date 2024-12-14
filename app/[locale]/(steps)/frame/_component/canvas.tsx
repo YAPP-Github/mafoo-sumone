@@ -126,7 +126,13 @@ const Canvas = ({
             marginTop: canvasSize.height * 0.025,
           }}
         >
-          <span className="z-30 flex flex-row items-center gap-1" style={{ opacity: 0.8, scale: '80%' }}>
+          {/* TODO: 수연님 오시면 다시 볼곳 
+            content - scale이 html2canvas에서 지원되지 않음
+          */}
+          <span
+            className="z-30 flex flex-row items-center gap-1"
+            style={{ opacity: 0.8, scale: "80%" }}
+          >
             <span
               style={{ color: frameType === 5 ? mainColor : "#ffffff" }}
               className="shifted-text text-lg font-bold"
@@ -188,8 +194,8 @@ const Canvas = ({
         />
         <span
           style={{
-            left: xPadding-10,
-            scale: '80%'
+            left: xPadding - 10,
+            scale: "80%",
           }}
           className="absolute bottom-7 z-30 flex flex-row items-center justify-center gap-1 rounded-full bg-[rgba(255,255,255,0.8)] px-3 py-1.5"
         >

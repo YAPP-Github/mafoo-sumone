@@ -86,7 +86,7 @@ const UserInteraction = ({
           text={`${dict.ask_for_partner.before}${searchParams.get(
             "partnerNickName"
           )}${dict.ask_for_partner.after}`}
-          textClass="text-white text-m tracking-[0.24px] leading-[150%]"
+          textClass="text-white text-base tracking-[0.24px] leading-[150%]"
           onClick={handleAskEvent}
         />
 
@@ -96,7 +96,7 @@ const UserInteraction = ({
           fill="#ff9092"
           // text="우리 1년 SNS에 자랑하기"
           text={dict.show_off_on_sns}
-          textClass="text-white text-m tracking-[0.24px] leading-[150%]"
+          textClass="text-white text-base tracking-[0.24px] leading-[150%]"
           onClick={handleShareEvent}
         />
       </div>

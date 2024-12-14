@@ -7,7 +7,7 @@ import { useObjectToQueryString } from "@/utils/useQueryString";
 
 import CoupleModal from "./CoupleModal";
 import PrivacyModal from "./PrivacyModal";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
 import { sendGAEvent } from "@next/third-parties/google";
@@ -57,9 +57,6 @@ const MainPageUserInteraction = ({
   const [modalType, setModalType] = useState<
     "privacy" | "couple" | "loading" | null
   >(null);
-
-  const searchParams = useSearchParams();
-  console.log(pathName, searchParams.toString());
 
   useEffect(() => {
     const mainElement = document.getElementById("mainBg");
@@ -211,7 +208,7 @@ const MainPageUserInteraction = ({
           fill={"#C5B698"}
           // text="결산 부탁하기"
           text={ask_for_mine}
-          textClass="text-white text-m tracking-[0.24px] leading-[150%]"
+          textClass="text-white text-base tracking-[0.24px] leading-[150%]"
           onClick={handleAskShare}
         />
         <SumoneButton
@@ -220,7 +217,7 @@ const MainPageUserInteraction = ({
           fill={"#FF9092"}
           // text="동의하고 바로 결산"
           text={agree_and_get_recap}
-          textClass="text-white text-m tracking-[0.24px] leading-[150%]"
+          textClass="text-white text-base tracking-[0.24px] leading-[150%]"
           onClick={handleCreateRecap}
         />
       </span>

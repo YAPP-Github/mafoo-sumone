@@ -273,7 +273,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
           navigation.push(`pickphoto?${searchParams.toString()}`)
         }
       />
-      <div className="flex h-full w-full flex-col items-center justify-center gap-10 mt-8">
+      <div className="mt-8 flex h-full w-full flex-col items-center justify-center gap-10">
         {/* Canvas Component Wrapper */}
         <div
           ref={canvasRef}
@@ -320,7 +320,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
               fill={"#ff9092"}
               // text="이 프레임으로 만들게요"
               text={dict.make_with_this_frame}
-              textClass="text-white text-m tracking-[0.28px] leading-[150%]"
+              textClass="text-white text-base tracking-[0.28px] leading-[150%]"
               onClick={handleSelectFrame}
               isLoading={isUploadPhotosAndCreateAlbumLoading}
             />
