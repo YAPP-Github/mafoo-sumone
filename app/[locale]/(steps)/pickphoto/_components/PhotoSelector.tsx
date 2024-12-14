@@ -73,6 +73,7 @@ const PhotoSelector = ({
             multiple
             accept="images/*"
             onChange={handleSelectPhotos}
+            capture="filesystem"
           />
           <label htmlFor="addImage">
             <AlbumIcon
