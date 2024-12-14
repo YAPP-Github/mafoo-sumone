@@ -1,4 +1,5 @@
-import CloseIcon from "@/assets/CloseIcon";
+import CloseIconSrc from "@/assets/SumoneCloseIconBlack.png";
+import Image from "next/image";
 
 const PrivacyModal = ({
   onClose,
@@ -13,10 +14,20 @@ const PrivacyModal = ({
 
   return (
     <div className="bg-image fixed bottom-0 z-50 w-full rounded-t-3xl">
-      <CloseIcon
+      {/* <CloseIcon
         width={36}
         className="absolute right-2.5 top-2.5 z-20 focus:outline-none"
         onClick={handleClose}
+      /> */}
+      <Image
+        src={CloseIconSrc}
+        width={24}
+        height={24}
+        className="absolute right-4 top-4 z-20 focus:outline-none"
+        onClick={handleClose}
+        alt="close"
+        sizes="100vw"
+        quality={100}
       />
       <div className="relative flex h-full w-full flex-col gap-4 p-6">
         <span className="text-lg leading-[150%] tracking-[0.36px]">

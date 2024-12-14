@@ -14,8 +14,9 @@ import { sendGAEvent } from "@next/third-parties/google";
 import Link from "next/link";
 import CheckCircleIcon from "@/assets/CheckCircleIcon";
 import RegisterCode from "@/components/RegisterCode";
-import CloseTransparentIcon from "@/assets/CloseTrasparentIcon";
 import { Locale } from "@/types/page";
+import Image from "next/image";
+import CloseIconSrc from "@/assets/SumoneCloseIcon.png";
 
 const FAQ_URL = {
   ko: "https://chisel-promise-9ff.notion.site/2024-FAQ-KR-153385a9a75b80acabeffd1b81648b71?pvs=4",
@@ -248,7 +249,12 @@ const MainPageUserInteraction = ({
           onClick={handleClose}
           className="bg-[rgba(255, 255, 255, 0.70)] flex h-11 w-11 items-center justify-center rounded-full border border-white backdrop-blur-xl"
         >
-          <CloseTransparentIcon width={28} />
+          <Image
+            src={CloseIconSrc}
+            alt="close"
+            width={28}
+            height={28}
+          />
         </div>
       </div>
       {showClipboardModal && (

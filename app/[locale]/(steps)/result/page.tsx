@@ -74,6 +74,7 @@ const ResultPage = async (props: {
             {dict.Result.our_year_recap}
           </div>
         }
+        displayCloseIcon={true}
       />
       {lang.locale === "ko" && <MovieInteraction code={data.code} />}
 

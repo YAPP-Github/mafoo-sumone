@@ -246,7 +246,6 @@ const FrameStack = memo(function ({
       if (id === `frame-${frameType}`) {
         el.style.opacity = "1";
         return true;
-      } else {
       }
       el.remove();
       el.style.opacity = "0";

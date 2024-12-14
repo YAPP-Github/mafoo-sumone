@@ -75,6 +75,7 @@ const UserInteraction = ({
       userName: userName,
     });
   };
+
   return (
     <div className="bm-8 flex h-[108px] w-full flex-shrink-0 flex-grow-0 items-center">
       <div className="mx-6 flex h-full w-full flex-col gap-1">
