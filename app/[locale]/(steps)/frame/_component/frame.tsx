@@ -67,6 +67,10 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
     uploadPhotosAndCreateAlbum();
   }, [photos, navigation]);
 
+  useEffect(() => {
+    console.log("frameType", frameType);
+  }, [frameType]);
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleTestRecap = async () => {
@@ -92,6 +96,11 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
             const htmlElement = element as HTMLElement;
             // Adjust styles or do whatever you want here
             htmlElement.style.transform = "translateY(-40%)";
+          });
+          const elementFrame = el.querySelectorAll(".frame-element");
+          elementFrame.forEach((element) => {
+            const htmlElement = element as HTMLElement;
+            htmlElement.style.borderRadius = "0";
           });
         },
       });
@@ -231,7 +240,11 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
               const htmlElement = element as HTMLElement;
               htmlElement.style.transform = "translateY(-40%)";
             });
-            // const elementImage;
+            const elementFrame = el.querySelectorAll(".frame-element");
+            elementFrame.forEach((element) => {
+              const htmlElement = element as HTMLElement;
+              htmlElement.style.borderRadius = "0";
+            });
           },
         });
 
@@ -302,7 +315,6 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
               setImageIdx={setImageIdx}
               userData={userData}
               dict={dict}
-              isMakingFrame={isLoading}
             />
           )}
         </div>

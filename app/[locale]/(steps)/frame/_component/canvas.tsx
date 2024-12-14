@@ -79,7 +79,6 @@ interface CanvasProps {
   setImageIdx: Dispatch<SetStateAction<number>>;
   userData: ObjectedParams;
   dict: Record<string, any>;
-  isMakingFrame: boolean;
 }
 
 const Canvas = ({
@@ -90,7 +89,6 @@ const Canvas = ({
   setImageIdx,
   userData,
   dict,
-  isMakingFrame,
 }: CanvasProps) => {
   const { mainColor, subColor } = CanvasPrepData[frameType - 1];
   const [isFrameStackLoaded, setIsFrameStackLoaded] = useState(false);
@@ -107,7 +105,7 @@ const Canvas = ({
     setIsFrameStackLoaded(true);
   }, []);
 
-  const xPadding = (canvasSize.height * 37) / 543;
+  const xPadding = (canvasSize.height * 46) / 680;
   const topIndex = (canvasSize.height * 110) / 543;
 
   return (
@@ -116,17 +114,14 @@ const Canvas = ({
         frameType={frameType}
         handleClickBackground={handleClickBackground}
         onFrameStackLoad={onFrameStackLoad}
-        isMakingFrame={isMakingFrame}
       />
       {/* 상단 Title */}
       <div className="absolute top-0 flex h-full w-full flex-col items-center gap-4 pt-4">
         <span
           className="relative z-30 flex flex-col items-center"
-          style={
-            {
-              // marginTop: canvasSize.height * 0.025,
-            }
-          }
+          style={{
+            marginTop: canvasSize.height * 0.015,
+          }}
         >
           <span
             className="z-30 flex flex-row items-center gap-1"
@@ -193,15 +188,19 @@ const Canvas = ({
           canvasSize={canvasSize}
           dict={dict}
         />
+
         <span
           style={{
-            left: xPadding - 10,
-            scale: "80%",
+            left: xPadding,
+            bottom: xPadding * 0.8,
           }}
-          className="absolute bottom-7 z-30 flex flex-row items-center justify-center gap-1 rounded-full bg-[rgba(255,255,255,0.8)] px-3 py-1.5"
+          className="absolute z-30 flex flex-row items-center justify-center gap-1 rounded-full bg-[rgba(255,255,255,0.8)] py-1 pl-2 pr-2.5"
         >
-          <DayHeartIcon width={28} />
-          <span className="shifted-text text-center text-sm font-bold leading-[140%] tracking-[0.28px]">
+          <DayHeartIcon
+            width={24}
+            height={24}
+          />
+          <span className="shifted-text text-center text-sm font-bold tracking-[0.36px]">
             {/* {userData.dDay} 일째 */}
             {dict.days.before}
             {userData.dDay}
@@ -217,12 +216,10 @@ const FrameStack = memo(function ({
   frameType,
   handleClickBackground,
   onFrameStackLoad,
-  isMakingFrame,
 }: {
   frameType: number;
   handleClickBackground: () => void;
   onFrameStackLoad: () => void;
-  isMakingFrame: boolean;
 }) {
   const loadedCountRef = useRef(frameSrcs.length);
 
@@ -241,14 +238,16 @@ const FrameStack = memo(function ({
       document.querySelectorAll(".frame-element")
     ).reverse() as HTMLImageElement[];
 
+    console.log("frameType", frameType, frameElements);
     frameElements.find((el) => {
       const id = el.id;
+      console.log(el);
 
       if (id === `frame-${frameType}`) {
         el.style.opacity = "1";
         return true;
+      } else {
       }
-
       el.remove();
       el.style.opacity = "0";
       frameStack.prepend(el);
@@ -270,7 +269,7 @@ const FrameStack = memo(function ({
           priority
           alt="frame"
           fill
-          className={`frame-element absolute top-0 z-20 h-full w-full object-contain bg-blend-overlay ${isMakingFrame ? "" : "rounded-2xl"}`}
+          className={`frame-element absolute top-0 z-20 h-full w-full rounded-2xl object-contain bg-blend-overlay`}
           onClick={handleClickBackground}
           onLoad={onLoad}
         />
