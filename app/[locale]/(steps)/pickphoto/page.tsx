@@ -38,6 +38,7 @@ const PickPhotoPage = async (props: {
 
   return (
     <main
+      id="pickphotoBg"
       style={{ paddingTop: top + "px" }}
       className="flex h-full w-full flex-col"
     >

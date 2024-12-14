@@ -8,7 +8,7 @@ import Masonry from "react-responsive-masonry";
 import Image from "next/image";
 import { useObjectToQueryString } from "@/utils/useQueryString";
 import { usePhotoStore } from "@/atom/photo";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const PhotoSelector = ({
   userData,
@@ -24,7 +24,6 @@ const PhotoSelector = ({
   const navigation = useRouter();
   const OTQ = useObjectToQueryString();
   const { photos, setPhotos } = usePhotoStore();
-  const [userOS, setUserOS] = useState<"ios" | "aos" | null>(null);
 
   const pathName = usePathname();
   const searchParams = useSearchParams();
@@ -32,15 +31,6 @@ const PhotoSelector = ({
 
   useEffect(() => {
     setPhotos([]);
-  }, []);
-
-  useEffect(() => {
-    const userAgent = navigator.userAgent;
-    if (userAgent.match(/iPhone|iPad|iPod/i)) {
-      setUserOS("ios");
-    } else if (userAgent.match(/Android/i)) {
-      setUserOS("aos");
-    }
   }, []);
 
   const handleSelectPhotos = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,11 +55,6 @@ const PhotoSelector = ({
     <div
       className={`flex w-full flex-1 gap-2 overflow-y-scroll rounded-t-3xl border border-b-0 border-gray-200 bg-white`}
     >
-      {userOS === "ios" ? (
-        <div className="absolute right-10 top-10 z-10">{userOS}</div>
-      ) : (
-        <div className="absolute right-10 top-10 z-10">{userOS}</div>
-      )}
       <Masonry
         key={photos.length}
         columnsCount={2}
