@@ -72,5 +72,12 @@
       "before": "Está lleno de tu amor\npor ",
       "after": "!"
     }
+  },
+  "File": {
+    "tooltip": "¿Solo se puede seleccionar una foto?",
+    "description": {
+      "title": "En algunos dispositivos, solo se puede seleccionar una foto.",
+      "content": "En el caso de Android, ciertos dispositivos pueden tener dificultades para cargar varias fotos.En ese caso, selecciona la más importante para ti."
+    }
   }
 }

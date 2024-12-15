@@ -12,9 +12,12 @@ import Image from "next/image";
 const PickPhotoHeader = ({
   searchParams,
   text,
+  dict,
 }: {
   searchParams: ObjectedParams;
   text: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  dict: Record<string, any>;
 }) => {
   const navigation = useRouter();
   const pathName = usePathname();
@@ -61,6 +64,7 @@ const PickPhotoHeader = ({
         }
         displayFAQIcon={userOS === "aos"}
         onClickFAQ={userOS === "aos" ? handleOnClickFAQ : () => {}}
+        tooltipText={dict.tooltip}
       />
       {openModal && (
         <div
@@ -79,12 +83,14 @@ const PickPhotoHeader = ({
           />
           <div className="flex flex-col gap-4">
             <span className="text-lg leading-[150%] tracking-[0.36px] text-gray-800">
-              일부 기기에서는 1장만 선택할 수 있어요.
+              {/* 일부 기기에서는 1장만 선택할 수 있어요. */}
+              {dict.description.title}
             </span>
             <span className="h-[1px] w-full bg-gray-200" />
             <span className="text-sm leading-[200%] tracking-[0.28px] text-gray-500">
-              안드로이드의 경우 여러 사진을 불러오기 어려운 기기가 있어요.
-              이때는 가장 소중한 한 장만 선택해주세요.
+              {/* 안드로이드의 경우 여러 사진을 불러오기 어려운 기기가 있어요.
+              이때는 가장 소중한 한 장만 선택해주세요. */}
+              {dict.description.content}
             </span>
           </div>
         </div>

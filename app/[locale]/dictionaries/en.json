@@ -71,5 +71,12 @@
       "before": "It’s filled with your love\nfor ",
       "after": "!"
     }
+  },
+  "File": {
+    "tooltip": "Can only one photo be selected?",
+    "description": {
+      "title": "On some devices, only one photo can be selected.",
+      "content": "For Android devices, certain models may have difficulty uploading multiple photos.In this case, please choose the one most precious to you."
+    }
   }
 }

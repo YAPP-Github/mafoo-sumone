@@ -53,6 +53,7 @@ const PickPhotoPage = async (props: {
           coupleId,
         }}
         text={dict.PickPhoto.year_end_event}
+        dict={dict.File}
       />
       <div className="flex flex-col gap-4 p-6 pt-4">
         <div className="whitespace-pre text-xl leading-[160%] tracking-[0.4px]">

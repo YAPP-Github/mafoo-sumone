@@ -13,6 +13,7 @@ interface HeaderProps {
   displayCloseIcon?: boolean;
   displayFAQIcon?: boolean;
   onClickFAQ?: () => void;
+  tooltipText?: string;
 }
 
 const Header = ({
@@ -21,6 +22,7 @@ const Header = ({
   displayCloseIcon = false,
   displayFAQIcon = false,
   onClickFAQ,
+  tooltipText,
 }: HeaderProps) => {
   const router = useRouter();
   const handleClickPrev = () => {
@@ -92,7 +94,7 @@ const Header = ({
               className="absolute right-0 top-10 w-fit translate-x-[10%] whitespace-pre rounded-lg bg-white px-3 py-2.5 shadow-md"
             >
               <span className="text-sm leading-[150%] tracking-[0.24px]">
-                1장 밖에 선택되지 않나요?
+                {tooltipText}
               </span>
               <span className="absolute -top-1 right-[10%] h-4 w-4 -translate-x-1/2 rotate-45 bg-white" />
             </div>

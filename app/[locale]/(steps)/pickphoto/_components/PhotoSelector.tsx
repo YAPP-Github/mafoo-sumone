@@ -33,6 +33,17 @@ const PhotoSelector = ({
     setPhotos([]);
   }, []);
 
+  const handleException = () => {
+    const tooltip = document.getElementById("FAQtooltip");
+    if (!tooltip) return;
+    tooltip.classList.remove("hidden");
+    setTimeout(() => {
+      if (tooltip) {
+        tooltip.classList.add("hidden");
+      }
+    }, 3000);
+  };
+
   const handleSelectPhotos = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (!files) return;
@@ -41,6 +52,10 @@ const PhotoSelector = ({
 
     if (selectedFiles.length > 10) {
       selectedFiles.splice(10);
+    }
+
+    if (selectedFiles.length <= 1) {
+      handleException();
     }
 
     console.log("선택된 파일:", selectedFiles, selectedFiles.length);
