@@ -71,7 +71,7 @@ const Character = ({
 
   return (
     <span
-      id="character-stack"
+      // id="character-stack"
       style={{
         width: (canvasSize.height * 144) / 543 + "px",
         height: (canvasSize.height * 144) / 543 + "px",
@@ -98,20 +98,22 @@ const Character = ({
             </div>
           </span>
         )}
-        {characterSrcs.map((src, i) => (
-          <Image
-            key={i}
-            id={`character-${i}`}
-            src={src}
-            priority
-            quality={100}
-            alt="character image"
-            fill
-            className="character-element"
-            onLoad={onLoad}
-            sizes="30vw"
-          />
-        ))}
+        <div id={"character-stack"}>
+          {characterSrcs.map((src, i) => (
+            <Image
+              key={i}
+              id={`character-${i}`}
+              src={src}
+              priority
+              quality={100}
+              alt="character image"
+              fill
+              className="character-element"
+              onLoad={onLoad}
+              sizes="30vw"
+            />
+          ))}
+        </div>
       </span>
     </span>
   );
