@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect, useRef } from "react";
 import "./carousel.css";
 
@@ -16,6 +18,7 @@ const Carousel = () => {
   const [items, setItems] = useState(initialColors);
   const carouselTrackRef = useRef<HTMLDivElement>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const isTransitioningRef = useRef<boolean>(false);
 
   const ITEM_WIDTH = 120; // px
   const GAP = 32; // px
@@ -38,16 +41,42 @@ const Carousel = () => {
   const slideToNext = () => {
     if (!carouselTrackRef.current) return;
 
-    // Apply the translateX to move left
-    carouselTrackRef.current.style.transition = "transform 0.5s ease-in-out";
+    carouselTrackRef.current.style.transition = "transform 0.4s ease-in-out";
     carouselTrackRef.current.style.transform = `translateX(-${TOTAL_MOVE}px)`;
+
+    const current = carouselTrackRef.current.getElementsByClassName(
+      "active"
+    )[0] as HTMLElement;
+    const next = carouselTrackRef.current.getElementsByClassName(
+      "next"
+    )[0] as HTMLElement;
+    if (current && next) {
+      current.style.transform = "scale(1)";
+      next.style.transform = "scale(1.36)";
+    }
   };
 
-  const handleTransitionEnd = () => {
-    if (!carouselTrackRef.current) return;
-
+  useEffect(() => {
+    if (!carouselTrackRef.current || isTransitioningRef.current) return;
     carouselTrackRef.current.style.transition = "none";
     carouselTrackRef.current.style.transform = `translateX(0px)`;
+  }, [items]);
+
+  const handleTransitionEnd = () => {
+    if (!carouselTrackRef.current || isTransitioningRef.current) return;
+
+    isTransitioningRef.current = true;
+
+    const current = carouselTrackRef.current.getElementsByClassName(
+      "active"
+    )[0] as HTMLElement;
+    const next = carouselTrackRef.current.getElementsByClassName(
+      "next"
+    )[0] as HTMLElement;
+    if (current && next) {
+      current.style.transform = "scale(1.36)";
+      next.style.transform = "scale(1)";
+    }
 
     void carouselTrackRef.current.offsetWidth;
 
@@ -56,6 +85,8 @@ const Carousel = () => {
         carouselTrackRef.current.style.transition =
           "transform 0.5s ease-in-out";
       }
+
+      isTransitioningRef.current = false;
     }, 0);
 
     setItems((prevItems) => {
@@ -68,12 +99,11 @@ const Carousel = () => {
     });
   };
 
-  // Set the class names based on the current position
   const getItemClass = (index: number) => {
     const mid = Math.floor(items.length / 2);
-    if (index === mid) return "carousel active"; // Central item
-    if (index === mid - 1 || index === mid + 1) return "carousel next"; // Next and previous
-    return "carousel prev"; // Items far away from center
+    if (index === mid) return "carousel active";
+    if (index === mid + 1) return "carousel next";
+    return "carousel";
   };
 
   useEffect(() => {
