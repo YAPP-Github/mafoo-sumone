@@ -82,7 +82,7 @@ const PickPhotoHeader = ({
             onClick={() => setOpenModal(false)}
           />
           <div className="flex flex-col gap-4">
-            <span className="text-lg leading-[150%] tracking-[0.36px] text-gray-800">
+            <span className="w-[calc(100%-2.5rem)] text-lg leading-[150%] tracking-[0.36px] text-gray-800">
               {/* 일부 기기에서는 1장만 선택할 수 있어요. */}
               {dict.description.title}
             </span>
