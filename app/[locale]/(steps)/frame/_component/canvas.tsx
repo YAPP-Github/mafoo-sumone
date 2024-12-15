@@ -194,7 +194,7 @@ const Canvas = ({
             left: xPadding,
             bottom: xPadding * 0.8,
           }}
-          className="absolute z-30 flex flex-row items-center justify-center gap-1 rounded-full bg-[rgba(255,255,255,0.8)] py-1 pl-2 pr-2.5"
+          className="absolute z-30 flex flex-row items-center justify-center gap-1 rounded-full border border-white bg-[rgba(255,255,255,0.8)] py-1 pl-2 pr-2.5"
         >
           <DayHeartIcon
             width={24}
