@@ -28,7 +28,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
   const { photos } = usePhotoStore();
   const canvasRef = useRef<HTMLDivElement>(null);
   const [imageIdx, setImageIdx] = useState(0);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   // const [isTesting, setIsTesting] = useState(false);
 
   const [
