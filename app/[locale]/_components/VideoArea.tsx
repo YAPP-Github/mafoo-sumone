@@ -72,7 +72,6 @@ const VideoArea = () => {
   const [startImage, setStartImage] = useState(false);
 
   const onLoadFinish = () => {
-    console.log("loaded");
     setIsFinishLoading(true);
   };
 

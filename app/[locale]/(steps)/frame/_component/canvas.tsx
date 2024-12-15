@@ -238,10 +238,8 @@ const FrameStack = memo(function ({
       document.querySelectorAll(".frame-element")
     ).reverse() as HTMLImageElement[];
 
-    console.log("frameType", frameType, frameElements);
     frameElements.find((el) => {
       const id = el.id;
-      console.log(el);
 
       if (id === `frame-${frameType}`) {
         el.style.opacity = "1";
@@ -250,7 +248,6 @@ const FrameStack = memo(function ({
       el.remove();
       el.style.opacity = "0";
       frameStack.prepend(el);
-
       return false;
     });
   }, [frameType]);

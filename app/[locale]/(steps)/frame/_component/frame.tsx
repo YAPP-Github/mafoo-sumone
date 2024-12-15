@@ -73,10 +73,6 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
     uploadPhotosAndCreateAlbum();
   }, [photos, navigation]);
 
-  useEffect(() => {
-    console.log("frameType", frameType);
-  }, [frameType]);
-
   /*
   const handleTestRecap = async () => {
     if (!canvasRef.current || !canvasSize.width) return;

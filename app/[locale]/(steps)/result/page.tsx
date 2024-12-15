@@ -42,9 +42,6 @@ const ResultPage = async (props: {
     }
   ).then((res) => res.json());
 
-  console.log(
-    `/sumone/invite-code?userId=${encodeURIComponent(coupleId + nickName)}`
-  );
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/sumone/invite-code?userId=${encodeURIComponent(coupleId + nickName)}`,
     {
