@@ -85,7 +85,7 @@ export default async function Home(props: {
         <span className="flex flex-col items-center gap-1">
           <span className="flex flex-row items-center gap-2">
             <HeartIcon width={24} />
-            <h1 className="whitespace-pre text-xl leading-[160%] tracking-[0.4px]">
+            <h1 className="whitespace-pre text-center text-xl leading-[160%] tracking-[0.4px]">
               {/* 2024년 내 연인 결산 */}
               {dict.MainPage.title}
             </h1>
