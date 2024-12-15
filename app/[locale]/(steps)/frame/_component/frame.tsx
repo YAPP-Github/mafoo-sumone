@@ -193,7 +193,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            userId: userData.coupleId,
+            userId: userData.coupleId + userData.nickName,
             fileUrls: newUrls,
           }),
         }

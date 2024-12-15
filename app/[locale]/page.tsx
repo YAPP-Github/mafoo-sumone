@@ -58,7 +58,7 @@ export default async function Home(props: {
     });
 
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/sumone/invite-code?userId=${coupleId}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/sumone/invite-code?userId=${coupleId}${nickName}`,
     {
       method: "GET",
       headers: {

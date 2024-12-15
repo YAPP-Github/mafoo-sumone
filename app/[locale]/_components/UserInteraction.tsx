@@ -150,7 +150,9 @@ const MainPageUserInteraction = ({
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ userId: userData.coupleId }),
+            body: JSON.stringify({
+              userId: userData.coupleId + userData.nickName,
+            }),
           }
         );
 
