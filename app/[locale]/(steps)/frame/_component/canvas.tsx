@@ -156,7 +156,7 @@ const Canvas = ({
             style={{
               backgroundColor: frameType === 5 ? subColor : mainColor,
               top: topIndex - 10,
-              width: (canvasSize.height * 240) / 543 + 2 + "px",
+              width: (canvasSize.height * 240) / 543 + 10 + "px",
               height: (canvasSize.height * 354) / 543 + 20 + "px",
               position: "absolute",
               display: "flex",
