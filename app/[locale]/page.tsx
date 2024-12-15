@@ -98,7 +98,7 @@ export default async function Home(props: {
           </h2>
         </span>
       </header>
-      <VideoArea />
+      <VideoArea lang={lang.locale} />
       <span className="flex items-center gap-2">
         <DoubleHeartIcon
           width={24}

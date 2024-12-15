@@ -4,11 +4,19 @@ import { useGetScreenSize } from "@/utils/useScreenSize";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-const ExampleImageSrcs = new Array(10)
-  .fill(0)
-  .map((_, idx) => `/_assets/mainpage/${idx}.png`);
+const getExampleImageSrcs = (lang: string) => {
+  return new Array(10)
+    .fill(0)
+    .map((_, idx) => `/_assets/mainpage/${lang}/${idx}.png`);
+};
 
-const ImageSection = ({ onLoadFinish }: { onLoadFinish: () => void }) => {
+const ImageSection = ({
+  onLoadFinish,
+  lang,
+}: {
+  onLoadFinish: () => void;
+  lang: string;
+}) => {
   const [imgIdx, setImgIdx] = useState(0);
   const loadedCountRef = useRef(10);
 
@@ -50,6 +58,8 @@ const ImageSection = ({ onLoadFinish }: { onLoadFinish: () => void }) => {
     return () => clearInterval(interval);
   }, []);
 
+  const ExampleImageSrcs = getExampleImageSrcs(lang);
+
   return ExampleImageSrcs.map((src, idx) => (
     <Image
       key={idx}
@@ -66,7 +76,7 @@ const ImageSection = ({ onLoadFinish }: { onLoadFinish: () => void }) => {
   ));
 };
 
-const VideoArea = () => {
+const VideoArea = ({ lang }: { lang: string }) => {
   const windowSize = useGetScreenSize();
   const [isFinishLoading, setIsFinishLoading] = useState(false);
   const [startImage, setStartImage] = useState(false);
@@ -90,12 +100,17 @@ const VideoArea = () => {
             opacity: isFinishLoading ? 1 : 0,
           }}
         >
-          {startImage && <ImageSection onLoadFinish={onLoadFinish} />}
+          {startImage && (
+            <ImageSection
+              onLoadFinish={onLoadFinish}
+              lang={lang}
+            />
+          )}
         </div>
         {!isFinishLoading && (
           <div className="h-full w-full">
             <Image
-              src="/_assets/mainpage/0.png"
+              src={`/_assets/mainpage/${lang}/0.png`}
               priority
               fill
               sizes="100vw"
