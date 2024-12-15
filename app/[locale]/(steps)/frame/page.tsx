@@ -49,6 +49,7 @@ const FramePage = async (props: {
         coupleId,
       }}
       dict={dict.Frame}
+      loader={dict.Loader}
     />
   );
 };

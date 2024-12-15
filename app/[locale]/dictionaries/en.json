@@ -64,5 +64,12 @@
     "show_off_on_sns": "Share my partner’s moments",
     "recap_complete": "Completed!"
   },
-  "Share": "When was the moment I was the most lovable in 2024?\nPlease capture the version of me that I love the most in a video!"
+  "Share": "When was the moment I was the most lovable in 2024?\nPlease capture the version of me that I love the most in a video!",
+  "Loader": {
+    "title": "We’re turning precious\nmemories into a video!",
+    "content": {
+      "before": "It’s filled with your love\nfor ",
+      "after": "!"
+    }
+  }
 }

@@ -12,15 +12,19 @@ import SumoneButton from "@/assets/SumoneButton";
 import { ObjectedParams } from "@/types/user";
 import { getPresignedUrls } from "../../api";
 import Carousel from "./carousel";
+import Image from "next/image";
+import SumoneLoader from "@/assets/Sumoneloader.gif";
 
 interface FrameProps {
   locale: string;
   userData: ObjectedParams;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dict: Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  loader: Record<string, any>;
 }
 
-const Frame = ({ locale, userData, dict }: FrameProps) => {
+const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
   const navigation = useRouter();
   const searchParams = useSearchParams();
   const canvasSize = useGetCanvasSize(userData.top, userData.bottom);
@@ -28,7 +32,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
   const { photos } = usePhotoStore();
   const canvasRef = useRef<HTMLDivElement>(null);
   const [imageIdx, setImageIdx] = useState(0);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   // const [isTesting, setIsTesting] = useState(false);
 
   const [
@@ -356,25 +360,39 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
         </div>
       </div>
       {isLoading && (
-        <div className="bg-image fixed z-50 mx-6 flex h-[500px] w-[calc(100%-48px)] flex-col">
+        <div className="bg-image fixed z-50 mx-6 flex h-fit w-[calc(100%-48px)] flex-col">
           <div className="flex h-full w-full flex-col items-center gap-2.5 pb-14 pt-12">
             <div className="flex flex-col items-center gap-5 pb-12">
-              <HeartIcon width={28} />
-              {locale === "ko" && (
+              {locale === "ko" ? (
+                <HeartIcon width={28} />
+              ) : (
+                <Image
+                  src={SumoneLoader}
+                  alt="loader"
+                  width={72}
+                  height={72}
+                />
+              )}
+              {locale === "ko" ? (
                 <span className="text-center text-lg leading-[160%] tracking-[0.36px] text-gray-800">
                   지금 만든 추억
                   <br />
                   마푸에서 한 달간 다시 볼 수 있어요
                 </span>
+              ) : (
+                <span className="whitespace-pre text-center text-lg leading-[160%] tracking-[0.36px]">
+                  {loader.title}
+                </span>
               )}
               <span className="whitespace-pre text-center text-sm leading-[150%] tracking-[0.28px] text-gray-600">
                 {/* {userData.partnerNickName}님을 사랑하는 마음을 */}
-                {dict.full_of_love.before} {userData.partnerNickName}
-                {dict.full_of_love.after}
+                {loader.content.before}
+                {userData.partnerNickName}
+                {loader.content.after}
               </span>
             </div>
             {/* Carousel */}
-            <Carousel />
+            {locale === "ko" && <Carousel />}
           </div>
         </div>
       )}
