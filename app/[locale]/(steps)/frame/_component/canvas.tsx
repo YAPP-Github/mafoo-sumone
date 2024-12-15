@@ -57,18 +57,6 @@ const frameSrcs = [
   // "https://mafoo-sumone-event.imgix.net/_assets/frame/cat.png",
   // "https://mafoo-sumone-event.imgix.net/_assets/frame/panda.png",
   // "https://mafoo-sumone-event.imgix.net/_assets/frame/egg.png",
-  // Local 3x
-  // "/_assets/frame/3x/Frame.png",
-  // "/_assets/frame/3x/Frame-1.png",
-  // "/_assets/frame/3x/Frame-2.png",
-  // "/_assets/frame/3x/Frame-3.png",
-  // "/_assets/frame/3x/Frame-4.png",
-  // CDN 3x
-  // "https://mafoo-sumone-event.imgix.net/_assets/frame/3x/Frame.png",
-  // "https://mafoo-sumone-event.imgix.net/_assets/frame/3x/Frame-1.png",
-  // "https://mafoo-sumone-event.imgix.net/_assets/frame/3x/Frame-2.png",
-  // "https://mafoo-sumone-event.imgix.net/_assets/frame/3x/Frame-3.png",
-  // "https://mafoo-sumone-event.imgix.net/_assets/frame/3x/Frame-4.png",
 ] as const;
 
 interface CanvasProps {
@@ -171,6 +159,7 @@ const Canvas = ({
               id="targetImage"
               src={photoSrc}
               alt="image"
+              quality={100}
               width={(canvasSize.height * 240) / 543}
               height={(canvasSize.height * 354) / 543}
               style={{
@@ -264,7 +253,9 @@ const FrameStack = memo(function ({
           src={frameSrc}
           priority
           alt="frame"
+          sizes="100vw"
           fill
+          quality={100}
           className={`frame-element absolute top-0 z-20 h-full w-full rounded-2xl object-contain bg-blend-overlay`}
           onClick={handleClickBackground}
           onLoad={onLoad}

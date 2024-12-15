@@ -1,6 +1,7 @@
 .sprite_f {
-  background-image: url("../../../../assets/FramePage.png");
+  background-image: url("../../../../../assets/FramePage.png");
   background-repeat: no-repeat;
+  background-size: 320px 56px;
 }
 
 .chip {

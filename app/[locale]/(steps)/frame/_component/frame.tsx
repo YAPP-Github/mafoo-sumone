@@ -14,7 +14,7 @@ import { getPresignedUrls } from "../../api";
 import Carousel from "./carousel";
 import Image from "next/image";
 import SumoneLoader from "@/assets/Sumoneloader.gif";
-
+import "./frame.css";
 interface FrameProps {
   locale: string;
   userData: ObjectedParams;
@@ -327,15 +327,19 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
                 <button
                   key={index}
                   onClick={() => setFrameType(index + 1)}
-                  className={`relative flex h-14 w-14 items-center justify-center rounded-full bg-white focus:outline-none`}
+                  className={`sprite_f chip chip_${character} ${
+                    index + 1 === frameType
+                      ? "rounded-full border-2 border-white"
+                      : "opacity-40"
+                  } relative flex h-14 w-14 items-center justify-center rounded-full bg-white focus:outline-none`}
                 >
-                  <span
+                  {/* <span
                     className={`sprite_f chip chip_${character} ${
                       index + 1 === frameType
                         ? "rounded-full border-2 border-white"
                         : "opacity-40"
                     }`}
-                  />
+                  /> */}
                 </button>
               )
             )}

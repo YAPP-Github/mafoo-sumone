@@ -2,7 +2,6 @@ import { Locale } from "@/types/page";
 import Frame from "./_component/frame";
 import { AsyncSearchParams } from "@/types/user";
 import { getDictionary } from "../../dictionaries";
-import "./frame.css";
 
 const FramePage = async (props: {
   params: Promise<{ locale: Locale }>;
