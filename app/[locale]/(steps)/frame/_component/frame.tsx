@@ -32,7 +32,7 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
   const { photos } = usePhotoStore();
   const canvasRef = useRef<HTMLDivElement>(null);
   const [imageIdx, setImageIdx] = useState(0);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   // const [isTesting, setIsTesting] = useState(false);
 
   const [
@@ -360,7 +360,9 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
         </div>
       </div>
       {isLoading && (
-        <div className="bg-image fixed z-50 mx-6 flex h-fit w-[calc(100%-48px)] flex-col">
+        <div
+          className={`${locale === "ko" ? "h-[500px]" : "h-[308px]"} bg-image fixed z-50 mx-6 flex w-[calc(100%-48px)] flex-col`}
+        >
           <div className="flex h-full w-full flex-col items-center gap-2.5 pb-14 pt-12">
             <div className="flex flex-col items-center gap-5 pb-12">
               {locale === "ko" ? (
