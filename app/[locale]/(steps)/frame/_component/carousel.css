@@ -4,7 +4,7 @@
 .sprite_carousel {
   background-image: url("../../../../../assets/CarouselSprite.png");
   background-repeat: no-repeat;
-  background-size: auto;
+  background-size: 300%;
 }
 
 .carousel {
@@ -21,11 +21,11 @@
 }
 
 .red {
-  background-position: -130px 0;
+  background-position: -123.333px 0;
 }
 
 .green {
-  background-position: -260px 0;
+  background-position: -246.666px 0;
 }
 
 /* 새로운 스타일 */
@@ -48,8 +48,12 @@
   transition: transform 0.5s ease-in-out;
 }
 
-/* 활성 클래스 설정 */
 .carousel.active {
   transform: scale(1.36);
   z-index: 1;
+}
+
+.carousel.prev,
+.carousel.next {
+  transform: scale(1);
 }
