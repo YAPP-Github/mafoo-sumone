@@ -151,7 +151,7 @@ const MainPageUserInteraction = ({
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              userId: userData.coupleId + encodeURI(userData.nickName),
+              userId: userData.coupleId + userData.nickName,
             }),
           }
         );

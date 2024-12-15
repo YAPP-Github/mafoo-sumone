@@ -56,7 +56,6 @@ export default async function Home(props: {
         userCount: -1,
       };
     });
-
   console.log(
     `${process.env.NEXT_PUBLIC_API_URL}/sumone/invite-code?userId=${coupleId}${encodeURI(nickName)}`
   );
@@ -70,7 +69,6 @@ export default async function Home(props: {
     }
   )
     .then((res) => {
-      console.log(res);
       return res.json();
     })
     .catch(() => {
