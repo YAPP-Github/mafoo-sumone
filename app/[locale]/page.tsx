@@ -57,10 +57,10 @@ export default async function Home(props: {
       };
     });
   console.log(
-    `${process.env.NEXT_PUBLIC_API_URL}/sumone/invite-code?userId=${encodeURI(coupleId + nickName)}`
+    `${process.env.NEXT_PUBLIC_API_URL}/sumone/invite-code?userId=${encodeURIComponent(coupleId + nickName)}`
   );
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/sumone/invite-code?userId=${encodeURI(coupleId + nickName)}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/sumone/invite-code?userId=${encodeURIComponent(coupleId + nickName)}`,
     {
       method: "GET",
       headers: {
