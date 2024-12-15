@@ -57,8 +57,11 @@ export default async function Home(props: {
       };
     });
 
+  console.log(
+    `${process.env.NEXT_PUBLIC_API_URL}/sumone/invite-code?userId=${coupleId}${encodeURI(nickName)}`
+  );
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/sumone/invite-code?userId=${coupleId}${nickName}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/sumone/invite-code?userId=${coupleId}${encodeURI(nickName)}`,
     {
       method: "GET",
       headers: {
@@ -67,6 +70,7 @@ export default async function Home(props: {
     }
   )
     .then((res) => {
+      console.log(res);
       return res.json();
     })
     .catch(() => {

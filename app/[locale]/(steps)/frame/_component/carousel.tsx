@@ -25,7 +25,7 @@ const Carousel = () => {
     if (intervalRef.current) return;
     intervalRef.current = setInterval(() => {
       slideToNext();
-    }, 5000);
+    }, 1200);
   };
 
   const stopAutoSlide = () => {
@@ -41,12 +41,6 @@ const Carousel = () => {
     // Apply the translateX to move left
     carouselTrackRef.current.style.transition = "transform 0.5s ease-in-out";
     carouselTrackRef.current.style.transform = `translateX(-${TOTAL_MOVE}px)`;
-    const currentItem = carouselTrackRef.current.querySelector(
-      ".active"
-    ) as HTMLElement;
-    currentItem.style.transform = "scale(1)";
-    const nextItem = currentItem.nextElementSibling as HTMLElement;
-    nextItem.style.transform = "scale(1.36)";
   };
 
   const handleTransitionEnd = () => {
@@ -61,12 +55,6 @@ const Carousel = () => {
       if (carouselTrackRef.current) {
         carouselTrackRef.current.style.transition =
           "transform 0.5s ease-in-out";
-        const currentItem = carouselTrackRef.current.querySelector(
-          ".active"
-        ) as HTMLElement;
-        currentItem.style.transform = "scale(1.36)";
-        const nextItem = currentItem.nextElementSibling as HTMLElement;
-        nextItem.style.transform = "scale(1)";
       }
     }, 0);
 

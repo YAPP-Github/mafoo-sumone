@@ -42,8 +42,9 @@ const ResultPage = async (props: {
     }
   ).then((res) => res.json());
 
+  console.log(`/sumone/invite-code?userId=${coupleId}${encodeURI(nickName)}`);
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/sumone/invite-code?userId=${coupleId}${nickName}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/sumone/invite-code?userId=${coupleId}${encodeURI(nickName)}`,
     {
       method: "GET",
       headers: {
@@ -58,6 +59,7 @@ const ResultPage = async (props: {
       return { code: null };
     });
 
+  console.log(data);
   return (
     <main
       id="mainBg"
