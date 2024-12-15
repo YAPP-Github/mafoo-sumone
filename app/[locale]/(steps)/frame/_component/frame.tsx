@@ -11,6 +11,7 @@ import { usePhotoStore } from "@/atom/photo";
 import SumoneButton from "@/assets/SumoneButton";
 import { ObjectedParams } from "@/types/user";
 import { getPresignedUrls } from "../../api";
+import Carousel from "./carousel";
 
 interface FrameProps {
   locale: string;
@@ -27,6 +28,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
   const { photos } = usePhotoStore();
   const canvasRef = useRef<HTMLDivElement>(null);
   const [imageIdx, setImageIdx] = useState(0);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   // const [isTesting, setIsTesting] = useState(false);
 
   const [
@@ -70,8 +72,6 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
   useEffect(() => {
     console.log("frameType", frameType);
   }, [frameType]);
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   /*
   const handleTestRecap = async () => {
@@ -357,7 +357,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
       </div>
       {isLoading && (
         <div className="bg-image fixed z-50 mx-6 flex h-[500px] w-[calc(100%-48px)] flex-col">
-          <div className="flex h-full w-full flex-col gap-2.5 pb-14 pt-12">
+          <div className="flex h-full w-full flex-col items-center gap-2.5 pb-14 pt-12">
             <div className="flex flex-col items-center gap-5 pb-12">
               <HeartIcon width={28} />
               {locale === "ko" && (
@@ -374,7 +374,7 @@ const Frame = ({ locale, userData, dict }: FrameProps) => {
               </span>
             </div>
             {/* Carousel */}
-            <div className="h-[150px] w-full bg-pastelpink">캐러셀~~~</div>
+            <Carousel />
           </div>
         </div>
       )}

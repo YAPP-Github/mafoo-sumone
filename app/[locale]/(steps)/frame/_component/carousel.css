@@ -1,0 +1,55 @@
+/* carousel.css */
+
+/* 기존 스타일 */
+.sprite_carousel {
+  background-image: url("../../../../../assets/CarouselSprite.png");
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+.carousel {
+  width: 120px;
+  height: 109.76px;
+  display: inline-block;
+  transition:
+    transform 0.5s ease,
+    scale 0.5s ease;
+}
+
+.yellow {
+  background-position: 0 0;
+}
+
+.red {
+  background-position: -130px 0;
+}
+
+.green {
+  background-position: -260px 0;
+}
+
+/* 새로운 스타일 */
+
+/* 컨테이너 설정 */
+.carousel-container {
+  position: relative;
+  display: flex;
+  height: 150px;
+  width: calc(100% - 2px);
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* 트랙 설정 */
+.carousel-track {
+  display: flex;
+  gap: 32px;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* 활성 클래스 설정 */
+.carousel.active {
+  transform: scale(1.36);
+  z-index: 1;
+}
