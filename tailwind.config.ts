@@ -13,6 +13,9 @@ export default {
       jf: ["jf-openhuninn", "sans-serif"],
       mamelon: ["Mamelon", "sans-serif"],
     },
+    screens: {
+      xs: "375px",
+    },
     colors: {
       pink: "#FF9092",
       brown: "#C5B698",

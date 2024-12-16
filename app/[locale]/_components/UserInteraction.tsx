@@ -204,25 +204,29 @@ const MainPageUserInteraction = ({
           />
         </span>
       </span>
-      <span className="mb-2 flex flex-row gap-2">
-        <SumoneButton
-          width={180}
-          height={54}
-          fill={"#C5B698"}
-          // text="결산 부탁하기"
-          text={ask_for_mine}
-          textClass="text-white text-base tracking-[0.24px] leading-[150%]"
-          onClick={handleAskShare}
-        />
-        <SumoneButton
-          width={180}
-          height={54}
-          fill={"#FF9092"}
-          // text="동의하고 바로 결산"
-          text={agree_and_get_recap}
-          textClass="text-white text-base tracking-[0.24px] leading-[150%]"
-          onClick={handleCreateRecap}
-        />
+      <span className="max-xs:px-4 mb-2 flex w-full flex-row gap-2">
+        <span className="max-xs:w-1/2 w-[180px]">
+          <SumoneButton
+            width={"100%"}
+            height={54}
+            fill={"#C5B698"}
+            // text="결산 부탁하기"
+            text={ask_for_mine}
+            textClass="text-white text-base tracking-[0.24px] leading-[150%] max-xs:text-sm"
+            onClick={handleAskShare}
+          />
+        </span>
+        <span className="max-xs:w-1/2 w-[180px]">
+          <SumoneButton
+            width={"100%"}
+            height={54}
+            fill={"#FF9092"}
+            // text="동의하고 바로 결산"
+            text={agree_and_get_recap}
+            textClass="text-white text-base tracking-[0.24px] leading-[150%] max-xs:text-sm"
+            onClick={handleCreateRecap}
+          />
+        </span>
       </span>
       <div
         className="fixed flex w-full flex-row items-center justify-between px-6"

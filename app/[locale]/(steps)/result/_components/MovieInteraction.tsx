@@ -27,9 +27,9 @@ const MovieInteraction = ({ code }: { code: string }) => {
   };
 
   return (
-    <div className="relative mb-3 flex h-14 w-full shrink-0 px-6">
+    <div className="max-xs:px-3 relative mb-3 flex h-14 w-full shrink-0 px-6">
       <span className="flex w-full flex-row items-center justify-between rounded-xl bg-white px-4 py-3">
-        <span className="flex flex-row gap-1 text-sm leading-[160%] tracking-[0.28px] text-gray-800">
+        <span className="max-xs:text-xs flex flex-row items-center gap-1 text-sm leading-[160%] tracking-[0.28px] text-gray-800">
           <MovieIcon width={20} />
           마푸 앱에서 영상 더 만들기
         </span>
