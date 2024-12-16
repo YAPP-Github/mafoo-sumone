@@ -19,12 +19,7 @@ const VideoArea = ({ videoSrc }: { videoSrc: string }) => {
       loop
       playsInline
       muted
-      className="rounded-2xl"
-      style={{
-        objectFit: "contain",
-        width: "fit-content",
-        height: "100%",
-      }}
+      className="h-fit w-fit rounded-2xl object-contain"
     />
   );
 };
