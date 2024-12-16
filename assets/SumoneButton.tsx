@@ -10,6 +10,7 @@ interface SumeoneButtonProps extends TouchableIcon {
   text: string;
   textClass?: string;
   isLoading?: boolean;
+  icon?: React.ReactNode;
 }
 
 const SumoneButton = ({
@@ -21,6 +22,7 @@ const SumoneButton = ({
   tabIndex,
   role,
   textClass,
+  icon,
   // isLoading,
 }: SumeoneButtonProps) => {
   /*
@@ -47,7 +49,7 @@ const SumoneButton = ({
       role={role || "button"}
       tabIndex={tabIndex || 0}
       onClick={onClick}
-      className="relative flex items-center justify-center"
+      className="relative flex items-center justify-center gap-1"
       style={{ width: width, height: height }}
     >
       <SumoneButtonAsset
@@ -58,6 +60,7 @@ const SumoneButton = ({
       />
       {/* {isLoading ? LoadingDot : <Label />} */}
       <Label />
+      {icon}
     </div>
   );
 };

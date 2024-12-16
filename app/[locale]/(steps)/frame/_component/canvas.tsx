@@ -46,11 +46,12 @@ const CanvasPrepData = [
 
 const frameSrcs = [
   // Local 1x
-  "/_assets/frame/puppy.png",
-  "/_assets/frame/penguin.png",
-  "/_assets/frame/cat.png",
-  "/_assets/frame/panda.png",
-  "/_assets/frame/egg.png",
+  "/_assets/frame/puppy.webp",
+  "/_assets/frame/penguin.webp",
+  "/_assets/frame/cat.webp",
+  "/_assets/frame/panda.webp",
+  "/_assets/frame/egg.webp",
+
   // CDN 1x
   // "https://mafoo-sumone-event.imgix.net/_assets/frame/puppy.png",
   // "https://mafoo-sumone-event.imgix.net/_assets/frame/penguin.png",
@@ -247,15 +248,25 @@ const FrameStack = memo(function ({
       className="relative h-full w-full"
     >
       {frameSrcs.map((frameSrc, idx) => (
-        <Image
+        // <Image
+        //   key={idx}
+        //   id={`frame-${idx + 1}`}
+        //   src={frameSrc}
+        //   priority
+        //   alt="frame"
+        //   sizes="100vw"
+        //   fill
+        //   quality={100}
+        //   className={`frame-element absolute top-0 z-20 h-full w-full rounded-2xl object-contain bg-blend-overlay`}
+        //   onClick={handleClickBackground}
+        //   onLoad={onLoad}
+        // />
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
           key={idx}
           id={`frame-${idx + 1}`}
           src={frameSrc}
-          priority
           alt="frame"
-          sizes="100vw"
-          fill
-          quality={100}
           className={`frame-element absolute top-0 z-20 h-full w-full rounded-2xl object-contain bg-blend-overlay`}
           onClick={handleClickBackground}
           onLoad={onLoad}

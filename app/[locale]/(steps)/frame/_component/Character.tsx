@@ -10,7 +10,6 @@ const characterSrcs = [
   "/_assets/character/cat1.png",
   "/_assets/character/panda0.png",
   "/_assets/character/panda1.png",
-  "/_assets/character/egg0.png",
 ] as const;
 
 const Character = ({
@@ -25,7 +24,7 @@ const Character = ({
 }) => {
   const [characterState, setCharacterState] = useState<number>(0);
   const [isCharacterLoaded, setIsCharacterLoaded] = useState<boolean>(false);
-  const loadedCountRef = useRef(9);
+  const loadedCountRef = useRef(characterSrcs.length);
 
   const onLoad = () => {
     loadedCountRef.current--;
@@ -51,10 +50,10 @@ const Character = ({
     characterElements.find((el) => {
       const id = el.id;
 
-      if (id === `character-8` && frameType === 5) {
-        el.style.opacity = "1";
-        return true;
-      }
+      // if (id === `character-8` && frameType === 5) {
+      //   el.style.opacity = "1";
+      //   return true;
+      // }
 
       if (id === `character-${2 * (frameType - 1) + characterState}`) {
         el.style.opacity = "1";
@@ -89,7 +88,8 @@ const Character = ({
         {frameType !== 5 && (
           <span
             style={{ bottom: "40px" }}
-            className="relative left-1/2 z-30 flex h-fit w-fit translate-x-[-50%] transform"
+            // className="relative left-1/2 z-30 flex h-fit w-fit translate-x-[-50%] transform"
+            className="relative right-2 z-30 flex h-fit w-fit transform"
             data-html2canvas-ignore="true"
           >
             <div className="z-20 w-fit whitespace-pre rounded-lg bg-white px-3 py-2.5 text-xs leading-[150%] tracking-[0.24px] shadow-sm">
