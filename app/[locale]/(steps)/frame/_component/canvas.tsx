@@ -248,19 +248,6 @@ const FrameStack = memo(function ({
       className="relative h-full w-full"
     >
       {frameSrcs.map((frameSrc, idx) => (
-        // <Image
-        //   key={idx}
-        //   id={`frame-${idx + 1}`}
-        //   src={frameSrc}
-        //   priority
-        //   alt="frame"
-        //   sizes="100vw"
-        //   fill
-        //   quality={100}
-        //   className={`frame-element absolute top-0 z-20 h-full w-full rounded-2xl object-contain bg-blend-overlay`}
-        //   onClick={handleClickBackground}
-        //   onLoad={onLoad}
-        // />
         // eslint-disable-next-line @next/next/no-img-element
         <img
           key={idx}

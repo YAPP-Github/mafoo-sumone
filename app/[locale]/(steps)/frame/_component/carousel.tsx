@@ -88,13 +88,15 @@ const Carousel = () => {
       isTransitioningRef.current = false;
     }, 0);
 
-    setItems((prevItems) => {
-      const newItems = [...prevItems];
-      const firstItem = newItems.shift();
-      if (firstItem) {
-        newItems.push(firstItem);
-      }
-      return newItems;
+    requestAnimationFrame(() => {
+      setItems((prevItems) => {
+        const newItems = [...prevItems];
+        const firstItem = newItems.shift();
+        if (firstItem) {
+          newItems.push(firstItem);
+        }
+        return newItems;
+      });
     });
   };
 

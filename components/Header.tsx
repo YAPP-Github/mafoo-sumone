@@ -5,7 +5,7 @@ import Image from "next/image";
 import CloseIconSrc from "@/assets/SumoneCloseIconBlack.png";
 import PrevIconSrc from "@/assets/SumonePrevIcon.png";
 import SumoneFAQIconSrc from "@/assets/SumoneFAQIcon.png";
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 
 interface HeaderProps {
   titleComponent: React.ReactElement;
@@ -108,4 +108,4 @@ const Header = ({
   );
 };
 
-export default Header;
+export default memo(Header);

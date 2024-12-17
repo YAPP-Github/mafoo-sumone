@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 
 const characterSrcs = [
   // "/_assets/character/puppy0.png",
@@ -127,4 +127,4 @@ const Character = ({
   );
 };
 
-export default Character;
+export default memo(Character);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useMemo, useRef, useState } from "react";
 import Canvas from "./canvas";
 import html2canvas from "html2canvas";
 import Header from "@/components/Header";
@@ -267,6 +267,15 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
     // Hide the loading indicator after all downloads
   };
 
+  const headerTitleComponent = useMemo(
+    () => (
+      <div className="flex flex-row items-center gap-1 text-lg leading-[140%] tracking-[0.36px]">
+        {dict.select_frame}
+      </div>
+    ),
+    [dict.select_frame]
+  );
+
   return (
     <main
       className={`${
@@ -293,12 +302,7 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
         </div>
       )} */}
       <Header
-        titleComponent={
-          <div className="flex flex-row items-center gap-1 text-lg leading-[140%] tracking-[0.36px]">
-            {/* 프레임 선택 */}
-            {dict.select_frame}
-          </div>
-        }
+        titleComponent={headerTitleComponent}
         onClickPrev={() =>
           navigation.push(`pickphoto?${searchParams.toString()}`)
         }
@@ -407,4 +411,4 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
   );
 };
 
-export default Frame;
+export default memo(Frame);
