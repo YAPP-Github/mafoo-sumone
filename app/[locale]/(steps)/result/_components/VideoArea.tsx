@@ -19,7 +19,7 @@ const VideoArea = ({ videoSrc }: { videoSrc: string }) => {
       loop
       playsInline
       muted
-      className="h-fit w-fit rounded-2xl object-contain"
+      className="h-fit max-h-full w-fit max-w-full rounded-2xl object-contain"
     />
   );
 };

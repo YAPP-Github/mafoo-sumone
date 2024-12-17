@@ -2,14 +2,22 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const characterSrcs = [
-  "/_assets/character/puppy0.png",
-  "/_assets/character/puppy1.png",
-  "/_assets/character/penguin0.png",
-  "/_assets/character/penguin1.png",
-  "/_assets/character/cat0.png",
-  "/_assets/character/cat1.png",
-  "/_assets/character/panda0.png",
-  "/_assets/character/panda1.png",
+  // "/_assets/character/puppy0.png",
+  // "/_assets/character/puppy1.png",
+  // "/_assets/character/penguin0.png",
+  // "/_assets/character/penguin1.png",
+  // "/_assets/character/cat0.png",
+  // "/_assets/character/cat1.png",
+  // "/_assets/character/panda0.png",
+  // "/_assets/character/panda1.png",
+  "/_assets/character/puppy0.webp",
+  "/_assets/character/puppy1.webp",
+  "/_assets/character/penguin0.webp",
+  "/_assets/character/penguin1.webp",
+  "/_assets/character/cat0.webp",
+  "/_assets/character/cat1.webp",
+  "/_assets/character/panda0.webp",
+  "/_assets/character/panda1.webp",
 ] as const;
 
 const Character = ({
@@ -89,7 +97,7 @@ const Character = ({
           <span
             style={{ bottom: "40px" }}
             // className="relative left-1/2 z-30 flex h-fit w-fit translate-x-[-50%] transform"
-            className="relative right-2 z-30 flex h-fit w-fit transform"
+            className="relative right-0 z-30 flex h-fit w-fit -translate-x-[10%] transform"
             data-html2canvas-ignore="true"
           >
             <div className="z-20 w-fit whitespace-pre rounded-lg bg-white px-3 py-2.5 text-xs leading-[150%] tracking-[0.24px] shadow-sm">
@@ -105,7 +113,7 @@ const Character = ({
               id={`character-${i}`}
               src={src}
               priority
-              quality={100}
+              unoptimized
               alt="character image"
               fill
               className="character-element"

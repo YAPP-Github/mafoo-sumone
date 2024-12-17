@@ -1,8 +1,41 @@
 import { useEffect, useState } from "react";
-import SumoneCopyPinkIcon from "@/assets/SumoneCopyIcon.png";
-import SumoneCopyWhiteIcon from "@/assets/SumoneCopyIconWhite.png";
+import SumoneCopyIcon from "@/assets/SumoneCopyIconBlack.png";
 import Image from "next/image";
 import SumoneButton from "@/assets/SumoneButton";
+
+const SumoneCopyPink = () => {
+  return (
+    <Image
+      src={SumoneCopyIcon}
+      alt="copy"
+      width={16}
+      height={16}
+      unoptimized
+      className="z-10"
+      style={{
+        filter:
+          "invert(64%) sepia(18%) saturate(1783%) hue-rotate(314deg) brightness(100%) contrast(101%)",
+      }}
+    />
+  );
+};
+
+const SumoneCopyWhite = () => {
+  return (
+    <Image
+      src={SumoneCopyIcon}
+      alt="copy"
+      width={16}
+      height={16}
+      unoptimized
+      className="z-10"
+      quality={100}
+      style={{
+        filter: "invert(1) brightness(2)",
+      }}
+    />
+  );
+};
 
 const RegisterCode = ({
   tooltip,
@@ -29,30 +62,13 @@ const RegisterCode = ({
       onClick={onClickHandler}
       className={`relative flex h-fit flex-row items-center gap-1 rounded-lg`}
     >
-      {/* <span
-        className={`${
-          tooltip ? "text-pink" : "text-white"
-        } max-xs:text-xs text-sm tracking-[0.28px]`}
-      >
-        가입코드
-      </span>
-       
-      */}
       <SumoneButton
         width={88}
         height={32}
         fill={tooltip ? "#ffffff" : "#FF9092"}
         text="가입코드"
         textClass={`${tooltip ? "text-[#FF9092]" : "text-white"} text-sm tracking-[0.28px] max-xs:text-xs`}
-        icon={
-          <Image
-            src={tooltip ? SumoneCopyPinkIcon : SumoneCopyWhiteIcon}
-            alt="copy"
-            width={16}
-            height={16}
-            className="z-10"
-          />
-        }
+        icon={tooltip ? <SumoneCopyPink /> : <SumoneCopyWhite />}
       />
       {tooltip && showTooltip && (
         <div

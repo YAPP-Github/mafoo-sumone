@@ -15,6 +15,8 @@ import Carousel from "./carousel";
 import Image from "next/image";
 import SumoneLoader from "@/assets/Sumoneloader.gif";
 import "./frame.css";
+import "./carousel.css";
+
 interface FrameProps {
   locale: string;
   userData: ObjectedParams;
@@ -359,6 +361,9 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
           </div>
         </div>
       </div>
+      {!isUploadPhotosAndCreateAlbumLoading && (
+        <span className="sprite_carousel invisible" />
+      )}
       {isLoading && (
         <div
           className={`${locale === "ko" ? "h-[500px]" : "h-[308px]"} bg-image fixed z-50 mx-6 flex w-[calc(100%-48px)] flex-col`}

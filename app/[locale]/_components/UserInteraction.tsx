@@ -17,6 +17,7 @@ import RegisterCode from "@/components/RegisterCode";
 import { Locale } from "@/types/page";
 import Image from "next/image";
 import CloseIconSrc from "@/assets/SumoneCloseIconBlack.png";
+import FAQIconSrc from "@/assets/SumoneFAQIcon.png";
 
 const FAQ_URL = {
   ko: "https://chisel-promise-9ff.notion.site/2024-FAQ-KR-153385a9a75b80acabeffd1b81648b71?pvs=4",
@@ -204,7 +205,7 @@ const MainPageUserInteraction = ({
           />
         </span>
       </span>
-      <span className="max-xs:px-4 mb-2 flex w-full flex-row gap-2">
+      <span className="max-xs:px-4 mb-2 flex w-full flex-row justify-center gap-2">
         <span className="max-xs:w-1/2 w-[180px]">
           <SumoneButton
             width={"100%"}
@@ -245,7 +246,13 @@ const MainPageUserInteraction = ({
             href={FAQ_URL[locale]}
             className="flex h-7 w-7 items-center justify-center rounded-lg"
           >
-            <span className="sprite faq" />
+            <Image
+              src={FAQIconSrc}
+              alt="faq"
+              unoptimized
+              width={28}
+              height={28}
+            />
           </Link>
         </span>
         <div
@@ -259,6 +266,7 @@ const MainPageUserInteraction = ({
             alt="close"
             width={28}
             height={28}
+            unoptimized
           />
         </div>
       </div>

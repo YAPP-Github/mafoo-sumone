@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import "./carousel.css";
 
 const Carousel = () => {
   const initialColors = [

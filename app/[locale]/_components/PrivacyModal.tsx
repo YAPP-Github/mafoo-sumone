@@ -27,8 +27,7 @@ const PrivacyModal = ({
             className="z-20 object-contain focus:outline-none"
             onClick={handleClose}
             alt="close"
-            sizes="100vw"
-            quality={100}
+            unoptimized
           />
         </div>
         <span className="w-full border-b border-gray-200" />

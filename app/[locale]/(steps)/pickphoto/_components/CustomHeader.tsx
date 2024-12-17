@@ -78,6 +78,7 @@ const PickPhotoHeader = ({
             alt="close"
             width={24}
             height={24}
+            unoptimized
             className="absolute right-4 top-4"
             onClick={() => setOpenModal(false)}
           />

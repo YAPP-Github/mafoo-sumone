@@ -60,6 +60,7 @@ const Header = ({
         width={28}
         height={28}
         alt="prevIcon"
+        unoptimized
         className="absolute left-4 focus:outline-none"
         onClick={onClickPrev ?? handleClickPrev}
       />
@@ -72,6 +73,7 @@ const Header = ({
           <Image
             src={CloseIconSrc}
             alt="close"
+            unoptimized
             width={28}
             height={28}
           />
@@ -87,6 +89,7 @@ const Header = ({
               src={SumoneFAQIconSrc}
               width={28}
               height={28}
+              unoptimized
               alt="faq"
             />
             <div
