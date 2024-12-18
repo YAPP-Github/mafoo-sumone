@@ -229,12 +229,21 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
     canvasRef.current.style.height = canvasSize.height + "px";
 
     setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 10));
     const dataUrls: string[] = [];
 
+    let currentImageIdx = imageIdx;
     // Iterate over all photos
     for (let idx = 0; idx < photos.length; idx++) {
       try {
+        // setImageIdx((prev) => (prev + 1) % photos.length);
+        currentImageIdx = (currentImageIdx + 1) % photos.length;
+        // await new Promise((resolve) => setTimeout(resolve, 10));
+        const ImgRef = document.getElementById("targetImage");
+        ImgRef?.setAttribute(
+          "src",
+          URL.createObjectURL(photos[currentImageIdx])
+        );
+
         const canvas = await html2canvas(canvasRef.current, {
           onclone: (el) => {
             const elementsWithShiftedDownwardText =
@@ -254,9 +263,6 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
         // Convert the canvas to a data URL (image)
         const dataUrl = canvas.toDataURL("image/jpeg");
         dataUrls.push(dataUrl);
-
-        setImageIdx((prev) => (prev + 1) % photos.length);
-        await new Promise((resolve) => setTimeout(resolve, 10));
       } catch (error) {
         console.error("Failed to capture the frame:", error);
       }
@@ -368,7 +374,7 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
       {!isUploadPhotosAndCreateAlbumLoading && (
         <span className="sprite_carousel invisible" />
       )}
-      {isLoading && (
+      {/* {isLoading && (
         <div
           className={`${locale === "ko" ? "h-[500px]" : "h-[308px]"} bg-image fixed z-50 mx-6 flex w-[calc(100%-48px)] flex-col`}
         >
@@ -396,17 +402,15 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
                 </span>
               )}
               <span className="whitespace-pre text-center text-sm leading-[150%] tracking-[0.28px] text-gray-600">
-                {/* {userData.partnerNickName}님을 사랑하는 마음을 */}
                 {loader.content.before}
                 {userData.partnerNickName}
                 {loader.content.after}
               </span>
             </div>
-            {/* Carousel */}
             {locale === "ko" && <Carousel />}
           </div>
         </div>
-      )}
+      )} */}
     </main>
   );
 };

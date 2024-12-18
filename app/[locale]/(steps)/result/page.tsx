@@ -58,7 +58,6 @@ const ResultPage = async (props: {
       return { code: null };
     });
 
-  console.log(data);
   return (
     <main
       id="mainBg"
