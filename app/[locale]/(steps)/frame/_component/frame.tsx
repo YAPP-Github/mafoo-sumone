@@ -374,7 +374,7 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
       {!isUploadPhotosAndCreateAlbumLoading && (
         <span className="sprite_carousel invisible" />
       )}
-      {/* {isLoading && (
+      {isLoading && (
         <div
           className={`${locale === "ko" ? "h-[500px]" : "h-[308px]"} bg-image fixed z-50 mx-6 flex w-[calc(100%-48px)] flex-col`}
         >
@@ -410,7 +410,7 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
             {locale === "ko" && <Carousel />}
           </div>
         </div>
-      )} */}
+      )}
     </main>
   );
 };
