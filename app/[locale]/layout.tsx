@@ -3,7 +3,6 @@ import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import { use } from "react";
 import { Locale } from "@/types/page";
 import "./globals.css";
-import { GoogleAdSense } from "./_adsense";
 
 export const metadata: Metadata = {
   title: "Mafoo-Sumone Recap",
@@ -55,7 +54,6 @@ export default function RootLayout(props: {
       {process.env.NEXT_PUBLIC_GTM && (
         <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM} />
       )}
-      {process.env.NEXT_PUBLIC_PID && <GoogleAdSense />}
     </html>
   );
 }
