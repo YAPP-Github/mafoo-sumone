@@ -246,6 +246,7 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
 
         const canvas = await html2canvas(canvasRef.current, {
           onclone: (el) => {
+            console.log("cloned", idx);
             const elementsWithShiftedDownwardText =
               el.querySelectorAll(".shifted-text");
             elementsWithShiftedDownwardText.forEach((element) => {
