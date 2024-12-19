@@ -244,7 +244,19 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
           URL.createObjectURL(photos[currentImageIdx])
         );
 
-        const canvas = await html2canvas(canvasRef.current, {
+        // Wait for the canvas to be updated with the new image
+
+        const canvas = await html2canvas(canvasRef.current!, {
+          useCORS: true,
+          allowTaint: true,
+          ignoreElements: function (e) {
+            // Here, ignore external URL links and lazyload images
+            if (e.tagName === "A" || e.getAttribute("loading") === "lazy") {
+              return true;
+            } else {
+              return false;
+            }
+          },
           onclone: (el) => {
             console.log("cloned", idx);
             const elementsWithShiftedDownwardText =
