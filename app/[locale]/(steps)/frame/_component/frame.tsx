@@ -16,6 +16,7 @@ import Image from "next/image";
 import SumoneLoader from "@/assets/Sumoneloader.gif";
 import "./frame.css";
 import "./carousel.css";
+import { fetchAd } from "./api";
 
 interface FrameProps {
   locale: string;
@@ -34,7 +35,8 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
   const { photos } = usePhotoStore();
   const canvasRef = useRef<HTMLDivElement>(null);
   const [imageIdx, setImageIdx] = useState(0);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isAdLoaded, setIsAdLoaded] = useState<boolean>(false);
   // const [isTesting, setIsTesting] = useState(false);
 
   const [
@@ -74,6 +76,11 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
 
     uploadPhotosAndCreateAlbum();
   }, [photos, navigation]);
+
+  useEffect(() => {
+    if (locale === "ko") return;
+    fetchAd().then(() => setIsAdLoaded(true));
+  }, []);
 
   /*
   const handleTestRecap = async () => {
@@ -389,11 +396,11 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
       )}
       {isLoading && (
         <div
-          className={`${locale === "ko" ? "h-[500px]" : "h-[308px]"} bg-image fixed z-50 mx-6 flex w-[calc(100%-48px)] flex-col`}
+          className={`${locale === "ko" ? "h-[500px]" : isAdLoaded ? "h-fit" : "h-[308px]"} bg-image fixed z-50 mx-6 flex w-[calc(100%-48px)] flex-col`}
         >
-          <div className="flex h-full w-full flex-col items-center gap-2.5 pb-14 pt-12">
-            <div className="flex flex-col items-center gap-5 pb-12">
-              {locale === "ko" ? (
+          <div className="flex h-full w-full flex-col items-center gap-2.5 pt-12">
+            <div className="flex flex-col items-center gap-5 pb-6">
+              {locale === "ko" || isAdLoaded ? (
                 <HeartIcon width={28} />
               ) : (
                 <Image
@@ -419,6 +426,17 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
                 {userData.partnerNickName}
                 {loader.content.after}
               </span>
+              {isAdLoaded && (
+                <span
+                  id="inmobi-ad-banner"
+                  style={{
+                    width: "320px",
+                    height: "250px",
+                    margin: "auto",
+                  }}
+                  className="bg-gray-300"
+                />
+              )}
             </div>
             {locale === "ko" && <Carousel />}
           </div>
