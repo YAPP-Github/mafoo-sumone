@@ -16,7 +16,7 @@ import Image from "next/image";
 import SumoneLoader from "@/assets/Sumoneloader.gif";
 import "./frame.css";
 import "./carousel.css";
-// import { fetchAd } from "./api";
+import { fetchAd } from "./api";
 
 interface FrameProps {
   locale: string;
@@ -78,14 +78,10 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
   }, [photos, navigation]);
 
   useEffect(() => {
-    setIsAdLoaded(false);
-  }, []);
-
-  // useEffect(() => {
-  //   // no ad for Ko
-  //   if (locale === "ko") return;
-  //   fetchAd().then(() => setIsAdLoaded(true));
-  // }, []);
+    // no ad for Ko
+    if (locale === "ko") return;
+    fetchAd().then(() => setIsAdLoaded(true));
+  }, [locale]);
 
   /*
   const handleTestRecap = async () => {
