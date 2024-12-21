@@ -78,6 +78,7 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
   }, [photos, navigation]);
 
   useEffect(() => {
+    // no ad for Ko
     if (locale === "ko") return;
     fetchAd().then(() => setIsAdLoaded(true));
   }, []);
@@ -430,7 +431,7 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
                 <span
                   id="inmobi-ad-banner"
                   style={{
-                    width: "320px",
+                    width: "300px",
                     height: "250px",
                     margin: "auto",
                   }}
