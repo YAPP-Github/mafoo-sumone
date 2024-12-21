@@ -77,6 +77,10 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
     uploadPhotosAndCreateAlbum();
   }, [photos, navigation]);
 
+  useEffect(() => {
+    setIsAdLoaded(false);
+  }, []);
+
   // useEffect(() => {
   //   // no ad for Ko
   //   if (locale === "ko") return;
