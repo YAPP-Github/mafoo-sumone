@@ -10,7 +10,7 @@ import { useGetCanvasSize } from "@/utils/useScreenSize";
 import { usePhotoStore } from "@/atom/photo";
 import SumoneButton from "@/assets/SumoneButton";
 import { ObjectedParams } from "@/types/user";
-import { getPresignedUrls } from "../../api";
+import { getPresignedUrls, postOriginalPhoto } from "../../api";
 import Carousel from "./carousel";
 import Image from "next/image";
 import SumoneLoader from "@/assets/Sumoneloader.gif";
@@ -25,9 +25,10 @@ interface FrameProps {
   dict: Record<string, any>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   loader: Record<string, any>;
+  albumId: string;
 }
 
-const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
+const Frame = ({ locale, userData, dict, loader, albumId }: FrameProps) => {
   const navigation = useRouter();
   const searchParams = useSearchParams();
   const canvasSize = useGetCanvasSize(userData.top, userData.bottom);
@@ -48,19 +49,20 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
     try {
       setIsUploadPhotoAndCreateAlbumLoading(true);
 
-      const formData = new FormData();
+      // const formData = new FormData();
 
-      photos.forEach((photo) => {
-        formData.append(`photo`, photo);
-      });
+      // photos.forEach((photo) => {
+      //   formData.append(`photo`, photo);
+      // });
 
-      const res = await fetch("/api/originalPhoto", {
-        method: "POST",
-        body: formData,
-      });
+      // const res = await fetch("/api/originalPhoto", {
+      //   method: "POST",
+      //   body: formData,
+      // });
 
-      const data = await res.json();
-      console.log("🚀[Success] Uploaded Photo Urls", data.photoUrls);
+      // const data = await res.json();
+      // console.log("🚀[Success] Uploaded Photo Urls", data.photoUrls);
+      postOriginalPhoto(photos, albumId);
     } catch (err) {
       console.error("Failed to upload photos or create album:", err);
     }
@@ -80,7 +82,9 @@ const Frame = ({ locale, userData, dict, loader }: FrameProps) => {
   useEffect(() => {
     // no ad for Ko
     if (locale === "ko") return;
-    fetchAd().then(() => setIsAdLoaded(true));
+    fetchAd()
+      .then(() => setIsAdLoaded(true))
+      .catch((err) => console.error(err));
   }, [locale]);
 
   /*
